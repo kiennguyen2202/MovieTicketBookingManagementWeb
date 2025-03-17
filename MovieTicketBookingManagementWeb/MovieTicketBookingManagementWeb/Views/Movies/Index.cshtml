@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Movie>
+
+<h2>Movies</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Genre</th>
+            <th>Language</th>
+            <th>Duration</th>
+            <th>ReleaseDate</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Genre</td>
+                <td>@movie.Language</td>
+                <td>@movie.Duration</td>
+                <td>@movie.ReleaseDate</td>
+                <td>@movie.Description</td>
+                <td>@movie.PosterUrl</td>
+               
+
+                <td><a href="@Url.Action("Details", new { id = movie.Id })">Details</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
