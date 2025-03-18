@@ -1,0 +1,15 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Movie
+<h2>@Model.Title</h2>
+<div>
+	<h3>Genre: @Model.Genre</h3>
+	<p>@Model.Language</p>
+	<p>@Model.Duration</p>
+	<p>@Model.ReleaseDate.ToShortDateString()</p>
+	<p>@Model.Description</p>
+	@if (!string.IsNullOrEmpty(Model.PosterUrl))
+	{
+		<img src="@Model.PosterUrl" alt="Product Image" style="max-width:
+200px;" />
+	}
+</div>
+<a asp-action="Index">Back to List</a>

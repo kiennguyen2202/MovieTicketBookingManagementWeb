@@ -1,10 +1,12 @@
-﻿@model IEnumerable<Movie>
+﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Movie>
 
-<h2>Movies</h2>
+<h2 class="my-4 text-center">Movies List</h2>
+<table id="movieTable" class="table table-bordered table-striped text-center">
 
-<table>
-    <thead>
+
+    <thead class="table-dark">
         <tr>
+            <th>Poster</th>
             <th>Title</th>
             <th>Genre</th>
             <th>Language</th>
@@ -18,17 +20,50 @@
         @foreach (var movie in Model)
         {
             <tr>
+                <td>
+                   
+                    <img src="@movie.PosterUrl" alt="@movie.Title" class="img-thumbnail" style="width: 60px; height: 60px;">
+                </td>
                 <td>@movie.Title</td>
                 <td>@movie.Genre</td>
                 <td>@movie.Language</td>
                 <td>@movie.Duration</td>
                 <td>@movie.ReleaseDate</td>
                 <td>@movie.Description</td>
-                <td>@movie.PosterUrl</td>
-               
+                
+                <td>
+                <a asp-action="Update" asp-route-id="@movie.Id" class="btn btn-warning">Sửa</a>
+				<a asp-action="Details" asp-route-id="@movie.Id" class="btn btn-danger">Chi tiet</a>
+				<a asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-danger">Xóa</a>
+				</td>
 
-                <td><a href="@Url.Action("Details", new { id = movie.Id })">Details</a></td>
+                
             </tr>
         }
     </tbody>
 </table>
+<a asp-action="Add" class="btn btn-primary">Thêm phim</a>
+@section Scripts {
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- jQuery (Cần có trước DataTables.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            console.log("DataTables is initializing...");
+
+            if ($.fn.DataTable) {
+                console.log("DataTables loaded successfully!");
+            } else {
+                console.error("DataTables failed to load!");
+            }
+
+            $('#productTable').DataTable();
+        });
+    </script>
+    }
