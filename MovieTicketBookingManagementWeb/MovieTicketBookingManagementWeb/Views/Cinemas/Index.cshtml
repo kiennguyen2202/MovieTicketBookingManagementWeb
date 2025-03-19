@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Cinema>
+
+<h2 class="my-4 text-center">Cinemas List</h2>
+<table id="cinameTable" class="table table-bordered table-striped text-center">
+
+
+    <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Location</th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cinema in Model)
+        {
+            <tr>
+
+                <td>@cinema.Name</td>
+                <td>@cinema.Location</td>
+                
+
+                <td>
+                    <a asp-action="Update" asp-route-id="@cinema.ID" class="btn btn-warning">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@cinema.ID" class="btn btn-danger">Chi tiet</a>
+                    <a asp-action="Delete" asp-route-id="@cinema.ID" class="btn btn-danger">Xóa</a>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Add" class="btn btn-primary">Thêm rap chieu phim</a>
+@section Scripts {
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- jQuery (Cần có trước DataTables.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            console.log("DataTables is initializing...");
+
+            if ($.fn.DataTable) {
+                console.log("DataTables loaded successfully!");
+            } else {
+                console.error("DataTables failed to load!");
+            }
+
+            $('#productTable').DataTable();
+        });
+    </script>
+    }

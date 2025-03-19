@@ -5,7 +5,7 @@ namespace MovieTicketBookingManagementWeb.Models;
 
 public partial class Payment
 {
-    public int Id { get; set; }
+    public int ID { get; set; }
 
     public int UserId { get; set; }
 

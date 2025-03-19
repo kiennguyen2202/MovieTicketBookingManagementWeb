@@ -5,9 +5,9 @@ namespace MovieTicketBookingManagementWeb.Models;
 
 public partial class Seat
 {
-    public int Id { get; set; }
+    public int ID { get; set; }
 
-    public int RoomId { get; set; }
+    public int RoomID { get; set; }
 
     public string SeatNumber { get; set; } = null!;
 

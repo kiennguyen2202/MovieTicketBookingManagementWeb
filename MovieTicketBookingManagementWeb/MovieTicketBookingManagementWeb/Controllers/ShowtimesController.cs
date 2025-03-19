@@ -16,7 +16,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
         public async Task<IActionResult> Index(int movieId)
         {
             var showtimes = await _context.Showtimes
-                .Where(s => s.MovieId == movieId)
+                .Where(s => s.MovieID == movieId)
                 .ToListAsync();
 
             return View(showtimes);

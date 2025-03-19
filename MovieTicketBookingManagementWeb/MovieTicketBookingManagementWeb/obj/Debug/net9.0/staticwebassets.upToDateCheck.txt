@@ -62,6 +62,7 @@ C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\M
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\Military.jpg
 wwwroot\images\Oxidized.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css

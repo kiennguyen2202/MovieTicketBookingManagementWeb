@@ -24,12 +24,12 @@ namespace MovieTicketBookingManagementWeb.Migrations
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Cinema", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -41,7 +41,7 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Cinemas__59C926260B1BBE46");
 
                     b.ToTable("Cinemas");
@@ -49,12 +49,12 @@ namespace MovieTicketBookingManagementWeb.Migrations
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Movie", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -83,43 +83,20 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Movies__4BD2943AA05B8B91");
 
                     b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.MoviePoster", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MovieId")
-                        .IsUnique();
-
-                    b.ToTable("MoviePosters");
-                });
-
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Payment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(10, 2)");
@@ -143,7 +120,7 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UserID");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Payments__9B556A588F0B63FC");
 
                     b.HasIndex("UserId");
@@ -153,17 +130,17 @@ namespace MovieTicketBookingManagementWeb.Migrations
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Review", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MovieId")
+                    b.Property<int>("MovieID")
                         .HasColumnType("int")
                         .HasColumnName("MovieID");
 
@@ -175,30 +152,30 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("(getdate())");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("UserID")
                         .HasColumnType("int")
                         .HasColumnName("UserID");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Reviews__74BC79AEE3371759");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("MovieID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Room", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("CinemaId")
+                    b.Property<int>("CinemaID")
                         .HasColumnType("int")
                         .HasColumnName("CinemaID");
 
@@ -210,24 +187,24 @@ namespace MovieTicketBookingManagementWeb.Migrations
                     b.Property<int>("SeatCapacity")
                         .HasColumnType("int");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Rooms__3286391982D9C9F8");
 
-                    b.HasIndex("CinemaId");
+                    b.HasIndex("CinemaID");
 
                     b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Seat", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("RoomId")
+                    b.Property<int>("RoomID")
                         .HasColumnType("int")
                         .HasColumnName("RoomID");
 
@@ -241,55 +218,55 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Seats__311713D3FAA4D100");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("RoomID");
 
                     b.ToTable("Seats");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Showtime", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("MovieId")
+                    b.Property<int>("MovieID")
                         .HasColumnType("int")
                         .HasColumnName("MovieID");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10, 2)");
 
-                    b.Property<int>("RoomId")
+                    b.Property<int>("RoomID")
                         .HasColumnType("int")
                         .HasColumnName("RoomID");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Showtime__32D31FC00CFB611F");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("MovieID");
 
-                    b.HasIndex("RoomId");
+                    b.HasIndex("RoomID");
 
                     b.ToTable("Showtimes");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Ticket", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<DateTime?>("BookingTime")
                         .ValueGeneratedOnAdd()
@@ -314,7 +291,7 @@ namespace MovieTicketBookingManagementWeb.Migrations
                     b.Property<decimal>("FinalPrice")
                         .HasColumnType("decimal(10, 2)");
 
-                    b.Property<int?>("PaymentId")
+                    b.Property<int?>("PaymentID")
                         .HasColumnType("int")
                         .HasColumnName("PaymentID");
 
@@ -331,11 +308,11 @@ namespace MovieTicketBookingManagementWeb.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10, 2)");
 
-                    b.Property<int>("SeatId")
+                    b.Property<int>("SeatID")
                         .HasColumnType("int")
                         .HasColumnName("SeatID");
 
-                    b.Property<int>("ShowtimeId")
+                    b.Property<int>("ShowtimeID")
                         .HasColumnType("int")
                         .HasColumnName("ShowtimeID");
 
@@ -349,32 +326,32 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("UserID")
                         .HasColumnType("int")
                         .HasColumnName("UserID");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Tickets__712CC627F99AA1C7");
 
-                    b.HasIndex("PaymentId");
+                    b.HasIndex("PaymentID");
 
-                    b.HasIndex("SeatId");
+                    b.HasIndex("SeatID");
 
-                    b.HasIndex("ShowtimeId");
+                    b.HasIndex("ShowtimeID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasColumnName("ID");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -396,24 +373,13 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("Id")
+                    b.HasKey("ID")
                         .HasName("PK__Users__1788CCACDA95FF49");
 
                     b.HasIndex(new[] { "Email" }, "UQ__Users__A9D105349C68A34A")
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.MoviePoster", b =>
-                {
-                    b.HasOne("MovieTicketBookingManagementWeb.Models.Movie", "Movie")
-                        .WithOne("MoviePoster")
-                        .HasForeignKey("MovieTicketBookingManagementWeb.Models.MoviePoster", "MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Payment", b =>
@@ -431,13 +397,13 @@ namespace MovieTicketBookingManagementWeb.Migrations
                 {
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Movie", "Movie")
                         .WithMany("Reviews")
-                        .HasForeignKey("MovieId")
+                        .HasForeignKey("MovieID")
                         .IsRequired()
                         .HasConstraintName("FK__Reviews__MovieID__5DCAEF64");
 
                     b.HasOne("MovieTicketBookingManagementWeb.Models.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserID")
                         .IsRequired()
                         .HasConstraintName("FK__Reviews__UserID__5CD6CB2B");
 
@@ -450,7 +416,7 @@ namespace MovieTicketBookingManagementWeb.Migrations
                 {
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Cinema", "Cinema")
                         .WithMany("Rooms")
-                        .HasForeignKey("CinemaId")
+                        .HasForeignKey("CinemaID")
                         .IsRequired()
                         .HasConstraintName("FK__Rooms__CinemaID__3F466844");
 
@@ -461,7 +427,7 @@ namespace MovieTicketBookingManagementWeb.Migrations
                 {
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Room", "Room")
                         .WithMany("Seats")
-                        .HasForeignKey("RoomId")
+                        .HasForeignKey("RoomID")
                         .IsRequired()
                         .HasConstraintName("FK__Seats__RoomID__45F365D3");
 
@@ -472,13 +438,13 @@ namespace MovieTicketBookingManagementWeb.Migrations
                 {
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Movie", "Movie")
                         .WithMany("Showtimes")
-                        .HasForeignKey("MovieId")
+                        .HasForeignKey("MovieID")
                         .IsRequired()
                         .HasConstraintName("FK__Showtimes__Movie__4222D4EF");
 
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Room", "Room")
                         .WithMany("Showtimes")
-                        .HasForeignKey("RoomId")
+                        .HasForeignKey("RoomID")
                         .IsRequired()
                         .HasConstraintName("FK__Showtimes__RoomI__4316F928");
 
@@ -491,25 +457,25 @@ namespace MovieTicketBookingManagementWeb.Migrations
                 {
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Payment", "Payment")
                         .WithMany("Tickets")
-                        .HasForeignKey("PaymentId")
+                        .HasForeignKey("PaymentID")
                         .OnDelete(DeleteBehavior.SetNull)
                         .HasConstraintName("FK_Tickets_Payments");
 
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Seat", "Seat")
                         .WithMany("Tickets")
-                        .HasForeignKey("SeatId")
+                        .HasForeignKey("SeatID")
                         .IsRequired()
                         .HasConstraintName("FK__Tickets__SeatID__52593CB8");
 
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Showtime", "Showtime")
                         .WithMany("Tickets")
-                        .HasForeignKey("ShowtimeId")
+                        .HasForeignKey("ShowtimeID")
                         .IsRequired()
                         .HasConstraintName("FK__Tickets__Showtim__5165187F");
 
                     b.HasOne("MovieTicketBookingManagementWeb.Models.User", "User")
                         .WithMany("Tickets")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserID")
                         .IsRequired()
                         .HasConstraintName("FK__Tickets__UserID__5070F446");
 
@@ -529,9 +495,6 @@ namespace MovieTicketBookingManagementWeb.Migrations
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Movie", b =>
                 {
-                    b.Navigation("MoviePoster")
-                        .IsRequired();
-
                     b.Navigation("Reviews");
 
                     b.Navigation("Showtimes");

@@ -5,11 +5,11 @@ namespace MovieTicketBookingManagementWeb.Models;
 
 public partial class Showtime
 {
-    public int Id { get; set; }
+    public int ID { get; set; }
 
-    public int MovieId { get; set; }
+    public int MovieID { get; set; }
 
-    public int RoomId { get; set; }
+    public int RoomID { get; set; }
 
     public DateTime StartTime { get; set; }
 

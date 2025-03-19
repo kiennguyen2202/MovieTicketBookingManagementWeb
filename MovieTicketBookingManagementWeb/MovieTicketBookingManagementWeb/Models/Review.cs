@@ -5,11 +5,11 @@ namespace MovieTicketBookingManagementWeb.Models;
 
 public partial class Review
 {
-    public int Id { get; set; }
+    public int ID { get; set; }
 
-    public int UserId { get; set; }
+    public int UserID { get; set; }
 
-    public int MovieId { get; set; }
+    public int MovieID { get; set; }
 
     public int Rating { get; set; }
 

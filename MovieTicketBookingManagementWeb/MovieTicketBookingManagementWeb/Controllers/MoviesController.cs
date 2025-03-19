@@ -65,7 +65,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(int id, Movie movie, IFormFile PosterUrl)
         {
-            if (id != movie.Id) return NotFound();
+            if (id != movie.ID) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
             }
 
             var movie = await _context.Movies
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (movie == null)
             {
