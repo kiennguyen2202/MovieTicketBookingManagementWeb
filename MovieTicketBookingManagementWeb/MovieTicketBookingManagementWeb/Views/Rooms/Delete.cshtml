@@ -1,0 +1,9 @@
+﻿@model Room
+
+<h2>Bạn có chắc muốn xóa room "@Model.Name"?</h2>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="ID" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

@@ -1,31 +1,31 @@
-﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Room>
+﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Showtime>
 
 <h2 class="my-4 text-center">Rooms List</h2>
-<table id="roomTable" class="table table-bordered table-striped text-center">
+<table id="showtimeTable" class="table table-bordered table-striped text-center">
 
 
     <thead class="table-dark">
         <tr>
-            <th>Name</th>
-            <th>SeatCapacity</th>
-            <th>Cinema</th>
-          
+            <th>Movie Title</th>
+            <th>Room</th>
+            <th>Start Time</th>
+            <th>Actions</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var room in Model)
+        @foreach (var showtime in Model)
         {
             <tr>
 
-                <td>@room.Name</td>
-                <td>@room.SeatCapacity</td>
-                <td>@room.Cinema.Name</td>
-              
+                <td>@showtime.Movie.Title</td>
+                <td>@showtime.Room.Name</td>
+                <td>@showtime.StartTime.ToString("HH:mm, dd/MM/yyyy")</td>
+
                 <td>
-                    <a asp-action="Update" asp-route-id="@room.ID" class="btn btn-warning">Sửa</a>
-                    <a asp-action="Details" asp-route-id="@room.ID" class="btn btn-danger">Chi tiet</a>
-                    <a asp-action="Delete" asp-route-id="@room.ID" class="btn btn-danger">Xóa</a>
+                    <a asp-action="Update" asp-route-id="@showtime.ID" class="btn btn-warning">Sửa</a>
+                    <a asp-action="Details" asp-route-id="@showtime.ID" class="btn btn-danger">Chi tiet</a>
+                    <a asp-action="Delete" asp-route-id="@showtime.ID" class="btn btn-danger">Xóa</a>
                 </td>
 
 
@@ -33,14 +33,14 @@
         }
     </tbody>
 </table>
-<a asp-action="Add" class="btn btn-primary">Thêm room</a>
+<a asp-action="Add" class="btn btn-primary">Thêm showtime</a>
 @section Scripts {
     <!-- jQuery (Cần có trước DataTables.js) -->
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 
-    
+
 
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>

@@ -13,7 +13,7 @@ public partial class Showtime
 
     public DateTime StartTime { get; set; }
 
-    public decimal Price { get; set; }
+    
 
     public virtual Movie Movie { get; set; } = null!;
 

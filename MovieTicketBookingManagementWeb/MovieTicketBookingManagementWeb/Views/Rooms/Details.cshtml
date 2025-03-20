@@ -1,23 +1,24 @@
-﻿@model MovieTicketBookingManagementWeb.Models.Cinema
+﻿@model MovieTicketBookingManagementWeb.Models.Room
 
 @{
     ViewData["Title"] = "Room Details";
 }
 
-<h2>Cinema Details</h2>
+<h2>Room Details</h2>
 
 <div>
-    <h4>Cinema Information</h4>
+    <h4>Room Information</h4>
     <hr />
 
     <dl class="row">
         <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
         <dd class="col-sm-9">@Model.Name</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Location)</dt>
-        <dd class="col-sm-9">@Model.Location</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.SeatCapacity)</dt>
+        <dd class="col-sm-9">@Model.SeatCapacity</dd>
 
-       
+        <dt class="col-sm-3">Cinema</dt>
+        <dd class="col-sm-9">@Model.Cinema.Name</dd>
     </dl>
 </div>
 

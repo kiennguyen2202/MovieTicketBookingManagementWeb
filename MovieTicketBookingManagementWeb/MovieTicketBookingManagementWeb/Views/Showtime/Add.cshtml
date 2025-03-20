@@ -1,0 +1,48 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Showtime
+@{
+    ViewData["Title"] = "Add Showtime";
+}
+
+<h2>Thêm Showtime</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Add" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Dropdown chọn phim -->
+            <div class="form-group">
+                <label asp-for="MovieID" class="control-label"></label>
+                <select asp-for="MovieID" asp-items="ViewBag.MovieID" class="form-control">
+                    <option value="">Chọn phim</option>
+                </select>
+                <span asp-validation-for="MovieID" class="text-danger"></span>
+            </div>
+
+            <!-- Dropdown chọn phòng chiếu -->
+            <div class="form-group">
+                <label asp-for="RoomID" class="control-label"></label>
+                <select asp-for="RoomID" asp-items="ViewBag.RoomID" class="form-control">
+                    <option value="">Chọn phòng</option>
+                </select>
+                <span asp-validation-for="RoomID" class="text-danger"></span>
+            </div>
+
+            <!-- Chọn thời gian chiếu -->
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" type="datetime-local" class="form-control" />
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Thêm Showtime" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Quay lại danh sách</a>
+</div>

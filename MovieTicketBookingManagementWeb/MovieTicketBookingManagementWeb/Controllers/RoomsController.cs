@@ -20,7 +20,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
         public async Task<IActionResult> Index()
         {
             var rooms = _context.Rooms.Include(r => r.Cinema);
-            return View(await rooms.ToListAsync());
+            return View(rooms);
         }
         [HttpGet]
         // Hiển thị form tạo mới Room
@@ -72,6 +72,19 @@ namespace MovieTicketBookingManagementWeb.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CinemaID"] = new SelectList(_context.Cinemas, "ID", "Name", room.CinemaID);
+            return View(room);
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            
+            if (id == null) return NotFound();
+
+            var room = await _context.Rooms
+                .Include(c => c.Cinema)
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (room == null) return NotFound();
+
             return View(room);
         }
 

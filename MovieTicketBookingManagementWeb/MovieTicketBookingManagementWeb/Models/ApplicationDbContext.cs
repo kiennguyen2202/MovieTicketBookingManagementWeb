@@ -137,7 +137,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.Property(e => e.ID).HasColumnName("ID");
             entity.Property(e => e.MovieID).HasColumnName("MovieID");
-            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            
             entity.Property(e => e.RoomID).HasColumnName("RoomID");
             entity.Property(e => e.StartTime).HasColumnType("datetime");
 

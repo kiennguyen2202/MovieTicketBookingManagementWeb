@@ -784,13 +784,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\MovieTicketBookingManagementWeb.sjk6b4dv4b.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-eEd5YrKMivDcxhgst38UHEYD1IgU7rsc4wBOrGBta3c="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1149"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022eEd5YrKMivDcxhgst38UHEYD1IgU7rsc4wBOrGBta3c=\u0022"},{"Name":"Last-Modified","Value":"Wed, 19 Mar 2025 07:27:32 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"1149"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022eEd5YrKMivDcxhgst38UHEYD1IgU7rsc4wBOrGBta3c=\u0022"},{"Name":"Last-Modified","Value":"Thu, 20 Mar 2025 14:11:33 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb.sjk6b4dv4b.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\MovieTicketBookingManagementWeb.sjk6b4dv4b.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"sjk6b4dv4b"},{"Name":"integrity","Value":"sha256-eEd5YrKMivDcxhgst38UHEYD1IgU7rsc4wBOrGBta3c="},{"Name":"label","Value":"_content/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1149"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022eEd5YrKMivDcxhgst38UHEYD1IgU7rsc4wBOrGBta3c=\u0022"},{"Name":"Last-Modified","Value":"Wed, 19 Mar 2025 07:27:32 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1149"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022eEd5YrKMivDcxhgst38UHEYD1IgU7rsc4wBOrGBta3c=\u0022"},{"Name":"Last-Modified","Value":"Thu, 20 Mar 2025 14:11:33 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>
