@@ -27,7 +27,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
         public IActionResult Add()
         {
 
-            ViewBag.CinemaID = new SelectList(_context.Rooms, "ID", "Name");
+            ViewBag.RoomID = new SelectList(_context.Rooms, "ID", "Name");
             return View();
         }
 
