@@ -1,0 +1,42 @@
+﻿@model List<MovieTicketBookingManagementWeb.Models.Order>
+
+@{
+    ViewData["Title"] = "Danh sách đơn hàng";
+    
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">📋 Danh Sách Ve</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow-sm">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>ID Order</th>
+                    <th>Khách hàng</th>
+                    <th>Email</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td class="text-center">@order.ID</td>
+                        
+                        <td class="text-center">@order.OrderDate?.ToString("dd/MM/yyyy")?? "N/A"</td>
+                        <td class="text-end fw-bold">@order.TotalPrice</td>
+                        <td class="text-center">
+                            <a asp-area="Admin" asp-controller="Order" asp-action="Detail"
+                               asp-route-id="@order.ID" class="btn btn-sm btn-info text-white">
+                                📜 Xem Chi Tiết
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

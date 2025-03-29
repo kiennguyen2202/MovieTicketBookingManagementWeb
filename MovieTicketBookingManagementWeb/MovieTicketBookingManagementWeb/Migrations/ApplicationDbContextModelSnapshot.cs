@@ -22,6 +22,215 @@ namespace MovieTicketBookingManagementWeb.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Age")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Cinema", b =>
                 {
                     b.Property<int>("ID")
@@ -68,14 +277,18 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Language")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .IsUnicode(false)
                         .HasColumnType("varchar(50)");
 
                     b.Property<string>("PosterUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("PosterURL");
 
-                    b.Property<DateOnly>("ReleaseDate")
+                    b.Property<DateOnly?>("ReleaseDate")
                         .HasColumnType("date");
 
                     b.Property<string>("Title")
@@ -89,6 +302,75 @@ namespace MovieTicketBookingManagementWeb.Migrations
                     b.ToTable("Movies");
                 });
 
+            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Order", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("OrderDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime")
+                        .HasDefaultValueSql("(getdate())");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(10, 2)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID")
+                        .HasName("PK__Orders__3214EC279F18DDF8");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int")
+                        .HasColumnName("OrderID");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(10, 2)");
+
+                    b.Property<int?>("Quantity")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("ShowtimeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketID")
+                        .HasColumnType("int")
+                        .HasColumnName("TicketID");
+
+                    b.HasKey("ID")
+                        .HasName("PK__OrderDet__3214EC277A369FC6");
+
+                    b.HasIndex("OrderID");
+
+                    b.HasIndex("TicketID");
+
+                    b.ToTable("OrderDetails");
+                });
+
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Payment", b =>
                 {
                     b.Property<int>("ID")
@@ -100,6 +382,13 @@ namespace MovieTicketBookingManagementWeb.Migrations
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(10, 2)");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("OrderID")
+                        .HasColumnType("int")
+                        .HasColumnName("OrderID");
 
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
@@ -116,14 +405,12 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("(getdate())");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int")
-                        .HasColumnName("UserID");
-
                     b.HasKey("ID")
                         .HasName("PK__Payments__9B556A588F0B63FC");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("OrderID");
 
                     b.ToTable("Payments");
                 });
@@ -136,6 +423,9 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasColumnName("ID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
@@ -152,16 +442,12 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasColumnType("datetime")
                         .HasDefaultValueSql("(getdate())");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int")
-                        .HasColumnName("UserID");
-
                     b.HasKey("ID")
                         .HasName("PK__Reviews__74BC79AEE3371759");
 
-                    b.HasIndex("MovieID");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("MovieID");
 
                     b.ToTable("Reviews");
                 });
@@ -239,9 +525,6 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasColumnType("int")
                         .HasColumnName("MovieID");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(10, 2)");
-
                     b.Property<int>("RoomID")
                         .HasColumnType("int")
                         .HasColumnName("RoomID");
@@ -291,10 +574,6 @@ namespace MovieTicketBookingManagementWeb.Migrations
                     b.Property<decimal>("FinalPrice")
                         .HasColumnType("decimal(10, 2)");
 
-                    b.Property<int?>("PaymentID")
-                        .HasColumnType("int")
-                        .HasColumnName("PaymentID");
-
                     b.Property<decimal?>("PopcornPrice")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("decimal(10, 2)")
@@ -326,90 +605,121 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int")
-                        .HasColumnName("UserID");
-
                     b.HasKey("ID")
                         .HasName("PK__Tickets__712CC627F99AA1C7");
-
-                    b.HasIndex("PaymentID");
 
                     b.HasIndex("SeatID");
 
                     b.HasIndex("ShowtimeID");
 
-                    b.HasIndex("UserID");
-
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.User", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID");
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
-                    b.Property<string>("Email")
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Order", b =>
+                {
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Orders")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.OrderDetail", b =>
+                {
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderID")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasConstraintName("FK__OrderDeta__Order__1AD3FDA4");
 
-                    b.Property<string>("FullName")
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.Ticket", "Ticket")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("TicketID")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasConstraintName("FK__OrderDeta__Ticke__1BC821DD");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                    b.Navigation("Order");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.HasKey("ID")
-                        .HasName("PK__Users__1788CCACDA95FF49");
-
-                    b.HasIndex(new[] { "Email" }, "UQ__Users__A9D105349C68A34A")
-                        .IsUnique();
-
-                    b.ToTable("Users");
+                    b.Navigation("Ticket");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Payment", b =>
                 {
-                    b.HasOne("MovieTicketBookingManagementWeb.Models.User", "User")
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.ApplicationUser", null)
                         .WithMany("Payments")
-                        .HasForeignKey("UserId")
-                        .IsRequired()
-                        .HasConstraintName("FK__Payments__UserID__5812160E");
+                        .HasForeignKey("ApplicationUserId");
 
-                    b.Navigation("User");
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.Order", "Order")
+                        .WithMany("Payments")
+                        .HasForeignKey("OrderID");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Review", b =>
                 {
+                    b.HasOne("MovieTicketBookingManagementWeb.Models.ApplicationUser", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Movie", "Movie")
                         .WithMany("Reviews")
                         .HasForeignKey("MovieID")
-                        .IsRequired()
-                        .HasConstraintName("FK__Reviews__MovieID__5DCAEF64");
-
-                    b.HasOne("MovieTicketBookingManagementWeb.Models.User", "User")
-                        .WithMany("Reviews")
-                        .HasForeignKey("UserID")
-                        .IsRequired()
-                        .HasConstraintName("FK__Reviews__UserID__5CD6CB2B");
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Movie");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Room", b =>
@@ -455,12 +765,6 @@ namespace MovieTicketBookingManagementWeb.Migrations
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Ticket", b =>
                 {
-                    b.HasOne("MovieTicketBookingManagementWeb.Models.Payment", "Payment")
-                        .WithMany("Tickets")
-                        .HasForeignKey("PaymentID")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .HasConstraintName("FK_Tickets_Payments");
-
                     b.HasOne("MovieTicketBookingManagementWeb.Models.Seat", "Seat")
                         .WithMany("Tickets")
                         .HasForeignKey("SeatID")
@@ -473,19 +777,18 @@ namespace MovieTicketBookingManagementWeb.Migrations
                         .IsRequired()
                         .HasConstraintName("FK__Tickets__Showtim__5165187F");
 
-                    b.HasOne("MovieTicketBookingManagementWeb.Models.User", "User")
-                        .WithMany("Tickets")
-                        .HasForeignKey("UserID")
-                        .IsRequired()
-                        .HasConstraintName("FK__Tickets__UserID__5070F446");
-
-                    b.Navigation("Payment");
-
                     b.Navigation("Seat");
 
                     b.Navigation("Showtime");
+                });
 
-                    b.Navigation("User");
+            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Orders");
+
+                    b.Navigation("Payments");
+
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Cinema", b =>
@@ -500,9 +803,11 @@ namespace MovieTicketBookingManagementWeb.Migrations
                     b.Navigation("Showtimes");
                 });
 
-            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Payment", b =>
+            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Order", b =>
                 {
-                    b.Navigation("Tickets");
+                    b.Navigation("OrderDetails");
+
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Room", b =>
@@ -522,13 +827,9 @@ namespace MovieTicketBookingManagementWeb.Migrations
                     b.Navigation("Tickets");
                 });
 
-            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.User", b =>
+            modelBuilder.Entity("MovieTicketBookingManagementWeb.Models.Ticket", b =>
                 {
-                    b.Navigation("Payments");
-
-                    b.Navigation("Reviews");
-
-                    b.Navigation("Tickets");
+                    b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
         }

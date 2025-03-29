@@ -1,0 +1,19 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Payment
+
+@{
+    ViewData["Title"] = "Chi tiết thanh toán";
+}
+
+<h2>Chi tiết thanh toán</h2>
+
+<table class="table">
+    <tr><th>ID:</th><td>@Model.ID</td></tr>
+   
+    <tr><th>Số tiền:</th><td>@Model.Amount.ToString("N0") VND</td></tr>
+    <tr><th>Phương thức:</th><td>@Model.PaymentMethod</td></tr>
+    <tr><th>Trạng thái:</th><td>@Model.PaymentStatus</td></tr>
+    <tr><th>Thời gian thanh toán:</th><td>@(Model.PaymentTime?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa xác định")</td></tr>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+<a asp-action="Update" asp-route-id="@Model.ID" class="btn btn-warning">Chỉnh sửa</a>

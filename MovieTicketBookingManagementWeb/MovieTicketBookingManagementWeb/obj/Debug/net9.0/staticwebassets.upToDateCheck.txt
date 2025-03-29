@@ -62,8 +62,15 @@ C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\M
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\images\616017_01.jpg_5004cabd4848459197c493b61850699b-768x347.jpeg
+wwwroot\images\721864_01.jpg_ed1366551e7446d49a_a5564a3dae3a455cb64c1fb7b3bd64f8.png
+wwwroot\images\dia-dao-cu-chi_1.webp
+wwwroot\images\love-lies.jpg
+wwwroot\images\MAIN_2_ADL_1215x365.png
 wwwroot\images\Military.jpg
+wwwroot\images\nghe-sieu-kho-noi-poster.webp
 wwwroot\images\Oxidized.jpg
+wwwroot\images\thieu-nu-anh-trang.webp
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

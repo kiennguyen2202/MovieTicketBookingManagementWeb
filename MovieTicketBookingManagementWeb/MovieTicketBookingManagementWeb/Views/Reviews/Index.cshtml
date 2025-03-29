@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Review>
+
+@{
+    ViewData["Title"] = "Danh sách Review";
+}
+
+<h2>Danh sách Review</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Phim</th>
+            <th>Người dùng</th>
+            <th>Đánh giá</th>
+            <th>Bình luận</th>
+            <th>Ngày đăng</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var review in Model)
+        {
+            <tr>
+                <td>@review.Movie.Title</td>
+                
+                <td>@review.Rating</td>
+                <td>@review.Comment</td>
+                <td>@(review.ReviewTime?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa xác định")</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@review.ID" class="btn btn-warning">Chỉnh sửa</a>
+                    <a asp-action="Details" asp-route-id="@review.ID" class="btn btn-danger">Xem chi tiet</a>
+                    <a asp-action="Delete" asp-route-id="@review.ID" class="btn btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Add" class="btn btn-primary">Tạo Review Mới</a>

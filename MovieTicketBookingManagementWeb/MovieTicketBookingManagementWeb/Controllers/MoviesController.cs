@@ -16,10 +16,17 @@ namespace MovieTicketBookingManagementWeb.Controllers
         }
 
         // Hiển thị danh sách phim
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string? searchQuery)
         {
-            var movies = _context.Movies.ToList();
-            return View(movies);
+            var movies = _context.Movies.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                movies = movies.Where(m => m.Title.Contains(searchQuery));
+            }
+
+            ViewData["SearchQuery"] = searchQuery;
+            return View(movies.ToList()); // Đảm bảo trả về danh sách phim
         }
         [HttpGet]
         public IActionResult Add()

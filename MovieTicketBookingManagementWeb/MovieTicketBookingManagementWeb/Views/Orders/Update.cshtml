@@ -1,0 +1,24 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Order
+
+@{
+    ViewData["Title"] = "Update Order";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Update" method="post">
+    
+
+    <div class="form-group">
+        <label for="OrderDate">Order Date</label>
+        <input type="datetime-local" asp-for="OrderDate" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="TotalPrice">Total Price</label>
+        <input type="number" asp-for="TotalPrice" class="form-control" step="0.01" min="0" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Order</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+</form>

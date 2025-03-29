@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using MovieTicketBookingManagementWeb.Models;
 
 namespace MovieTicketBookingManagementWeb.Models;
 
-public partial class ApplicationDbContext : DbContext
+public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
-    public ApplicationDbContext()
-    {
-    }
+    
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -18,6 +19,10 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<Cinema> Cinemas { get; set; }
 
     public virtual DbSet<Movie> Movies { get; set; }
+
+    public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderDetail> OrderDetails { get; set; }
 
     public virtual DbSet<Payment> Payments { get; set; }
 
@@ -31,11 +36,9 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Ticket> Tickets { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+   
 
-  
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=LAPTOP-N5O7TJD1\\SQLSERVER;Database=WEBBANVEXEMPHIM;Trusted_Connection=True;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -58,7 +61,44 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.Language)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.PosterUrl)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("PosterURL");
             entity.Property(e => e.Title).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.HasKey(e => e.ID).HasName("PK__Orders__3214EC279F18DDF8");
+
+            entity.Property(e => e.ID).HasColumnName("ID");
+            entity.Property(e => e.OrderDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
+           
+        });
+
+        modelBuilder.Entity<OrderDetail>(entity =>
+        {
+            entity.HasKey(e => e.ID).HasName("PK__OrderDet__3214EC277A369FC6");
+
+            entity.Property(e => e.ID).HasColumnName("ID");
+            entity.Property(e => e.OrderID).HasColumnName("OrderID");
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Quantity).HasDefaultValue(0);
+            entity.Property(e => e.TicketID).HasColumnName("TicketID");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.OrderID)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OrderDeta__Order__1AD3FDA4");
+
+            entity.HasOne(d => d.Ticket).WithMany(p => p.OrderDetails)
+                .HasForeignKey(d => d.TicketID)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__OrderDeta__Ticke__1BC821DD");
         });
 
         modelBuilder.Entity<Payment>(entity =>
@@ -67,17 +107,14 @@ public partial class ApplicationDbContext : DbContext
 
             entity.Property(e => e.ID).HasColumnName("ID");
             entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.OrderID).HasColumnName("OrderID");
             entity.Property(e => e.PaymentMethod).HasMaxLength(50);
             entity.Property(e => e.PaymentStatus).HasMaxLength(50);
             entity.Property(e => e.PaymentTime)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.UserId).HasColumnName("UserID");
+            
 
-            entity.HasOne(d => d.User).WithMany(p => p.Payments)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Payments__UserID__5812160E");
         });
 
         modelBuilder.Entity<Review>(entity =>
@@ -89,17 +126,7 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.ReviewTime)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.UserID).HasColumnName("UserID");
-
-            entity.HasOne(d => d.Movie).WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.MovieID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Reviews__MovieID__5DCAEF64");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.UserID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Reviews__UserID__5CD6CB2B");
+            
         });
 
         modelBuilder.Entity<Room>(entity =>
@@ -137,7 +164,6 @@ public partial class ApplicationDbContext : DbContext
 
             entity.Property(e => e.ID).HasColumnName("ID");
             entity.Property(e => e.MovieID).HasColumnName("MovieID");
-            
             entity.Property(e => e.RoomID).HasColumnName("RoomID");
             entity.Property(e => e.StartTime).HasColumnType("datetime");
 
@@ -168,7 +194,6 @@ public partial class ApplicationDbContext : DbContext
                 .HasColumnType("decimal(10, 2)");
             entity.Property(e => e.DrinkQuantity).HasDefaultValue(0);
             entity.Property(e => e.FinalPrice).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.PaymentID).HasColumnName("PaymentID");
             entity.Property(e => e.PopcornPrice)
                 .HasDefaultValue(0m)
                 .HasColumnType("decimal(10, 2)");
@@ -178,12 +203,6 @@ public partial class ApplicationDbContext : DbContext
             entity.Property(e => e.ShowtimeID).HasColumnName("ShowtimeID");
             entity.Property(e => e.Status).HasMaxLength(50);
             entity.Property(e => e.TicketType).HasMaxLength(50);
-            entity.Property(e => e.UserID).HasColumnName("UserID");
-
-            entity.HasOne(d => d.Payment).WithMany(p => p.Tickets)
-                .HasForeignKey(d => d.PaymentID)
-                .OnDelete(DeleteBehavior.SetNull)
-                .HasConstraintName("FK_Tickets_Payments");
 
             entity.HasOne(d => d.Seat).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.SeatID)
@@ -194,29 +213,11 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey(d => d.ShowtimeID)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Tickets__Showtim__5165187F");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Tickets)
-                .HasForeignKey(d => d.UserID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Tickets__UserID__5070F446");
         });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e => e.ID).HasName("PK__Users__1788CCACDA95FF49");
-
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D105349C68A34A").IsUnique();
-
-            entity.Property(e => e.ID).HasColumnName("ID");
-            entity.Property(e => e.Email).HasMaxLength(100);
-            entity.Property(e => e.FullName).HasMaxLength(100);
-            entity.Property(e => e.Password).HasMaxLength(255);
-            entity.Property(e => e.Phone).HasMaxLength(20);
-        });
-
-      
 
         OnModelCreatingPartial(modelBuilder);
+
+        base.OnModelCreating(modelBuilder);
     }
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

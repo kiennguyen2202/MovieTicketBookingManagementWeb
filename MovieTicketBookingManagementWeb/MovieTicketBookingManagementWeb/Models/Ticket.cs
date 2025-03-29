@@ -7,8 +7,6 @@ public partial class Ticket
 {
     public int ID { get; set; }
 
-    public int UserID { get; set; }
-
     public int ShowtimeID { get; set; }
 
     public int SeatID { get; set; }
@@ -33,13 +31,9 @@ public partial class Ticket
 
     public decimal? DrinkPrice { get; set; }
 
-    public int? PaymentID { get; set; }
-
-    public virtual Payment? Payment { get; set; }
+    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual Seat Seat { get; set; } = null!;
 
     public virtual Showtime Showtime { get; set; } = null!;
-
-    public virtual User User { get; set; } = null!;
 }

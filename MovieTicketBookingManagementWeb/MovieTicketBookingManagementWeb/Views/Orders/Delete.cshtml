@@ -1,0 +1,24 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Order
+
+@{
+    ViewData["Title"] = "Delete Order";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Are you sure you want to delete this order?</p>
+
+<div>
+    
+    <p>Order Date: @Model.OrderDate?.ToString("yyyy-MM-dd HH:mm")</p>
+    <p>Total Price: @Model.TotalPrice</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="ID" />
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Cancel</a>
+</form>
+
+
+

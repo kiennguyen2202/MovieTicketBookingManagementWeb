@@ -1,21 +1,23 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MovieTicketBookingManagementWeb.Models;
 
 namespace MovieTicketBookingManagementWeb.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly ApplicationDbContext _context;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ApplicationDbContext context)
     {
-        _logger = logger;
+        _context = context;
     }
 
     public IActionResult Index()
     {
-        return View();
+        var movies = _context.Movies.ToList(); // Đảm bảo có bảng Movies trong DbContext
+        return View(movies);
     }
 
     public IActionResult Privacy()

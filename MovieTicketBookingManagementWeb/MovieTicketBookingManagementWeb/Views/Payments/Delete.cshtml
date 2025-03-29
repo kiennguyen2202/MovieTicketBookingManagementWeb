@@ -1,0 +1,22 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Payment
+
+@{
+    ViewData["Title"] = "Xóa thanh toán";
+}
+
+<h2>Bạn có chắc muốn xóa thanh toán này?</h2>
+
+<table class="table">
+    <tr><th>ID:</th><td>@Model.ID</td></tr>
+   
+    <tr><th>Số tiền:</th><td>@Model.Amount.ToString("N0") VND</td></tr>
+    <tr><th>Phương thức:</th><td>@Model.PaymentMethod</td></tr>
+    <tr><th>Trạng thái:</th><td>@Model.PaymentStatus</td></tr>
+    <tr><th>Thời gian thanh toán:</th><td>@(Model.PaymentTime?.ToString("dd/MM/yyyy HH:mm") ?? "Chưa xác định")</td></tr>
+</table>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="ID">
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

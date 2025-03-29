@@ -7,7 +7,7 @@ public partial class Review
 {
     public int ID { get; set; }
 
-    public int UserID { get; set; }
+
 
     public int MovieID { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Review
 
     public virtual Movie Movie { get; set; } = null!;
 
-    public virtual User User { get; set; } = null!;
+  
 }

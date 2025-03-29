@@ -1,0 +1,61 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Ticket
+
+@{
+    ViewData["Title"] = "Thêm vé mới";
+}
+
+<h2>Thêm vé mới</h2>
+
+<form asp-action="Add" method="post">
+    <div class="mb-3">
+        <label class="form-label">Suất chiếu</label>
+        <select asp-for="ShowtimeID" asp-items="ViewBag.ShowtimeID" class="form-control"></select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Ghế</label>
+        <select asp-for="SeatID" asp-items="ViewBag.SeatID" class="form-control"></select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Loại vé</label>
+        <input asp-for="TicketType" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Giá</label>
+        <input asp-for="Price" type="number" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Giảm giá</label>
+        <input asp-for="Discount" type="number" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="FinalPrice" class="control-label"></label>
+        <input id="finalPrice" class="form-control" readonly />
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let priceInput = document.getElementById("Price");
+            let discountInput = document.getElementById("Discount");
+            let finalPriceInput = document.getElementById("finalPrice");
+
+            function updateFinalPrice() {
+                let price = parseFloat(priceInput.value) || 0;
+                let discount = parseFloat(discountInput.value) || 0;
+                finalPriceInput.value = price - discount;
+            }
+
+            priceInput.addEventListener("input", updateFinalPrice);
+            discountInput.addEventListener("input", updateFinalPrice);
+        });
+    </script>
+    <div class="mb-3">
+        <label class="form-label">Trạng thái</label>
+        <select asp-for="Status" class="form-control">
+            <option value="Booked">Booked</option>
+            <option value="Paid">Paid</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Lưu</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

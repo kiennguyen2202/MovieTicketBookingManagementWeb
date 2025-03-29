@@ -4,7 +4,14 @@
 	<h3>Genre: @Model.Genre</h3>
 	<p>@Model.Language</p>
 	<p>@Model.Duration</p>
-	<p>@Model.ReleaseDate.ToShortDateString()</p>
+	@if (Model.ReleaseDate.HasValue)
+    {
+        <p>@Model.ReleaseDate.Value.ToString("yyyy-MM-dd")</p>
+    }
+    else
+    {
+        <p>No Release Date Available</p>
+    }
 	<p>@Model.Description</p>
 	@if (!string.IsNullOrEmpty(Model.PosterUrl))
 	{

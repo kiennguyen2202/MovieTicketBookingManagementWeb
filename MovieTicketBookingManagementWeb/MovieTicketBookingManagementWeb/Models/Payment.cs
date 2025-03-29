@@ -7,7 +7,7 @@ public partial class Payment
 {
     public int ID { get; set; }
 
-    public int UserId { get; set; }
+ 
 
     public decimal Amount { get; set; }
 
@@ -17,7 +17,9 @@ public partial class Payment
 
     public DateTime? PaymentTime { get; set; }
 
-    public virtual ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    public int? OrderID { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual Order? Order { get; set; }
+
+
 }
