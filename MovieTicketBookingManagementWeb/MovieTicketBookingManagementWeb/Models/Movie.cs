@@ -20,6 +20,7 @@ public partial class Movie
     public string? Description { get; set; }
 
     public string? PosterUrl { get; set; }
+    public string TrailerID { get; set; }
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 

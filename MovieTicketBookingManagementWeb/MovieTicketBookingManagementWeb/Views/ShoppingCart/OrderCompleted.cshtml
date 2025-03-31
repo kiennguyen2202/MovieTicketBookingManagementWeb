@@ -1,0 +1,52 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Order
+
+<h2><i class="bi bi-check-circle"></i> Đơn Hàng Đã Được Xác Nhận</h2>
+
+<div class="card p-3">
+    <h4 class="text-primary"><i class="bi bi-person"></i> Thông Tin Khách Hàng</h4>
+    <ul>
+        <li><strong>👤 Tên:</strong> @Model.ApplicationUser.FullName</li>
+        <li><strong>📧 Email:</strong> @Model.ApplicationUser.Email</li>
+        <li><strong>📞 Số điện thoại:</strong> @Model.ApplicationUser.PhoneNumber</li>
+    </ul>
+</div>
+
+<div class="card p-3 mt-3">
+    <h4 class="text-primary"><i class="bi bi-box"></i> Thông Tin Đặt Hàng</h4>
+    <ul>
+       
+       
+       
+    </ul>
+</div>
+
+<div class="card p-3 mt-3">
+    <h4 class="text-success"><i class="bi bi-basket"></i> Sản Phẩm Trong Đơn Hàng</h4>
+    <table class="table table-bordered">
+        <thead class="table-success">
+            <tr>
+                <th>Mã sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@item.Movie.ID</td>
+                    <td>@item.Movie.Title</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Ticket.Showtime.Price.ToString("#,##0") $</td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h3 class="text-danger text-end">
+    <i class="bi bi-coin"></i> 
+</h3>

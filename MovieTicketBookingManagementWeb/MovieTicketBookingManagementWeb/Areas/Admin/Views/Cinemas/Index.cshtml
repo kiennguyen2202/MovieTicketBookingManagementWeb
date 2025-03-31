@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Cinema>
+
+<h2 class="my-4 text-center text-primary">Danh Sách Rạp Chiếu Phim</h2>
+
+<div class="table-responsive">
+    <table id="cinemaTable" class="table table-hover table-striped text-center">
+        <thead class="bg-dark text-white">
+            <tr>
+                <th>Tên Rạp</th>
+                <th>Địa Chỉ</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cinema in Model)
+            {
+                <tr>
+                    <td class="fw-bold">@cinema.Name</td>
+                    <td>@cinema.Location</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-action="Update" asp-route-id="@cinema.ID" class="btn btn-warning btn-sm">Sửa</a>
+                            <a asp-action="Details" asp-route-id="@cinema.ID" class="btn btn-info btn-sm">Chi tiết</a>
+                            <a asp-action="Delete" asp-route-id="@cinema.ID" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center mt-3">
+    <a asp-action="Add" class="btn btn-success btn-lg">
+        <i class="fas fa-plus-circle"></i> Thêm rạp chiếu phim
+    </a>
+</div>
+

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using MovieTicketBookingManagementWeb.Models;
 
 namespace MovieTicketBookingManagementWeb.Models;
@@ -8,7 +9,8 @@ public partial class Order
 {
     public int ID { get; set; }
 
-    public int UserId { get; set; }
+    [ForeignKey("UserID")]
+    public string UserID { get; set; }
 
     public DateTime? OrderDate { get; set; }
 

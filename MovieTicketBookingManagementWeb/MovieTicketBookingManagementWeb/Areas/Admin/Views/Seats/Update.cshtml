@@ -1,0 +1,40 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Seat
+
+@{
+    ViewData["Title"] = "Edit Seat";
+}
+
+<h2>Edit Seat</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Update" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+
+            <div class="form-group">
+                <label asp-for="SeatNumber" class="control-label"></label>
+                <input asp-for="SeatNumber" class="form-control" />
+                <span asp-validation-for="SeatNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SeatType" class="control-label"></label>
+                <input asp-for="SeatType"  class="form-control" />
+                <span asp-validation-for="SeatType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="RoomID" class="control-label"></label>
+                <select asp-for="RoomID" asp-items="ViewBag.RoomID" class="form-control">
+                    <option value="">Select a Cinema</option>
+                </select>
+                <span asp-validation-for="RoomID" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-warning">Update Room</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+</div>

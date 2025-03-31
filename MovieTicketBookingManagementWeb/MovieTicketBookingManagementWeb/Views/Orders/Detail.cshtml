@@ -39,8 +39,8 @@
                     <td>@item.Ticket.ID</td>
                    
                     <td>@item.Quantity</td>
-                    <td>@item.Ticket.Price.ToString("#,##0") VND</td>
-                    <td>@((item.Quantity * item.Ticket.Price)?.ToString("#,##0")) VND</td>
+                    <td>@item.Showtime.Price.ToString("#,##0") VND</td>
+                    <td>@((item.Quantity * item.Showtime.Price)?.ToString("#,##0")) VND</td>
                 </tr>
             }
         </tbody>
@@ -48,7 +48,7 @@
 </div>
 
 <h3 class="text-danger text-end">
-    <i class="bi bi-coin"></i> Tổng tiền: @Model.OrderDetails.Sum(od => od.Quantity * od.Ticket.Price)?.ToString("#,##0") VND
+    <i class="bi bi-coin"></i> Tổng tiền: @Model.OrderDetails.Sum(od => od.Quantity * od.Showtime.Price)?.ToString("#,##0") VND
 </h3>
 
 <a asp-action="Index" class="btn btn-primary mt-3"><i class="bi bi-arrow-left"></i> Quay lại danh sách</a>

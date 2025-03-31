@@ -1,0 +1,9 @@
+﻿@model Ticket
+
+<h2>Vé của bạn</h2>
+<p>Phim: @Model.Showtime.Movie.Title</p>
+<p>Suất chiếu: @Model.Showtime.StartTime</p>
+<p>Ghế: @Model.Seat.SeatNumber</p>
+<p>Giá: @Model.FinalPrice VND</p>
+<p>Thời gian đặt: @Model.BookingTime</p>
+<a href="@Url.Action("Index", "Home")" class="btn btn-primary">Về Trang Chủ</a>

@@ -1,0 +1,36 @@
+﻿@model Ticket
+
+@{
+    Layout = "_Layout";
+}
+
+<h2 class="text-center my-4"><i class="bi bi-ticket-perforated"></i> Thông Tin Vé</h2>
+
+<div class="container">
+    <!-- Thông tin vé -->
+    <div class="card p-3 shadow-sm">
+        <h4 class="text-primary"><i class="bi bi-film"></i> Thông Tin Phim</h4>
+        <ul>
+            <li><strong>🎬 Phim:</strong> @Model.Showtime.Movie.Title</li>
+            <li><strong>🕒 Suất chiếu:</strong> @Model.Showtime.StartTime</li>
+            <li><strong>💺 Ghế:</strong> @Model.Seat.SeatNumber</li>
+            <li><strong>💰 Giá:</strong> @Model.FinalPrice VND</li>
+            <li><strong>📅 Thời gian đặt:</strong> @Model.BookingTime</li>
+        </ul>
+    </div>
+
+    <!-- Card thông tin khách hàng -->
+    <!--<div class="card p-3 mt-4">
+        <h4 class="text-primary"><i class="bi bi-person"></i> Thông Tin Khách Hàng</h4>
+        <ul>
+            <li><strong>👤 Tên khách hàng:</strong> @Model..FullName</li>
+            <li><strong>📧 Email:</strong> @Model..Email</li>
+            <li><strong>📞 Số điện thoại:</strong> @Model..PhoneNumber</li>
+        </ul>
+    </div>
+	-->
+    <!-- Footer với nút quay lại -->
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary btn-lg"><i class="bi bi-house-door"></i> Về Trang Chủ</a>
+    </div>
+</div>

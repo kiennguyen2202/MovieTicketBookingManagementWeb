@@ -1,0 +1,28 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Seat
+
+@{
+    ViewData["Title"] = "Room Details";
+}
+
+<h2>Seat Details</h2>
+
+<div>
+    <h4>Seat Information</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.SeatNumber)</dt>
+        <dd class="col-sm-9">@Model.SeatNumber</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.SeatType)</dt>
+        <dd class="col-sm-9">@Model.SeatType</dd>
+
+        <dt class="col-sm-3">Cinema</dt>
+        <dd class="col-sm-9">@Model.Room.Name</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Update" asp-route-id="@Model.ID" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

@@ -1,0 +1,21 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Ticket
+
+@{
+    ViewData["Title"] = "Chi tiết vé";
+}
+
+<h2>Chi tiết vé</h2>
+
+<div>
+    <p><strong>Mã vé:</strong> @Model.ID</p>
+    <p><strong>Suất chiếu:</strong> @Model.Showtime.StartTime</p>
+    <p><strong>Ghế:</strong> @Model.Seat.SeatNumber</p>
+    <p><strong>Loại vé:</strong> @Model.TicketType</p>
+    
+    <p><strong>Giảm giá:</strong> @Model.Discount</p>
+    <p><strong>Giá cuối:</strong> @Model.FinalPrice</p>
+    <p><strong>Trạng thái:</strong> @Model.Status</p>
+    <p><strong>Thời gian đặt:</strong> @Model.BookingTime?.ToString("dd/MM/yyyy HH:mm")</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>

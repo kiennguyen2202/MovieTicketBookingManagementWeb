@@ -1,0 +1,44 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Review
+
+@{
+    ViewData["Title"] = "Update Review";
+}
+
+<h2>Edit Review</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="MovieID" class="control-label"></label>
+                <select asp-for="MovieID" class="form-control" asp-items="ViewBag.MovieID">
+                    <option value="">Select Movie</option>
+                </select>
+                <span asp-validation-for="MovieID" class="text-danger"></span>
+            </div>
+
+            
+
+            <div class="form-group">
+                <label asp-for="Rating" class="control-label">Đánh giá (1-5)</label>
+                <input asp-for="Rating" type="number" class="form-control" min="1" max="5" />
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Comment" class="control-label">Bình luận</label>
+                <textarea asp-for="Comment" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="Comment" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

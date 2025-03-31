@@ -6,6 +6,7 @@ namespace MovieTicketBookingManagementWeb.Models;
 public partial class Ticket
 {
     public int ID { get; set; }
+    public int MovieID { get; set; }
 
     public int ShowtimeID { get; set; }
 
@@ -13,7 +14,7 @@ public partial class Ticket
 
     public string TicketType { get; set; } = null!;
 
-    public decimal Price { get; set; }
+    public int UserID { get; set; }
 
     public decimal? Discount { get; set; }
 
@@ -32,8 +33,11 @@ public partial class Ticket
     public decimal? DrinkPrice { get; set; }
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual Movie? Movie { get; set; } = null!;
 
-    public virtual Seat Seat { get; set; } = null!;
+    public virtual Seat? Seat { get; set; } = null!;
 
-    public virtual Showtime Showtime { get; set; } = null!;
+    public virtual Showtime? Showtime { get; set; } = null!;
+    public ApplicationUser ApplicationUser { get; set; } = null!;
+
 }

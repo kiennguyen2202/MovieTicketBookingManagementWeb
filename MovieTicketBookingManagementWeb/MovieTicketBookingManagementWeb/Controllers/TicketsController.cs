@@ -5,6 +5,7 @@ using MovieTicketBookingManagementWeb.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace MovieTicketBookingManagementWeb.Controllers
 {
     public class TicketsController : Controller
@@ -41,7 +42,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                ticket.FinalPrice = ticket.Price - (ticket.Discount ?? 0);
+                ticket.FinalPrice = ticket.Showtime.Price - (ticket.Discount ?? 0);
                 _context.Add(ticket);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,9 +83,9 @@ namespace MovieTicketBookingManagementWeb.Controllers
                 existingTicket.ShowtimeID = ticket.ShowtimeID;
                 existingTicket.SeatID = ticket.SeatID;
                 existingTicket.TicketType = ticket.TicketType;
-                existingTicket.Price = ticket.Price;
+                existingTicket.Showtime.Price = ticket.Showtime.Price;
                 existingTicket.Discount = ticket.Discount;
-                existingTicket.FinalPrice = ticket.Price - (ticket.Discount ?? 0);
+                existingTicket.FinalPrice = ticket.Showtime.Price - (ticket.Discount ?? 0);
                 existingTicket.Status = ticket.Status;
                 existingTicket.BookingTime = ticket.BookingTime ?? existingTicket.BookingTime;  // Giữ lại BookingTime cũ nếu không có giá trị mới
                 existingTicket.PopcornQuantity = ticket.PopcornQuantity;
@@ -147,6 +148,99 @@ namespace MovieTicketBookingManagementWeb.Controllers
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));
+        }
+        // Hiển thị giao diện chọn ghế
+        public async Task<IActionResult> SelectSeats(int showtimeId)
+        {
+            var showtime = await _context.Showtimes
+                .Include(s => s.Movie)
+                .Include(s => s.Room)
+                .Include(s => s.Room.Cinema)
+                .FirstOrDefaultAsync(s => s.ID == showtimeId);
+
+            if (showtime == null) return NotFound();
+
+            var availableSeats = _context.Seats
+                .Where(s => s.RoomID == showtime.RoomID && !_context.Tickets.Any(t => t.SeatID == s.ID && t.ShowtimeID == showtimeId))
+                .ToList();
+
+            var viewModel = new SelectSeats
+            {
+                Showtime = showtime,
+                AvailableSeats = availableSeats
+            };
+
+            return View(viewModel);
+        }
+
+
+        // Xử lý đặt vé
+        [HttpPost]
+        
+        public async Task<IActionResult> BookTicket(int showtimeId, int seatId)
+        {
+            var showtime = await _context.Showtimes
+                .Include(s => s.Room)
+                .Include(s => s.Movie)
+                .FirstOrDefaultAsync(s => s.ID == showtimeId);
+
+            if (showtime == null) return NotFound("Suất chiếu không tồn tại!");
+
+            var seat = await _context.Seats
+                .FirstOrDefaultAsync(s => s.ID == seatId && s.RoomID == showtime.RoomID);
+
+            if (seat == null) return BadRequest("Ghế không hợp lệ hoặc không thuộc phòng chiếu của suất chiếu này!");
+
+            var existingTicket = await _context.Tickets
+                .FirstOrDefaultAsync(t => t.SeatID == seatId && t.ShowtimeID == showtimeId);
+
+            if (existingTicket != null) return BadRequest("Ghế này đã được đặt!");
+
+            seat.IsBooked = true;
+
+
+            var ticket = new Ticket
+            {
+                ShowtimeID = showtimeId,
+                SeatID = seatId,
+                TicketType = "Standard",
+                MovieID = showtime.MovieID,
+                Discount = 0,
+                FinalPrice = showtime.Price,
+                Status = "Booked",
+                BookingTime = DateTime.Now,
+                
+   
+            };
+
+            _context.Tickets.Add(ticket);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("TicketConfirmation", new { ticketId = ticket.ID });
+        }
+
+
+
+        // Hiển thị thông tin vé sau khi đặt thành công
+        public IActionResult TicketConfirmation(int ticketId)
+        {
+            var ticket = _context.Tickets
+        .Include(t => t.Showtime)
+        .ThenInclude(s => s.Movie)
+        .Include(t => t.Seat)
+        .FirstOrDefault(t => t.ID == ticketId);
+        if (ticket == null) return NotFound();
+
+            return View(ticket);
+        }
+        private bool TicketExists(int id)
+        {
+            return _context.Tickets.Any(e => e.ID == id);
+        }
+        private void PopulateSelectLists(int? showtimeId = null, int? seatId = null)
+        {
+            ViewBag.ShowtimeID = new SelectList(_context.Showtimes, "ID", "StartTime", showtimeId);
+            ViewBag.SeatID = new SelectList(_context.Seats, "ID", "SeatNumber", seatId);
         }
     }
 }

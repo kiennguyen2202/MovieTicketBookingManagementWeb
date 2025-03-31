@@ -11,9 +11,9 @@
     <p><strong>Suất chiếu:</strong> @Model.Showtime.StartTime</p>
     <p><strong>Ghế:</strong> @Model.Seat.SeatNumber</p>
     <p><strong>Loại vé:</strong> @Model.TicketType</p>
-    <p><strong>Giá:</strong> @Model.Price</p>
-    <p><strong>Giảm giá:</strong> @Model.Discount</p>
-    <p><strong>Giá cuối:</strong> @Model.FinalPrice</p>
+    <p>Giá vé: @Model.Showtime.Price.ToString("C")</p>
+    <p>Giảm giá: @Model.Discount?.ToString("C")</p>
+    <p>Thành tiền: @Model.FinalPrice.ToString("C")</p>
     <p><strong>Trạng thái:</strong> @Model.Status</p>
     <p><strong>Thời gian đặt:</strong> @Model.BookingTime?.ToString("dd/MM/yyyy HH:mm")</p>
 </div>

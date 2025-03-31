@@ -166,6 +166,7 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.MovieID).HasColumnName("MovieID");
             entity.Property(e => e.RoomID).HasColumnName("RoomID");
             entity.Property(e => e.StartTime).HasColumnType("datetime");
+            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
 
             entity.HasOne(d => d.Movie).WithMany(p => p.Showtimes)
                 .HasForeignKey(d => d.MovieID)
@@ -198,7 +199,6 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 .HasDefaultValue(0m)
                 .HasColumnType("decimal(10, 2)");
             entity.Property(e => e.PopcornQuantity).HasDefaultValue(0);
-            entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.SeatID).HasColumnName("SeatID");
             entity.Property(e => e.ShowtimeID).HasColumnName("ShowtimeID");
             entity.Property(e => e.Status).HasMaxLength(50);

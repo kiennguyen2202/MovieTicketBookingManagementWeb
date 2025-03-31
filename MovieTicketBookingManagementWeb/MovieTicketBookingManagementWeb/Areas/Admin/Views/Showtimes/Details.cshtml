@@ -1,0 +1,28 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Showtime
+
+@{
+    ViewData["Title"] = "Room ShowTime";
+}
+
+<h2>Room ShowTime</h2>
+
+<div>
+    <h4>ShowTime Information</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Movie.Title)</dt>
+        <dd class="col-sm-9">@Model.Movie.Title</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Room.Name)</dt>
+        <dd class="col-sm-9">@Model.Room.Name</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.StartTime)</dt>
+        <dd class="col-sm-9">@Model.StartTime.ToString("yyyy-MM-dd HH:mm:ss")</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Update" asp-route-id="@Model.ID" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

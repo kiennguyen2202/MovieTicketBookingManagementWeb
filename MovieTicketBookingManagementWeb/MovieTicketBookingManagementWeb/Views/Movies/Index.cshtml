@@ -1,45 +1,48 @@
 ﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Movie>
 
-<h2 class="my-4 text-center">Movies List</h2>
-<table id="movieTable" class="table table-bordered table-striped text-center">
+<h2 class="my-4 text-center text-primary">Danh Sách Phim</h2>
 
-
-    <thead class="table-dark">
-        <tr>
-            <th>Poster</th>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Language</th>
-            <th>Duration</th>
-            <th>ReleaseDate</th>
-            <th>Description</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var movie in Model)
-        {
+<div class="table-responsive">
+    <table id="movieTable" class="table table-hover table-striped text-center">
+       
+        <thead class="bg-dark text-white">
             <tr>
-                <td>
-                   
-                    <img src="@movie.PosterUrl" alt="@movie.Title" class="img-thumbnail" style="width: 60px; height: 60px;">
-                </td>
-                <td>@movie.Title</td>
-                <td>@movie.Genre</td>
-                <td>@movie.Language</td>
-                <td>@movie.Duration</td>
-                <td>@movie.ReleaseDate</td>
-                <td>@movie.Description</td>
-                
-                <td>
-                <a asp-action="Update" asp-route-id="@movie.ID" class="btn btn-warning">Sửa</a>
-				<a asp-action="Details" asp-route-id="@movie.ID" class="btn btn-danger">Chi tiet</a>
-				<a asp-action="Delete" asp-route-id="@movie.ID" class="btn btn-danger">Xóa</a>
-				</td>
-
-                
+                <th>Poster</th>
+                <th>Tiêu đề</th>
+                <th>Thể loại</th>
+                <th>Ngôn ngữ</th>
+                <th>Thời lượng</th>
+                <th>Ngày phát hành</th>
+                <th>Mô tả</th>
+                <th>Hành động</th>
             </tr>
-        }
-    </tbody>
-</table>
-<a asp-action="Add" class="btn btn-primary">Thêm phim</a>
+        </thead>
+        <tbody>
+            @foreach (var movie in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="@movie.PosterUrl" alt="@movie.Title" class="img-thumbnail" style="width: 70px; height: 70px; object-fit: cover;">
+                    </td>
+                    <td class="fw-bold">@movie.Title</td>
+                    <td>@movie.Genre</td>
+                    <td>@movie.Language</td>
+                    <td>@movie.Duration phút</td>
+                    <td>@(movie.ReleaseDate?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")</td>
+
+                    <td class="text-truncate" style="max-width: 150px;">@movie.Description</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            
+                            <a asp-action="Details" asp-route-id="@movie.ID" class="btn btn-info btn-sm">Chi tiết</a>
+                           
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        
+    </table>
+</div>
+
+

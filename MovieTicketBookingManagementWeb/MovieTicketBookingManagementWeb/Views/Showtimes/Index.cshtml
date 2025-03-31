@@ -8,6 +8,8 @@
         <tr>
             <th>Movie Title</th>
             <th>Room</th>
+			<th>Cinema</th>
+            <th>Price</th>
             <th>Start Time</th>
             <th>Actions</th>
             <th></th>
@@ -20,6 +22,8 @@
 
                 <td>@showtime.Movie.Title</td>
                 <td>@showtime.Room.Name</td>
+                <td>@showtime.Room.Cinema.Name</td>
+                <td>@showtime.Price.ToString("C")</td>
                 <td>@showtime.StartTime.ToString("HH:mm, dd/MM/yyyy")</td>
 
                 <td>
@@ -34,28 +38,3 @@
     </tbody>
 </table>
 <a asp-action="Add" class="btn btn-primary">Thêm showtime</a>
-@section Scripts {
-    <!-- jQuery (Cần có trước DataTables.js) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
-
-
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            console.log("DataTables is initializing...");
-
-            if ($.fn.DataTable) {
-                console.log("DataTables loaded successfully!");
-            } else {
-                console.error("DataTables failed to load!");
-            }
-
-            $('#productTable').DataTable();
-        });
-    </script>
-    }

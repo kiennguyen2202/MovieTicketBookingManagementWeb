@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketBookingManagementWeb.Models;
-using MovieTicketBookingManagementWeb.Models;
+
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -32,29 +32,50 @@ namespace MovieTicketBookingManagementWeb.Controllers
 
         [HttpGet]
         // Hiển thị form tạo mới Review
-        public IActionResult Add()
+
+        public async Task<IActionResult> Add(int movieId)
         {
-            ViewBag.MovieID = new SelectList(_context.Movies, "ID", "Title");
-            ViewBag.UserID = new SelectList(_context.Users, "ID", "FullName");
+            var movie = await _context.Movies.FindAsync(movieId);
+            if (movie == null) return NotFound();
+
+            var userId = _userManager.GetUserId(User);
+            if (string.IsNullOrEmpty(userId)) return Unauthorized(); // Nếu chưa đăng nhập, trả về lỗi 401
+
+            var hasWatchedMovie = await _context.Tickets
+                .AnyAsync(t => t.UserID.ToString() == userId && t.MovieID == movieId && t.Status == "Completed");
+
+            if (!hasWatchedMovie)
+            {
+                TempData["ErrorMessage"] = "Bạn cần xem phim này trước khi đánh giá.";
+                return RedirectToAction("Details", "Movies", new { id = movieId });
+            }
+
+            ViewBag.MovieID = movieId;
             return View();
         }
 
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("ID,UserID,MovieID,Rating,Comment,ReviewTime")] Review review)
+        public async Task<IActionResult> Add([Bind("MovieID,Rating,Comment")] Review review)
         {
             if (ModelState.IsValid)
             {
+                var userId = _userManager.GetUserId(User); // Lấy UserID của người dùng hiện tại
+                review.UserID = userId; // Gán UserID vào review (nếu UserID là int, cần ép kiểu)
+                review.ReviewTime = DateTime.Now; // Thêm thời gian review
+
                 _context.Add(review);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Details", "Movies", new { id = review.MovieID });
             }
 
-            // Nếu có lỗi, giữ lại dữ liệu dropdown
             ViewBag.MovieID = new SelectList(_context.Movies, "ID", "Title", review.MovieID);
-           
             return View(review);
         }
+
 
         [HttpGet]
         // Hiển thị form chỉnh sửa Review

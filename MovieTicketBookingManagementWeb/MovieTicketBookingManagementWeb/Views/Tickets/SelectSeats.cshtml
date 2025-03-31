@@ -1,0 +1,19 @@
+﻿@model SelectSeats
+
+<h2>Chọn Ghế Cho Suất Chiếu: @Model.Showtime.Movie.Title</h2>
+
+<form asp-action="BookTicket" method="post">
+    <input type="hidden" name="showtimeId" value="@Model.Showtime.ID" />
+
+    <div>
+        @foreach (var seat in Model.AvailableSeats)
+        {
+            <label>
+                <input type="radio" name="seatId" value="@seat.ID" required />
+                Ghế @seat.SeatNumber
+            </label>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Đặt Vé</button>
+</form>

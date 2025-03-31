@@ -22,7 +22,9 @@ namespace MovieTicketBookingManagementWeb.Controllers
             var showtimes = _context.Showtimes
                 .Include(s => s.Movie)
                 .Include(s => s.Room)
+                .Include(s => s.Room.Cinema)
                 .OrderBy(s => s.StartTime);
+            
             return View(await showtimes.ToListAsync());
         }
 
@@ -32,12 +34,14 @@ namespace MovieTicketBookingManagementWeb.Controllers
         {
             ViewBag.MovieID = new SelectList(_context.Movies, "ID", "Title");
             ViewBag.RoomID = new SelectList(_context.Rooms, "ID", "Name");
+            ViewBag.StartTime = DateTime.Now;
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("ID,MovieID,RoomID,StartTime")] Showtime showtime)
+        public async Task<IActionResult> Add([Bind("ID,MovieID,RoomID,StartTime,Price")] Showtime showtime)
         {
             if (ModelState.IsValid)
             {
@@ -68,7 +72,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, [Bind("ID,MovieID,RoomID,StartTime")] Showtime showtime)
+        public async Task<IActionResult> Update(int id, [Bind("ID,MovieID,RoomID,StartTime,Price")] Showtime showtime)
         {
             if (id != showtime.ID) return NotFound();
 

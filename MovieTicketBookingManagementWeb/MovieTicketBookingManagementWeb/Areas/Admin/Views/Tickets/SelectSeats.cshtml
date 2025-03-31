@@ -1,0 +1,16 @@
+﻿@model SelectSeats
+
+<h2>Chọn Ghế Cho @Model.Showtime.Movie.Title</h2>
+<form asp-action="BookTicket" method="post">
+    <input type="hidden" name="showtimeId" value="@Model.Showtime.ID" />
+    <label>Chọn Ghế:</label>
+    <select name="seatId">
+        @foreach (var seat in Model.AvailableSeats)
+        {
+            <option value="@seat.ID">@seat.SeatNumber</option>
+        }
+    </select>
+    <label>Giá vé:</label>
+    <input type="number" name="price" value="100000" required />
+    <button type="submit" class="btn btn-success">Đặt Vé</button>
+</form>
