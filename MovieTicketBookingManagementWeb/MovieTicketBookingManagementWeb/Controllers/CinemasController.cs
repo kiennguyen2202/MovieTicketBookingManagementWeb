@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MovieTicketBookingManagementWeb.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
+using System.Globalization;
 
 namespace MovieTicketBookingManagementWeb.Controllers
 {
-    public class CinemaController : Controller
+    public class CinemasController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public CinemaController(ApplicationDbContext context)
+        public CinemasController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -16,26 +18,15 @@ namespace MovieTicketBookingManagementWeb.Controllers
             var cinemas = await _context.Cinemas.ToListAsync();
             return View(cinemas);
         }
-        public async Task<IActionResult> Display(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var cinema = await _context.Cinemas
-                .Include(c => c.Rooms)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (cinema == null) return NotFound();
-
-            return View(cinema);
-        }
+        [HttpGet]
         public IActionResult Add()
         {
-            
+
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("Id,Name,Location")] Cinema cinema)
+        public async Task<IActionResult> Add([Bind("ID,Name,Location")] Cinema cinema)
         {
             if (ModelState.IsValid)
             {
@@ -45,7 +36,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
             }
             return View(cinema);
         }
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return NotFound();
 
@@ -56,7 +47,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Location")] Cinema cinema)
+        public async Task<IActionResult> Update(int id, [Bind("ID,Name,Location")] Cinema cinema)
         {
             if (id != cinema.Id) return NotFound();
 
@@ -76,6 +67,18 @@ namespace MovieTicketBookingManagementWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            return View(cinema);
+        }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var cinema = await _context.Cinemas
+                .Include(c => c.Rooms)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (cinema == null) return NotFound();
+
             return View(cinema);
         }
         public async Task<IActionResult> Delete(int? id)
@@ -101,5 +104,5 @@ namespace MovieTicketBookingManagementWeb.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
-}
+    }
 }
