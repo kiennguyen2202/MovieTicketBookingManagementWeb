@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - test</title>
+    <title>@ViewData["Title"] - Trang Đặt Vé</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/test.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css />
+    <link rel="stylesheet" href="~/MovieTicketBookingManagementWeb.styles.css" asp-append-version="true" />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -39,35 +39,29 @@
                             <a class="nav-link active" href="/Home/Index">Trang chủ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Combo giảm giá</a>
+                            <a class="nav-link" href="/PopcornDrinkItems/Selected">Combo giảm giá</a>
                         </li>
 
                         <!-- Dropdown Thể loại -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="genreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Thể loại phim
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Thể loại
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="genreDropdown">
-                                @if (ViewBag.Genres != null && ((List<string>)ViewBag.Genres).Any())
-                                {
-                                    @foreach (var genre in ViewBag.Genres as List<string>)
-                                    {
-                                        <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { genre = genre })">@genre</a></li>
-                                    }
-                                }
-                                else
-                                {
-                                    <li><a class="dropdown-item disabled" href="#">Không có thể loại</a></li>
-                                }
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 1 })">Hành động</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 2 })">Hài</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 3 })">Phiêu lưu</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 4 })">Khoa học viễn tưởng</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 5 })">Kinh dị</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 6 })">Tâm lý - Chính kịch</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 7 })">Tình cảm</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 8 })">Tội phạm - Hình sự</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 9 })">Hoạt hình</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 10 })">Âm nhạc</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 11 })">Chiến tranh</a></li>
+                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 12 })">Giả tưởng</a></li>
                             </ul>
                         </li>
-
-
-
-
-
-
-
 
                     </ul>
 
@@ -104,10 +98,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-        </div>
-    </footer>
+   
 
     <script src="~/js/site.js"></script>
 </body>

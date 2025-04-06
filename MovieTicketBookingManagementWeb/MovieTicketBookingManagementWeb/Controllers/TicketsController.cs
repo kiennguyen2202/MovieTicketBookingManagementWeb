@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketBookingManagementWeb.Models;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace MovieTicketBookingManagementWeb.Controllers
 {
+    [Authorize]
     public class TicketsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -88,10 +90,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
                 existingTicket.FinalPrice = ticket.Showtime.Price - (ticket.Discount ?? 0);
                 existingTicket.Status = ticket.Status;
                 existingTicket.BookingTime = ticket.BookingTime ?? existingTicket.BookingTime;  // Giữ lại BookingTime cũ nếu không có giá trị mới
-                existingTicket.PopcornQuantity = ticket.PopcornQuantity;
-                existingTicket.DrinkQuantity = ticket.DrinkQuantity;
-                existingTicket.PopcornPrice = ticket.PopcornPrice;
-                existingTicket.DrinkPrice = ticket.DrinkPrice;
+                
 
                 // Lưu các thay đổi
                 await _context.SaveChangesAsync();

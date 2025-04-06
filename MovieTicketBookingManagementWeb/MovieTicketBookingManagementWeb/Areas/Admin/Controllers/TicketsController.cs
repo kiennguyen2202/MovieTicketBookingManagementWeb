@@ -91,10 +91,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
                 existingTicket.FinalPrice = ticket.Showtime.Price - (ticket.Discount ?? 0);
                 existingTicket.Status = ticket.Status;
                 existingTicket.BookingTime = ticket.BookingTime ?? existingTicket.BookingTime;  // Giữ lại BookingTime cũ nếu không có giá trị mới
-                existingTicket.PopcornQuantity = ticket.PopcornQuantity;
-                existingTicket.DrinkQuantity = ticket.DrinkQuantity;
-                existingTicket.PopcornPrice = ticket.PopcornPrice;
-                existingTicket.DrinkPrice = ticket.DrinkPrice;
+                
 
                 // Lưu các thay đổi
                 await _context.SaveChangesAsync();

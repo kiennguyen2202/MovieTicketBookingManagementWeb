@@ -11,10 +11,6 @@ namespace MovieTicketBookingManagementWeb.Models
         public string? Address { get; set; }
         public string? Age { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
-
-        public virtual ICollection<Payment> Payments { get; set; } = new List<Payment>();
-
-        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
+        
     }
 }

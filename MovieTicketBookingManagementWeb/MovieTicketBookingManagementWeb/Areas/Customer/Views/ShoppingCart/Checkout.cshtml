@@ -1,0 +1,71 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Order
+
+@{
+    ViewData["Title"] = "Thanh Toán";
+}
+
+<h2 class="text-center my-4"><i class="bi bi-credit-card"></i> Thanh Toán</h2>
+<form asp-action="Checkout" method="post">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <!-- Card for Checkout Form -->
+            <div class="card p-4 shadow-sm rounded">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3><i class="bi bi-cart-check"></i> Đặt Hàng</h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Checkout" method="post">
+                       
+                    </form>
+                </div>
+            </div>
+
+            <!-- Card danh sách sản phẩm -->
+            <div class="card p-4 shadow-sm rounded mt-4">
+                <h4 class="text-success"><i class="bi bi-basket"></i> Sản Phẩm Trong Đơn Hàng</h4>
+                <table class="table table-bordered mt-3">
+                    <thead class="table-success text-center">
+                        <tr>
+                            <th>Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-end">Giá</th>
+                            <th class="text-end">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderDetails)
+                        {
+                            <tr>
+                                <td>@item.MovieID</td>
+                                <td>@item.Movie.Title</td>
+                                <td class="text-center">@item.Quantity</td>
+                                <td class="text-end">@item.Showtime.Price.ToString("#,##0") $</td>
+                                  
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tổng tiền -->
+            <h3 class="text-danger text-end mt-3 fw-bold">
+                <i class="bi bi-coin"></i> 
+            </h3>
+
+            <!-- Nút đặt hàng và quay lại -->
+            <div class="text-end mt-4">
+                <button type="submit" class="btn btn-success w-100"><i class="bi bi-check-circle"></i> Xác Nhận Đặt Hàng</button>
+                <a asp-action="Index" asp-controller="ShoppingCart" class="btn btn-outline-primary mt-2 w-100">
+                    <i class="bi bi-arrow-left"></i> Quay lại giỏ hàng
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+<!-- Footer -->
+<footer class="py-4 mt-5 bg-dark text-white text-center">
+    <p>&copy; 2025 NguyenTrungKien Company. All Rights Reserved.</p>
+</footer>

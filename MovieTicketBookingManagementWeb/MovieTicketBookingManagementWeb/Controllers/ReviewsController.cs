@@ -63,7 +63,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User); // Lấy UserID của người dùng hiện tại
-                review.UserID = userId; // Gán UserID vào review (nếu UserID là int, cần ép kiểu)
+                /*review.UserID = userId; // Gán UserID vào review (nếu UserID là int, cần ép kiểu)*/
                 review.ReviewTime = DateTime.Now; // Thêm thời gian review
 
                 _context.Add(review);

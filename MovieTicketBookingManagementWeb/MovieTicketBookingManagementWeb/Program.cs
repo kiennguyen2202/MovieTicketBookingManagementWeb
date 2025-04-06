@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieTicketBookingManagementWeb.Models;
@@ -27,7 +28,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = $"/Identity/Account/Login";
     options.LogoutPath = $"/Identity/Account/Logout";
-    options.LoginPath = $"/Identity/Account/AccessDenied";
+    //options.LoginPath = $"/Identity/Account/AccessDenied";
 });
 
 builder.Services.AddRazorPages();
@@ -56,6 +57,11 @@ app.MapStaticAssets();
 app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapAreaControllerRoute(
+        name: "areas",
+        areaName: "Admin",
+        pattern: "Admin/{controller=Admin}/{action=Index}/{id?}");
+    
     endpoints.MapControllerRoute(
          name: "areas",
          pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");

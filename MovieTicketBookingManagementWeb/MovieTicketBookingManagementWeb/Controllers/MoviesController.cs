@@ -5,11 +5,14 @@ using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MovieTicketBookingManagementWeb.Controllers
 {
+   
     public class MoviesController : Controller
     {
+        
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
@@ -22,35 +25,38 @@ namespace MovieTicketBookingManagementWeb.Controllers
         // Hiển thị danh sách phim
         public async Task<IActionResult> Index(string? searchQuery)
         {
-            var movies = _context.Movies.AsQueryable();
+            var movies = _context.Movies.Include(m => m.Genre).AsQueryable();
 
+            // Lọc theo từ khóa tìm kiếm
             if (!string.IsNullOrEmpty(searchQuery))
             {
                 movies = movies.Where(m => m.Title.Contains(searchQuery) || m.Description.Contains(searchQuery));
             }
-            ViewBag.Genres = await _context.Movies
-        .Where(m => m.Genre != null)
-        .Select(m => m.Genre)
-        .Distinct()
-        .ToListAsync();
+            
+
+
+
+
             ViewData["SearchQuery"] = searchQuery;
-            return View(await movies.ToListAsync()); // Đảm bảo trả về danh sách phim
+            
+            return View(await movies.ToListAsync());
         }
+
         [HttpGet]
         public IActionResult Add()
         {
+            ViewBag.GenreID = new SelectList(_context.Genres, "ID", "Name");
             return View();
         }
+
         [HttpPost]
-        public async Task<IActionResult> Add(Movie movie, IFormFile
-        PosterUrl)
+        public async Task<IActionResult> Add([Bind("ID,Title,Language,Duration,ReleaseDate,Description,GenreID")] Movie movie, IFormFile PosterUrl)
         {
             if (ModelState.IsValid)
             {
-                if (movie.ReleaseDate != null)
-                    {
-                    var releaseDate = movie.ReleaseDate;
-                    movie.ReleaseDate = releaseDate;
+                if (string.IsNullOrWhiteSpace(movie.TrailerID))
+                {
+                    movie.TrailerID = "default_trailer_id"; // Hoặc một giá trị mặc định hợp lệ
                 }
                 if (PosterUrl != null && PosterUrl.Length > 0)
                 {
@@ -61,12 +67,17 @@ namespace MovieTicketBookingManagementWeb.Controllers
                     }
                     movie.PosterUrl = "/images/" + PosterUrl.FileName;
                 }
+
                 _context.Movies.Add(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.GenreID = new SelectList(_context.Genres, "ID", "Name", movie.GenreID);
             return View(movie);
         }
+
+
         [HttpGet]
         public async Task<IActionResult> Update(int? id)
         {
@@ -75,10 +86,13 @@ namespace MovieTicketBookingManagementWeb.Controllers
             var movie = await _context.Movies.FindAsync(id);
             if (movie == null) return NotFound();
 
+            ViewBag.GenreID = new SelectList(_context.Genres, "ID", "Name", movie.GenreID);
+
             return View(movie);
         }
+
         [HttpPost]
-        public async Task<IActionResult> Update(int id, Movie movie, IFormFile PosterUrl)
+        public async Task<IActionResult> Update(int id, [Bind("ID,Title,Language,Duration,ReleaseDate,Description,GenreID,PosterUrl")] Movie movie, IFormFile PosterUrl)
         {
             if (id != movie.ID) return NotFound();
 
@@ -93,12 +107,17 @@ namespace MovieTicketBookingManagementWeb.Controllers
                     }
                     movie.PosterUrl = "/images/" + PosterUrl.FileName;
                 }
+
                 _context.Update(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.GenreID = new SelectList(_context.Genres, "ID", "Name", movie.GenreID);
             return View(movie);
         }
+
+
         // Xem chi tiết phim
         public async Task<IActionResult> Details(int? id)
         {
@@ -108,25 +127,18 @@ namespace MovieTicketBookingManagementWeb.Controllers
             }
 
             var movie = await _context.Movies
+                .Include(m => m.Genre)
                  .Include(m => m.Showtimes)
-
                  .ThenInclude(s => s.Room)
                  .ThenInclude(r => r.Cinema)
-                 .Include(m => m.Reviews)
+                
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (movie == null)
             {
                 return NotFound();
             }
-            var averageRating = movie.Reviews.Any() ? movie.Reviews.Average(r => r.Rating) : 0;
-            var reviews = await _context.Reviews
-        .Where(r => r.MovieID == id)
-        .Include(r => r.ApplicationUser) // Lấy thông tin người dùng
-        .OrderByDescending(r => r.ReviewTime)
-        .ToListAsync();
-            // Gửi thông tin về điểm trung bình và reviews đến view
-            ViewBag.AverageRating = averageRating;
+            
 
             return View(movie);
             
@@ -165,6 +177,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
         }
         [HttpPost]
         [Authorize]
+        /*
         public async Task<IActionResult> AddReview(Review review)
         {
             review.UserID = _userManager.GetUserId(User);
@@ -172,34 +185,55 @@ namespace MovieTicketBookingManagementWeb.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Details", new { id = review.MovieID });
         }
-        public async Task<IActionResult> ByGenre(string genre)
+        */
+        public async Task<IActionResult> ByGenre(string genreID)
         {
-            if (string.IsNullOrEmpty(genre))
+            if (string.IsNullOrEmpty(genreID))
             {
                 return RedirectToAction("Index");
             }
 
-            // Lọc phim theo thể loại
+            // Chuyển genreID từ string sang int
+            if (!int.TryParse(genreID, out int genreIdInt))
+            {
+                return BadRequest("Invalid genre ID");
+            }
+
+            // Lấy danh sách phim theo thể loại được chọn
             var movies = await _context.Movies
-                .Where(m => m.Genre == genre)
-                .ToListAsync();
+                                       .Where(m => m.Genre.ID == genreIdInt) 
+                                       .ToListAsync();
 
-            ViewData["GenreName"] = genre;
+            // Lấy danh sách thể loại từ bảng Genres
+            ViewData["Genres"] = await _context.Genres.ToListAsync();
 
-            return View("Index", movies); // Sử dụng chung View Index để hiển thị phim
+            // Lưu thể loại hiện tại vào ViewData
+            ViewData["SelectedGenre"] = genreIdInt; // Lưu kiểu int thay vì string
+
+            return View("Index", movies);
         }
-        public async Task<IActionResult> LoadGenres()
+        public IActionResult GetShowtimesByDate(int movieId, DateTime date)
         {
-            var genres = await _context.Movies
-                .Where(m => m.Genre != null)
-                .Select(m => m.Genre)
-                .Distinct()
-                .ToListAsync();
+            var showtimes = _context.Showtimes
+                .Where(s => s.MovieID == movieId && s.StartTime.Date == date.Date)
+                .Select(s => new
+                {
+                    s.ID,
+                    StartTime = s.StartTime.ToString("HH:mm"), // Lấy giờ theo định dạng HH:mm
+                    RoomName = s.Room.Name,
+                    CinemaName = s.Room.Cinema.Name,
+                    s.Price
+                })
+                .ToList()
+                .OrderBy(s => s.StartTime); // Sắp xếp theo giờ bắt đầu
 
-            ViewBag.Genres = genres;
-
-            return PartialView("_GenreDropdown", genres); // Tạo một Partial View nếu cần
+            return Json(showtimes);
         }
+
+
+
+
+
 
 
 

@@ -20,11 +20,11 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<Movie> Movies { get; set; }
 
-    public virtual DbSet<Order> Orders { get; set; }
+    public  DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+    public  DbSet<OrderDetail> OrderDetails { get; set; }
 
-    public virtual DbSet<Payment> Payments { get; set; }
+    
 
     public virtual DbSet<Review> Reviews { get; set; }
 
@@ -36,10 +36,9 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<Ticket> Tickets { get; set; }
 
-   
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=LAPTOP-N5O7TJD1\\SQLSERVER;Database=WEBBANVEXEMPHIM;Trusted_Connection=True;TrustServerCertificate=True;");
+    public virtual DbSet<Genre> Genres { get; set; }
+    
+    public virtual DbSet<PopcornDrinkItem> PopcornDrinkItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -57,7 +56,7 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.HasKey(e => e.ID).HasName("PK__Movies__4BD2943AA05B8B91");
 
             entity.Property(e => e.ID).HasColumnName("ID");
-            entity.Property(e => e.Genre).HasMaxLength(50);
+            
             entity.Property(e => e.Language)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -77,8 +76,13 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(10, 2)");
-           
+
+            entity.HasOne(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserID)
+                .IsRequired(true);
         });
+
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
@@ -101,21 +105,7 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 .HasConstraintName("FK__OrderDeta__Ticke__1BC821DD");
         });
 
-        modelBuilder.Entity<Payment>(entity =>
-        {
-            entity.HasKey(e => e.ID).HasName("PK__Payments__9B556A588F0B63FC");
-
-            entity.Property(e => e.ID).HasColumnName("ID");
-            entity.Property(e => e.Amount).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.OrderID).HasColumnName("OrderID");
-            entity.Property(e => e.PaymentMethod).HasMaxLength(50);
-            entity.Property(e => e.PaymentStatus).HasMaxLength(50);
-            entity.Property(e => e.PaymentTime)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            
-
-        });
+       
 
         modelBuilder.Entity<Review>(entity =>
         {
@@ -126,7 +116,12 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.ReviewTime)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            
+
+            entity.HasOne(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserID)
+                .IsRequired(true);
+
         });
 
         modelBuilder.Entity<Room>(entity =>
@@ -190,15 +185,9 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.Discount)
                 .HasDefaultValue(0m)
                 .HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.DrinkPrice)
-                .HasDefaultValue(0m)
-                .HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.DrinkQuantity).HasDefaultValue(0);
+
             entity.Property(e => e.FinalPrice).HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.PopcornPrice)
-                .HasDefaultValue(0m)
-                .HasColumnType("decimal(10, 2)");
-            entity.Property(e => e.PopcornQuantity).HasDefaultValue(0);
+
             entity.Property(e => e.SeatID).HasColumnName("SeatID");
             entity.Property(e => e.ShowtimeID).HasColumnName("ShowtimeID");
             entity.Property(e => e.Status).HasMaxLength(50);
@@ -213,6 +202,20 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 .HasForeignKey(d => d.ShowtimeID)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Tickets__Showtim__5165187F");
+
+            // Thêm cấu hình cho PopcornDrinkItem
+            entity.HasOne(d => d.PopcornDrinkItem)
+                .WithMany() // Hoặc WithOne nếu PopcornDrinkItem có một Ticket
+                .HasForeignKey(d => d.PopcornDrinkItemID)
+                .HasConstraintName("FK__Tickets__PopcornDrinkItemID__XXXXXX"); // Thay XXXXXX bằng tên ràng buộc phù hợp
+
+            // Thêm cấu hình cho PopcornQuantity (nếu cần)
+            entity.Property(e => e.PopcornQuantity).HasColumnName("PopcornQuantity");
+
+            entity.HasOne(o => o.User)
+                .WithMany()
+                .HasForeignKey(o => o.UserID)
+                .IsRequired(true);
         });
 
         OnModelCreatingPartial(modelBuilder);

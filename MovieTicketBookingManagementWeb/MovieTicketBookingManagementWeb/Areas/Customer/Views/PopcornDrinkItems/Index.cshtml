@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.PopcornDrinkItem>
+
+<h2 class="my-4 text-center">PopcornDrinkItem List</h2>
+<table id="cinameTable" class="table table-bordered table-striped text-center">
+
+
+    <thead class="table-dark">
+        <tr>
+            <td>Picture</td>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var popcornDrinkItem in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@popcornDrinkItem.PictureUrl" alt="@popcornDrinkItem.Name" class="img-thumbnail" style="width: 70px; height: 70px; object-fit: cover;">
+                </td>
+                <td>@popcornDrinkItem.Name</td>
+                <td>@popcornDrinkItem.Description</td>
+                <td>@popcornDrinkItem.Price</td>
+
+                <td>
+                   
+                    <a asp-area="Customer" asp-controller="PopcornDrinkItems" asp-action="Details" asp-route-id="@popcornDrinkItem.ID" class="btn btn-danger">Chi tiet</a>
+                   
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+

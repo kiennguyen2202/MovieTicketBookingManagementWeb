@@ -22,17 +22,13 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
         // Hiển thị danh sách phim
         public async Task<IActionResult> Index(string? searchQuery)
         {
-            var movies = _context.Movies.AsQueryable();
+            var movies = _context.Movies.Include(m => m.Genre).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchQuery))
             {
                 movies = movies.Where(m => m.Title.Contains(searchQuery) || m.Description.Contains(searchQuery));
             }
-            ViewBag.Genres = await _context.Movies
-        .Where(m => m.Genre != null)
-        .Select(m => m.Genre)
-        .Distinct()
-        .ToListAsync();
+            
             ViewData["SearchQuery"] = searchQuery;
             return View(await movies.ToListAsync()); // Đảm bảo trả về danh sách phim
         }
@@ -47,57 +43,79 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             }
 
             var movie = await _context.Movies
+                    .Include(m => m.Genre)
                  .Include(m => m.Showtimes)
-
                  .ThenInclude(s => s.Room)
                  .ThenInclude(r => r.Cinema)
-                 .Include(m => m.Reviews)
+                 
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (movie == null)
             {
                 return NotFound();
             }
-            var averageRating = movie.Reviews.Any() ? movie.Reviews.Average(r => r.Rating) : 0;
-            var reviews = await _context.Reviews
-        .Where(r => r.MovieID == id)
-        .Include(r => r.ApplicationUser) // Lấy thông tin người dùng
-        .OrderByDescending(r => r.ReviewTime)
-        .ToListAsync();
-            // Gửi thông tin về điểm trung bình và reviews đến view
-            ViewBag.AverageRating = averageRating;
+            if (movie.Showtimes.Any())
+            {
+                ViewBag.Price = movie.Showtimes.First().Price; // Lấy giá từ Showtime đầu tiên
+            }
+            else
+            {
+                ViewBag.Price = "Chưa có giá"; // Hoặc giá mặc định nếu không có Showtime
+            }
 
             return View(movie);
 
         }
-        public async Task<IActionResult> ByGenre(string genre)
+        public IActionResult Trailer(int id)
         {
-            if (string.IsNullOrEmpty(genre))
+            var movie = _context.Movies.FirstOrDefault(m => m.ID == id);
+            if (movie == null || string.IsNullOrEmpty(movie.TrailerID))
             {
-                return RedirectToAction("Index");
+                return NotFound();
+            }
+            return View(movie);
+        }
+        public async Task<IActionResult> ByGenre(int genreId)
+        {
+            if (genreId <= 0)
+            {
+                return RedirectToAction("Index"); // Chuyển hướng đến trang chủ nếu genreId không hợp lệ
             }
 
-            // Lọc phim theo thể loại
+            // Lấy danh sách phim theo genreId từ cơ sở dữ liệu
             var movies = await _context.Movies
-                .Where(m => m.Genre == genre)
-                .ToListAsync();
+                                       .Where(m => m.GenreID == genreId) // Lọc theo GenreID
+                                       .ToListAsync();
 
-            ViewData["GenreName"] = genre;
+            // Lấy tên của genre từ cơ sở dữ liệu (hoặc từ bảng Genre nếu có)
+            var genre = await _context.Genres
+                                      .FirstOrDefaultAsync(g => g.ID == genreId);
 
-            return View("Index", movies); // Sử dụng chung View Index để hiển thị phim
+            // Lưu tên genre vào ViewData để hiển thị trên view
+            ViewData["GenreName"] = genre?.Name ?? "Unknown Genre";
+
+            return View(movies); // Trả về danh sách phim đã lọc theo genre
         }
-        public async Task<IActionResult> LoadGenres()
+        public IActionResult GetShowtimesByDate(int movieId, DateTime date)
         {
-            var genres = await _context.Movies
-                .Where(m => m.Genre != null)
-                .Select(m => m.Genre)
-                .Distinct()
-                .ToListAsync();
+            var showtimes = _context.Showtimes
+                .Where(s => s.MovieID == movieId && s.StartTime.Date == date.Date)
+                .Select(s => new
+                {
+                    s.ID,
+                    StartTime = s.StartTime.ToString("HH:mm"), // Lấy giờ theo định dạng HH:mm
+                    RoomName = s.Room.Name,
+                    CinemaName = s.Room.Cinema.Name,
+                    s.Price
+                })
+                .ToList()
+                .OrderBy(s => s.StartTime); // Sắp xếp theo giờ bắt đầu
 
-            ViewBag.Genres = genres;
-
-            return PartialView("_GenreDropdown", genres); // Tạo một Partial View nếu cần
+            return Json(showtimes);
         }
+       
+
+
 
 
 

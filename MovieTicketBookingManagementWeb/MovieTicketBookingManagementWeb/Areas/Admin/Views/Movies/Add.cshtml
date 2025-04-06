@@ -17,10 +17,13 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Genre" class="control-label"></label>
-                <input asp-for="Genre" class="form-control" />
-                <span asp-validation-for="Genre" class="text-danger"></span>
+                <label asp-for="GenreID" class="control-label"></label>
+                <select asp-for="GenreID" asp-items="ViewBag.GenreID" class="form-control">
+                    <option value="">Select a Genre</option>
+                </select>
+                <span asp-validation-for="GenreID" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Language" class="control-label"></label>
                 <input asp-for="Language" class="form-control" />
@@ -33,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" type="datetime-local" class="form-control" />
+                <input asp-for="ReleaseDate" type="date" class="form-control" />
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -1,26 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieTicketBookingManagementWeb.Models
 {
+    public class PopcornDrinkCardItem
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int Quantity { get; set; } // Thêm thuộc tính này
+        public decimal Price { get; set; }
+    }
     public class CartItem
     {
-        [Key]
-        public int ID { get; set; }
-
         public int ShowtimeID { get; set; }
-        public int MovieID { get; set; }
+        public int RoomID { get; set; }
+        public int CinemaID { get; set; }
+        public string RoomName { get; set; }
+        public string CinemaName { get; set; }
+        public string MovieTitle { get; set; }
+        public DateTime StartTime { get; set; }
+        public decimal ShowtimePrice { get; set; }
+        public int SeatID { get; set; }
+        public string SeatNumber { get; set; }
+        public List<PopcornDrinkCardItem> PopcornDrinkCardItems { get; set; } = new List<PopcornDrinkCardItem>();
+        public decimal TotalPrice => (ShowtimePrice + PopcornDrinkCardItems.Sum(p => p.Quantity * p.Price));
 
-        [ForeignKey("ShowtimeID")]
-        public virtual Showtime Showtime { get; set; }
-
-        [Required]
-        public int Quantity { get; set; } // Số lượng vé đặt
-
-        [Required]
-        public decimal Price { get; set; } // Giá của mỗi vé
-
-        [NotMapped]
-        public decimal TotalPrice => Quantity * Price; // Tổng tiền
+        public int Quantity { get; set; }
     }
 }

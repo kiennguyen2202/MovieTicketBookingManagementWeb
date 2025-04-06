@@ -1,0 +1,31 @@
+﻿@model MovieTicketBookingManagementWeb.Models.PopcornDrinkItem
+
+@{
+    ViewData["Title"] = "PopcornDrinkItem Details";
+}
+
+<h2>PopcornDrinkItem Details</h2>
+
+<div>
+    <h4>PopcornDrinkItem Information</h4>
+    <hr />
+
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.PictureUrl)</dt>
+        <dd class="col-sm-9">@Model.PictureUrl</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
+        <dd class="col-sm-9">@Model.Name</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Description)</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
+        <dd class="col-sm-9">@Model.Price</dd>
+
+       
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Update" asp-route-id="@Model.ID" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

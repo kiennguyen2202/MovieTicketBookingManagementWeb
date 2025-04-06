@@ -42,7 +42,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("ID,MovieID,RoomID,StartTime")] Showtime showtime)
+        public async Task<IActionResult> Add([Bind("ID,MovieID,RoomID,StartTime,Price")] Showtime showtime)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, [Bind("ID,MovieID,RoomID,StartTime")] Showtime showtime)
+        public async Task<IActionResult> Update(int id, [Bind("ID,MovieID,RoomID,StartTime,Price")] Showtime showtime)
         {
             if (id != showtime.ID) return NotFound();
 

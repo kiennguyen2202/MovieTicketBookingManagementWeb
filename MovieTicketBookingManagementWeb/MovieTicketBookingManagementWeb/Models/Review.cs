@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace MovieTicketBookingManagementWeb.Models;
 
 public partial class Review
 {
     public int ID { get; set; }
-
     public string UserID { get; set; }
-    
 
     public int MovieID { get; set; }
 
@@ -18,8 +18,9 @@ public partial class Review
 
     public DateTime? ReviewTime { get; set; }
 
-    public virtual Movie? Movie { get; set; } = null!;
+    public Movie? Movie { get; set; } = null!;
     public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public ApplicationUser ApplicationUser { get; set; } = null!;
+    
+    public ApplicationUser User { get; set; } = null!;
 
 }

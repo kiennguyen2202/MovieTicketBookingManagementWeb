@@ -1,0 +1,196 @@
+﻿@model List<MovieTicketBookingManagementWeb.Models.PopcornDrinkItem>
+
+@{
+    ViewData["Title"] = "Chọn Bắp & Nước";
+}
+<head>
+	<style>
+		.container {
+			width: 90%;
+			max-width: 1200px;
+			margin: 20px auto;
+			font-family: sans-serif;
+		}
+
+		.page-title {
+			text-align: center;
+			margin-bottom: 30px;
+			color: #333;
+		}
+
+		.item-form {
+			border: 1px solid #ddd;
+			border-radius: 8px;
+			padding: 20px;
+		}
+
+		.item-table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+
+			.item-table th, .item-table td {
+				border: 1px solid #eee;
+				padding: 12px 15px;
+				text-align: left;
+			}
+
+			.item-table th {
+				background-color: #f8f8f8;
+				font-weight: bold;
+			}
+
+		.item-image {
+			max-width: 80px;
+			height: auto;
+			border-radius: 4px;
+			border: 1px solid #ddd;
+		}
+
+		.item-price {
+			font-weight: 500;
+			color: #007bff;
+		}
+
+		.quantity-control {
+			display: flex;
+			align-items: center;
+		}
+
+		.quantity-btn {
+			background-color: #f0f0f0;
+			border: 1px solid #ccc;
+			padding: 8px 12px;
+			cursor: pointer;
+			font-size: 16px;
+		}
+
+		.quantity-input {
+			width: 50px;
+			text-align: center;
+			margin: 0 5px;
+			padding: 8px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+
+		.confirm-button-container {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		.confirm-button {
+			background-color: #007bff;
+			color: white;
+			padding: 12px 25px;
+			border: none;
+			border-radius: 5px;
+			font-size: 18px;
+			cursor: pointer;
+		}
+
+			.confirm-button:hover {
+				background-color: #0056b3;
+			}
+
+		.item-checkbox-label {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+		}
+
+		.item-checkbox {
+			width: 20px;
+			height: 20px;
+			margin: 0;
+		}
+	</style>
+</head>
+<div class="container">
+    <h2 class="page-title">Chọn Bắp & Nước</h2>
+
+    <form asp-action="Confirm" method="post" class="item-form">
+        <table class="item-table">
+            <thead>
+                <tr>
+                    <th>Chọn</th>
+                    <th>Hình ảnh</th>
+                    <th>Tên</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <label class="item-checkbox-label">
+                                <input type="checkbox" name="selectedItems" value="@item.ID" class="item-checkbox" />
+                            </label>
+                        </td>
+                        <td><img src="@item.PictureUrl" alt="@item.Name" class="item-image" /></td>
+                        <td>@item.Name</td>
+                        <td class="item-price">@item.Price.ToString("N0") VND</td>
+                        <td>
+                            <div class="quantity-control">
+                                <button type="button" class="quantity-btn quantity-minus" data-item-id="@item.ID">-</button>
+                                <span class="quantity-display" data-item-id="@item.ID">0</span>
+                                <button type="button" class="quantity-btn quantity-plus" data-item-id="@item.ID">+</button>
+                                <input type="hidden" name="quantity_@item.ID" value="0" class="quantity-value" data-item-id="@item.ID" />
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="confirm-button-container">
+            <button type="submit" class="confirm-button">Xác nhận</button>
+        </div>
+    </form>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const quantityContainers = document.querySelectorAll('.quantity-control');
+
+		quantityContainers.forEach(container => {
+			const minusBtn = container.querySelector('.quantity-minus');
+			const plusBtn = container.querySelector('.quantity-plus');
+			const quantityDisplay = container.querySelector('.quantity-display');
+			const quantityValue = container.querySelector('.quantity-value');
+
+			minusBtn.addEventListener('click', function () {
+				if (parseInt(quantityDisplay.textContent) > 0) {
+					quantityDisplay.textContent = parseInt(quantityDisplay.textContent) - 1;
+					quantityValue.value = quantityDisplay.textContent;
+				}
+			});
+
+			plusBtn.addEventListener('click', function () {
+				quantityDisplay.textContent = parseInt(quantityDisplay.textContent) + 1;
+				quantityValue.value = quantityDisplay.textContent;
+			});
+		});
+
+		const checkboxes = document.querySelectorAll('.item-checkbox');
+		checkboxes.forEach(checkbox => {
+			checkbox.addEventListener('change', function () {
+				const itemId = this.value;
+				const quantityDisplay = document.querySelector(`.quantity-display[data-item-id="${itemId}"]`);
+				const quantityValue = document.querySelector(`.quantity-value[data-item-id="${itemId}"]`);
+
+				if (this.checked) {
+					if (quantityDisplay.textContent == 0) {
+						quantityDisplay.textContent = 1;
+						quantityValue.value = 1;
+					}
+				} else {
+					quantityDisplay.textContent = 0;
+					quantityValue.value = 0;
+				}
+			});
+		});
+	});
+</script>

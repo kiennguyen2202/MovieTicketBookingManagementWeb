@@ -76,13 +76,15 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
         }
 
         // Hiển thị trang xác nhận xóa Ticket
-        
+
         // Hiển thị giao diện chọn ghế
+       
         public async Task<IActionResult> SelectSeats(int showtimeId)
         {
             var showtime = await _context.Showtimes
                 .Include(s => s.Movie)
                 .Include(s => s.Room)
+                .Include(s => s.Room.Cinema)
                 .FirstOrDefaultAsync(s => s.ID == showtimeId);
 
             if (showtime == null) return NotFound();
@@ -99,13 +101,34 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
 
             return View(viewModel);
         }
+        [HttpPost]
+        public async Task<IActionResult> Selected(int showtimeId, int selectedSeatId)
+        {
+            // Lấy danh sách PopcornDrinkItem từ cơ sở dữ liệu
+            var items = await _context.PopcornDrinkItems.ToListAsync();
 
+            // Truyền showtimeId và selectedSeatId sang view
+            ViewData["ShowtimeID"] = showtimeId;
+            ViewData["SelectedSeatID"] = selectedSeatId;
+
+            return View("Selected", items); 
+        }
 
         // Xử lý đặt vé
         [HttpPost]
-        public async Task<IActionResult> BookTicket(int showtimeId, int seatId, decimal price)
+        public async Task<IActionResult> BookTicket(int showtimeId, int seatId, int popcorndrinkitemId)
         {
-            var existingTicket = await _context.Tickets.FirstOrDefaultAsync(t => t.SeatID == seatId && t.ShowtimeID == showtimeId);
+            var showtime = await _context.Showtimes.FindAsync(showtimeId);
+            var popcorndrink = await _context.PopcornDrinkItems.FindAsync(popcorndrinkitemId); // Lấy PopcornDrinkItem
+
+            if (showtime == null || popcorndrink == null)
+            {
+                return BadRequest("Showtime hoặc PopcornDrinkItem không tồn tại.");
+            }
+
+            decimal totalPrice = showtime.Price + popcorndrink.Price; // Tính tổng giá
+
+            var existingTicket = await _context.Tickets.FirstOrDefaultAsync(t => t.SeatID == seatId && t.ShowtimeID == showtimeId && t.PopcornDrinkItemID == popcorndrinkitemId);
             if (existingTicket != null)
             {
                 return BadRequest("Ghế này đã được đặt.");
@@ -116,9 +139,10 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
                 ShowtimeID = showtimeId,
                 SeatID = seatId,
                 TicketType = "Standard",
-                //Showtime.Price = price,
+                PopcornDrinkItemID = popcorndrinkitemId,
+                MovieID = showtime.MovieID,
                 Discount = 0,
-                FinalPrice = price,
+                FinalPrice = totalPrice, // Gán tổng giá
                 Status = "Booked",
                 BookingTime = DateTime.Now
             };
@@ -128,15 +152,33 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
 
             return RedirectToAction("TicketConfirmation", new { ticketId = ticket.ID });
         }
-
-
-        // Hiển thị thông tin vé sau khi đặt thành công
+        [HttpGet]
         public IActionResult TicketConfirmation(int ticketId)
         {
-            var ticket = _context.Tickets.Include(t => t.Movie).Include(t => t.Seat).FirstOrDefault(t => t.ID == ticketId);
+            var ticket = _context.Tickets
+    .Include(t => t.Showtime)
+        .ThenInclude(s => s.Movie)
+    .Include(t => t.Showtime)
+        .ThenInclude(s => s.Room) // Tải Room thông qua Showtime
+    .Include(t => t.Seat)
+    .Include(t => t.PopcornDrinkItem)
+    
+    .Include(t => t.OrderDetails)
+        .ThenInclude(od => od.PopcornDrinkItem)
+            
+    .FirstOrDefault(t => t.ID == ticketId);
             if (ticket == null) return NotFound();
 
             return View(ticket);
+        }
+        private bool TicketExists(int id)
+        {
+            return _context.Tickets.Any(e => e.ID == id);
+        }
+        private void PopulateSelectLists(int? showtimeId = null, int? seatId = null)
+        {
+            ViewBag.ShowtimeID = new SelectList(_context.Showtimes, "ID", "StartTime", showtimeId);
+            ViewBag.SeatID = new SelectList(_context.Seats, "ID", "SeatNumber", seatId);
         }
     }
 }

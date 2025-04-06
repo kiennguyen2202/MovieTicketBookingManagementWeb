@@ -33,27 +33,3 @@
     </tbody>
 </table>
 <a asp-action="Add" class="btn btn-primary">Thêm rap chieu phim</a>
-@section Scripts {
-    <!-- DataTables CSS -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
-    <!-- jQuery (Cần có trước DataTables.js) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            console.log("DataTables is initializing...");
-
-            if ($.fn.DataTable) {
-                console.log("DataTables loaded successfully!");
-            } else {
-                console.error("DataTables failed to load!");
-            }
-
-            $('#productTable').DataTable();
-        });
-    </script>
-    }

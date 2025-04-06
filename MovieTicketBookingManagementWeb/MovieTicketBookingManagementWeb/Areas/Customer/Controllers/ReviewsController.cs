@@ -36,7 +36,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
         [HttpGet]
         // Hiển thị form tạo mới Review
 
-        public async Task<IActionResult> Add(int movieId)
+        /*public async Task<IActionResult> Add(int movieId)
         {
             var movie = await _context.Movies.FindAsync(movieId);
             if (movie == null) return NotFound();
@@ -58,7 +58,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             ViewBag.MovieID = movieId; // Thêm ID phim vào ViewBag để biết đang tạo review cho phim nào.
             return View();
         }
-
+        */
 
         [HttpPost]
         [ValidateAntiForgeryToken]

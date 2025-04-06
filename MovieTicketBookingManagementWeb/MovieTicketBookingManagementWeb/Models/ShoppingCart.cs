@@ -1,4 +1,7 @@
-﻿namespace MovieTicketBookingManagementWeb.Models
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace MovieTicketBookingManagementWeb.Models
 {
     public class ShoppingCart
     {
@@ -6,7 +9,10 @@
 
         public void AddItem(CartItem item)
         {
-            var existingItem = Items.FirstOrDefault(i => i.MovieID == item.MovieID);
+            var existingItem = Items.FirstOrDefault(i =>
+                i.ShowtimeID == item.ShowtimeID &&
+                i.SeatID == item.SeatID);
+
             if (existingItem != null)
             {
                 existingItem.Quantity += item.Quantity;
@@ -17,15 +23,29 @@
             }
         }
 
-        public void RemoveItem(int movieId)
+        public void RemoveItem(int showtimeId, int seatId)
         {
-            Items.RemoveAll(i => i.MovieID == movieId);
+            Items.RemoveAll(i =>
+                i.ShowtimeID == showtimeId &&
+                i.SeatID == seatId);
+        }
+
+
+        public void UpdateQuantity(int showtimeId, int seatId, int popcornDrinkItemId, int quantity)
+        {
+            var item = Items.FirstOrDefault(i =>
+                i.ShowtimeID == showtimeId &&
+                i.SeatID == seatId);
+
+            if (item != null)
+            {
+                item.Quantity = quantity;
+            }
         }
 
         public decimal GetTotalPrice()
         {
-            return Items.Sum(i => i.Price * i.Quantity);
+            return Items.Sum(i => (i.ShowtimePrice + i.PopcornDrinkCardItems.Sum(p => p.Quantity * p.Price) ) * i.Quantity);
         }
-
     }
 }

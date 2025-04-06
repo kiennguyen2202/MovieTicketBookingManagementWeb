@@ -1,14 +1,10 @@
 ﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Movie>
-<form asp-action="Index" method="get" class="mb-4">
-    <div class="input-group">
-        <input type="text" name="search" class="form-control" placeholder="Nhập tên phim..." value="@ViewData["SearchQuery"]">
-        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-    </div>
-</form>
+
 <h2 class="my-4 text-center text-primary">Danh Sách Phim</h2>
 
 <div class="table-responsive">
     <table id="movieTable" class="table table-hover table-striped text-center">
+
         <thead class="bg-dark text-white">
             <tr>
                 <th>Poster</th>
@@ -29,7 +25,7 @@
                         <img src="@movie.PosterUrl" alt="@movie.Title" class="img-thumbnail" style="width: 70px; height: 70px; object-fit: cover;">
                     </td>
                     <td class="fw-bold">@movie.Title</td>
-                    <td>@movie.Genre</td>
+                    <td>@movie.Genre?.Name</td>
                     <td>@movie.Language</td>
                     <td>@movie.Duration phút</td>
                     <td>@(movie.ReleaseDate?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")</td>
@@ -37,14 +33,15 @@
                     <td class="text-truncate" style="max-width: 150px;">@movie.Description</td>
                     <td>
                         <div class="btn-group" role="group">
-                            
-                            <a asp-action="Details" asp-route-id="@movie.ID" class="btn btn-info btn-sm">Chi tiết</a>
-                           
+
+                            <a asp-area ="Customer" asp-controller="Movies" asp-action="Details" asp-route-id="@movie.ID" class="btn btn-info btn-sm">Chi tiết</a>
+
                         </div>
                     </td>
                 </tr>
             }
         </tbody>
+
     </table>
 </div>
 

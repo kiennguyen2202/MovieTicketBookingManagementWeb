@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace MovieTicketBookingManagementWeb.Models;
 
 public partial class Ticket
 {
     public int ID { get; set; }
+    public string UserID { get; set; }
     public int MovieID { get; set; }
 
     public int ShowtimeID { get; set; }
@@ -14,7 +18,8 @@ public partial class Ticket
 
     public string TicketType { get; set; } = null!;
 
-    public int UserID { get; set; }
+    public int PopcornDrinkItemID { get; set; }
+    public int PopcornQuantity { get; set; }
 
     public decimal? Discount { get; set; }
 
@@ -24,13 +29,7 @@ public partial class Ticket
 
     public DateTime? BookingTime { get; set; }
 
-    public int? PopcornQuantity { get; set; }
-
-    public int? DrinkQuantity { get; set; }
-
-    public decimal? PopcornPrice { get; set; }
-
-    public decimal? DrinkPrice { get; set; }
+    public ApplicationUser User { get; set; } = null!;
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     public virtual Movie? Movie { get; set; } = null!;
@@ -38,6 +37,6 @@ public partial class Ticket
     public virtual Seat? Seat { get; set; } = null!;
 
     public virtual Showtime? Showtime { get; set; } = null!;
-    public ApplicationUser ApplicationUser { get; set; } = null!;
+    public virtual PopcornDrinkItem? PopcornDrinkItem { get; set; }
 
 }

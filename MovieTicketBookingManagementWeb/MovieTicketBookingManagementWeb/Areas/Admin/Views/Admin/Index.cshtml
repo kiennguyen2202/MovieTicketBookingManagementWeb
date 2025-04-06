@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Trang quản trị Admin";
+}
+
+<style>
+    .admin-card {
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        text-align: center;
+    }
+
+    .admin-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .admin-card h5 {
+        color: #3498db;
+        margin-bottom: 15px;
+    }
+
+    .admin-card p {
+        margin-bottom: 20px;
+    }
+
+    .admin-card .btn-primary,
+    .admin-card .btn-success {
+        padding: 12px 25px;
+        font-size: 16px;
+        border-radius: 25px;
+    }
+
+    .admin-card .btn-primary {
+        background-color: #3498db;
+        border-color: #3498db;
+    }
+
+    .admin-card .btn-success {
+        background-color: #2ecc71;
+        border-color: #2ecc71;
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center mb-5">Chào mừng đến trang quản trị Admin</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="admin-card">
+                <h5>Quản lý Rạp phim</h5>
+                <p>Thực hiện các thao tác CRUD với rạp phim.</p>
+                <a href="/Admin/Cinemas/Index" class="btn btn-primary">Xem Rạp phim</a>
+                <a href="/Admin/Cinemas/Add" class="btn btn-success">Thêm Rạp phim</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="admin-card">
+                <h5>Quản lý Phim</h5>
+                <p>Thực hiện các thao tác CRUD với phim.</p>
+                <a href="/Admin/Movies/Index" class="btn btn-primary">Xem Phim</a>
+                <a href="/Admin/Movies/Add" class="btn btn-success">Thêm Phim</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="admin-card">
+                <h5>Quản lý Phòng chiếu</h5>
+                <p>Thực hiện các thao tác CRUD với phòng chiếu.</p>
+                <a href="/Admin/Rooms/Index" class="btn btn-primary">Xem Phòng chiếu</a>
+                <a href="/Admin/Rooms/Add" class="btn btn-success">Thêm Phòng chiếu</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="admin-card">
+                <h5>Quản lý Ghế ngồi</h5>
+                <p>Thực hiện các thao tác CRUD với ghế ngồi.</p>
+                <a href="/Admin/Seats/Index" class="btn btn-primary">Xem Ghế ngồi</a>
+                <a href="/Admin/Seats/Add" class="btn btn-success">Thêm Ghế ngồi</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="admin-card">
+                <h5>Quản lý Lịch chiếu</h5>
+                <p>Thực hiện các thao tác CRUD với lịch chiếu.</p>
+                <a href="/Admin/Showtimes/Index" class="btn btn-primary">Xem Lịch chiếu</a>
+                <a href="/Admin/Showtimes/Add" class="btn btn-success">Thêm Lịch chiếu</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="admin-card">
+                <h5>Quản lý Vé</h5>
+                <p>Thực hiện các thao tác CRUD với vé.</p>
+                <a href="/Admin/Tickets/Index" class="btn btn-primary">Xem Vé</a>
+                <a href="/Admin/Tickets/Add" class="btn btn-success">Thêm Vé</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="admin-card">
+                <h5>Quản lý Thể Loại</h5>
+				<p>Thực hiện các thao tác CRUD với thể loại.</p>
+				<a href="/Admin/Genres/Index" class="btn btn-primary">Xem Thể loại</a>
+				<a href="/Admin/Genres/Add" class="btn btn-success">Thêm Thể loại</a>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="admin-card">
+                <h5>Quản lý Bắp Nước</h5>
+                <p>Thực hiện các thao tác CRUD với bắp nước.</p>
+                <a href="/Admin/PopcornDrinkItems/Index" class="btn btn-primary">Xem  Bắp Nước</a>
+                <a href="/Admin/PopcornDrinkItems/Add" class="btn btn-success">Thêm  Bắp Nước</a>
+            </div>
+        </div>
+    </div>
+</div>

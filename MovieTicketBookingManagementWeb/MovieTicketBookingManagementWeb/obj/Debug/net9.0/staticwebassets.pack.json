@@ -1,0 +1,353 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\MovieTicketBookingManagementWeb.bundle.scp.css",
+      "PackagePath": "staticwebassets\\MovieTicketBookingManagementWeb.c1mb3jzokq.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\616017_01.jpg_5004cabd4848459197c493b61850699b-768x347.jpeg",
+      "PackagePath": "staticwebassets\\images\\616017_01.jpg_5004cabd4848459197c493b61850699b-768x347.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\721864_01.jpg_ed1366551e7446d49a_a5564a3dae3a455cb64c1fb7b3bd64f8.png",
+      "PackagePath": "staticwebassets\\images\\721864_01.jpg_ed1366551e7446d49a_a5564a3dae3a455cb64c1fb7b3bd64f8.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\90d5a2a65c0d94272bb6755d3bd65b27.jpg",
+      "PackagePath": "staticwebassets\\images\\90d5a2a65c0d94272bb6755d3bd65b27.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\CNS035_COMBO_GAU.png",
+      "PackagePath": "staticwebassets\\images\\CNS035_COMBO_GAU.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\CNS036_COMBO_CO_GAU.png",
+      "PackagePath": "staticwebassets\\images\\CNS036_COMBO_CO_GAU.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\MAIN_2_ADL_1215x365.png",
+      "PackagePath": "staticwebassets\\images\\MAIN_2_ADL_1215x365.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\Military.jpg",
+      "PackagePath": "staticwebassets\\images\\Military.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\Oxidized.jpg",
+      "PackagePath": "staticwebassets\\images\\Oxidized.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\combo-co-gau.png.png",
+      "PackagePath": "staticwebassets\\images\\combo-co-gau.png.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\combo-gau.png",
+      "PackagePath": "staticwebassets\\images\\combo-gau.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\combo-nha-gau.png",
+      "PackagePath": "staticwebassets\\images\\combo-nha-gau.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\dh3227_105_b026cc45a2eb4bf48d7f567579485b62.png",
+      "PackagePath": "staticwebassets\\images\\dh3227_105_b026cc45a2eb4bf48d7f567579485b62.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\dia-dao-cu-chi_1.webp",
+      "PackagePath": "staticwebassets\\images\\dia-dao-cu-chi_1.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\gau-yeu-cua-anh-banner.jpg",
+      "PackagePath": "staticwebassets\\images\\gau-yeu-cua-anh-banner.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\love-lies.jpg",
+      "PackagePath": "staticwebassets\\images\\love-lies.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\nghe-sieu-kho-noi-poster.webp",
+      "PackagePath": "staticwebassets\\images\\nghe-sieu-kho-noi-poster.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\sprite.png",
+      "PackagePath": "staticwebassets\\images\\sprite.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\thieu-nu-anh-trang.webp",
+      "PackagePath": "staticwebassets\\images\\thieu-nu-anh-trang.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MovieTicketBookingManagementWeb.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MovieTicketBookingManagementWeb.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.MovieTicketBookingManagementWeb.props",
+      "PackagePath": "build\\MovieTicketBookingManagementWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.MovieTicketBookingManagementWeb.props",
+      "PackagePath": "buildMultiTargeting\\MovieTicketBookingManagementWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.MovieTicketBookingManagementWeb.props",
+      "PackagePath": "buildTransitive\\MovieTicketBookingManagementWeb.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-8">
                 <h2 class="text-primary">@Model.Title</h2>
-                <h4 class="text-secondary">Thể loại: @Model.Genre</h4>
+                <p><strong>Thể loại :</strong> @Model.Genre.Name</p>
                 <p><strong>Ngôn ngữ:</strong> @Model.Language</p>
                 <p><strong>Thời lượng:</strong> @Model.Duration phút</p>
                 <p><strong>Ngày phát hành:</strong> @(Model.ReleaseDate?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")</p>

@@ -1,4 +1,6 @@
-﻿<h2 class="text-center">Phim thuộc thể loại: @ViewData["GenreName"]</h2>
+﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Movie>
+
+<h2>Danh sách phim - @ViewData["SelectedGenre"]</h2>
 
 <div class="row">
     @foreach (var movie in Model)
@@ -8,8 +10,8 @@
                 <img class="card-img-top" src="@movie.PosterUrl" alt="@movie.Title">
                 <div class="card-body">
                     <h5 class="card-title">@movie.Title</h5>
-                    <p class="card-text">@movie.Description</p>
-                    <p class="card-text"><strong>Thể loại:</strong> @movie.Genre</p>
+                    
+                    <p class="card-text"><strong>Thể loại:</strong> @movie.Genre.Name</p>
                     <a href="@Url.Action("Details", "Movies", new { id = movie.ID })" class="btn btn-primary">Xem chi tiết</a>
                 </div>
             </div>

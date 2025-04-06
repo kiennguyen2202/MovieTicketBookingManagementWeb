@@ -1,0 +1,87 @@
+﻿@model ShoppingCart
+@{
+    ViewData["Title"] = "Giỏ Hàng";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container py-4">
+        <h2>Giỏ Hàng Đặt Vé</h2>
+        @if (Model.Items.Count == 0)
+        {
+            <div class="alert alert-info text-center">
+                Giỏ hàng của bạn đang trống! <a href="/Home/Index" class="btn btn-primary">Tiếp tục chọn vé</a>
+            </div>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Phim</th>
+                        <th>Thời Gian</th>
+                        <th>Ghế</th>
+                        <th>Bắp Nước</th>
+                        <th>Giá Vé</th>
+                        <th>Giá Bắp Nước</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng Giá</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>@item.MovieTitle</td>
+                            <td>@item.StartTime</td>
+                            <td>@item.SeatNumber</td>
+                            <td>@(string.Join(", ", item.PopcornDrinkCardItems.Select(p => p.Name).ToList()))</td>
+                            <td>@item.ShowtimePrice.ToString("C")</td>
+                            <td>@item.PopcornDrinkCardItems.Sum(p => p.Quantity * p.Price).ToString("C")</td>
+                            <td>@item.Quantity</td>
+                            <td>@(((item.ShowtimePrice + item.PopcornDrinkCardItems.Sum(p => p.Quantity * p.Price)) * item.Quantity).ToString("C"))</td>
+                            <td>
+                                <a asp-controller="ShoppingCart" asp-action="RemoveFromCart"
+                                   asp-route-showtimeId="@item.ShowtimeID"
+                                   asp-route-seatId="@item.SeatID"
+                                   class="btn btn-danger btn-sm">Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-between mt-3">
+                <h4>Tổng Tiền: @(Model.Items.Sum(item => (item.ShowtimePrice + item.PopcornDrinkCardItems.Sum(p => p.Quantity * p.Price)) * item.Quantity).ToString("C"))</h4>
+                <form asp-controller="ShoppingCart" asp-action="Checkout" method="post">
+                    <button type="submit" class="btn btn-success">Tới trang thanh toán</button>
+                </form>
+
+            </div>
+        }
+    </div>
+
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Trang chủ</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Quy định giao hàng</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Quy định trả hàng</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Liên hệ</a></li>
+        </ul>
+        
+    </footer>
+
+    <script src="~/js/site.js"></script>
+</body>
+</html>
