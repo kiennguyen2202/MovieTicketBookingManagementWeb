@@ -127,21 +127,28 @@ namespace MovieTicketBookingManagementWeb.Controllers
             }
 
             var movie = await _context.Movies
-                .Include(m => m.Genre)
+                    .Include(m => m.Genre)
                  .Include(m => m.Showtimes)
                  .ThenInclude(s => s.Room)
                  .ThenInclude(r => r.Cinema)
-                
+
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (movie == null)
             {
                 return NotFound();
             }
-            
+            if (movie.Showtimes.Any())
+            {
+                ViewBag.Price = movie.Showtimes.First().Price; // Lấy giá từ Showtime đầu tiên
+            }
+            else
+            {
+                ViewBag.Price = "Chưa có giá"; // Hoặc giá mặc định nếu không có Showtime
+            }
 
             return View(movie);
-            
+
         }
         public async Task<IActionResult> Delete(int? id)
         {

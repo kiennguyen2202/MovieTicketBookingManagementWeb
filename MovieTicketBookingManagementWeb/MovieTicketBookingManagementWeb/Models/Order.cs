@@ -18,7 +18,8 @@ public partial class Order
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
+    [ValidateNever]
     public virtual ApplicationUser User { get; set; } = null!;
 
-
+    public List<CartItem> CartItems { get; set; } = new List<CartItem>();
 }

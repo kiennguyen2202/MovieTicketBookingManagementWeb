@@ -1,0 +1,71 @@
+﻿@model List<MovieTicketBookingManagementWeb.Models.Order>
+
+@{
+    ViewData["Title"] = "Danh sách đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">📋 Danh Sách Đơn Hàng</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow-sm">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>ID Order</th>
+                    <th>Khách hàng</th>
+                    <th>Email</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Chi tiết vé</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        <td class="text-center">@order.ID</td>
+                        <td>@order.User?.FullName</td>
+                        <td>@order.User?.Email</td>
+                        <td class="text-center">@order.OrderDate?.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td class="text-end fw-bold">@order.TotalPrice.ToString("C")</td>
+                        <td>
+                            <ul>
+                                @foreach (var orderDetail in order.OrderDetails)
+                                {
+                                    @if (orderDetail.Showtime != null && orderDetail.Seat != null)
+                                    {
+                                        <li>
+                                            Phim: @orderDetail.Showtime.Movie?.Title,
+                                            Thời gian: @orderDetail.Showtime.StartTime.ToString("dd/MM/yyyy HH:mm"),
+                                            Ghế: @orderDetail.Seat?.SeatNumber,
+                                            Giá vé: @orderDetail.Price?.ToString("C")
+                                            @if (orderDetail.PopcornDrinkItem != null)
+                                            {
+                                                <span>, Bắp nước: @orderDetail.PopcornDrinkItem.Name (@orderDetail.Quantity) - Giá: @(((decimal?)(orderDetail.PopcornDrinkItem?.Price * orderDetail.Quantity))?.ToString("C"))</span>
+                                            }
+                                        </li>
+                                    }
+                                    else if (orderDetail.PopcornDrinkItem != null)
+                                    {
+                                        <li>
+                                            Bắp nước: @orderDetail.PopcornDrinkItem.Name (@orderDetail.Quantity) - Giá: @(((decimal?)(orderDetail.PopcornDrinkItem?.Price * orderDetail.Quantity))?.ToString("C"))
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                            <a asp-area="Admin" asp-controller="Orders" asp-action="Detail"
+                               asp-route-id="@order.ID" class="btn btn-sm btn-info text-white">
+                                📜 Xem Chi Tiết
+                            </a>
+                            @* Bạn có thể thêm các hành động khác như chỉnh sửa, xóa ở đây *@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

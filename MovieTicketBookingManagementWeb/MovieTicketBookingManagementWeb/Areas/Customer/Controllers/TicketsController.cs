@@ -24,6 +24,8 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
         public async Task<IActionResult> Index()
         {
             var tickets = _context.Tickets
+                .Include(t => t.Movie)
+                //.Include(t => t.)
                 .Include(t => t.Showtime)
                 .Include(t => t.Seat)
                 .OrderBy(t => t.BookingTime);
@@ -78,7 +80,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
         // Hiển thị trang xác nhận xóa Ticket
 
         // Hiển thị giao diện chọn ghế
-       
+
         public async Task<IActionResult> SelectSeats(int showtimeId)
         {
             var showtime = await _context.Showtimes
@@ -89,14 +91,25 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
 
             if (showtime == null) return NotFound();
 
-            var availableSeats = _context.Seats
-                .Where(s => s.RoomID == showtime.RoomID && !_context.Tickets.Any(t => t.SeatID == s.ID && t.ShowtimeID == showtimeId))
+            var allSeatsInRoom = _context.Seats
+                .Where(s => s.RoomID == showtime.RoomID)
                 .ToList();
+
+            var bookedSeatIds = _context.Tickets
+                .Where(t => t.ShowtimeID == showtimeId)
+                .Select(t => t.SeatID)
+                .ToList();
+
+            // Gán trạng thái IsBooked cho từng ghế
+            foreach (var seat in allSeatsInRoom)
+            {
+                seat.IsBooked = bookedSeatIds.Contains(seat.ID);
+            }
 
             var viewModel = new SelectSeats
             {
                 Showtime = showtime,
-                AvailableSeats = availableSeats
+                AvailableSeats = allSeatsInRoom // Sử dụng tất cả ghế trong phòng
             };
 
             return View(viewModel);

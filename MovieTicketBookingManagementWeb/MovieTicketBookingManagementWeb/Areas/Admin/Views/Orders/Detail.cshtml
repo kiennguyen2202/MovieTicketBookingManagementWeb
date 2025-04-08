@@ -1,0 +1,66 @@
+﻿@model MovieTicketBookingManagementWeb.Models.Order
+
+@{
+    ViewData["Title"] = "Chi Tiết Đơn Hàng";
+}
+
+<h2><i class="bi bi-cart"></i> Chi Tiết Đơn Hàng</h2>
+
+<div class="card p-3">
+    <h4 class="text-primary"><i class="bi bi-person"></i> Thông Tin Khách Hàng</h4>
+    <ul>
+        <li><strong>👤 Tên:</strong> @Model.User?.FullName</li>
+        <li><strong>📧 Email:</strong> @Model.User?.Email</li>
+        <li><strong>📞 Số điện thoại:</strong> @Model.User?.PhoneNumber</li>
+    </ul>
+</div>
+
+<div class="card p-3 mt-3">
+    <h4 class="text-primary"><i class="bi bi-box"></i> Thông Tin Đặt Hàng</h4>
+    <ul>
+        <li><strong>📦 Mã đơn:</strong> @Model.ID</li>
+        <li><strong>📅 Ngày đặt:</strong> @Model.OrderDate?.ToString("dd/MM/yyyy HH:mm")</li>
+        @* Bạn có thể hiển thị thêm thông tin đơn hàng nếu cần *@
+    </ul>
+</div>
+
+<div class="card p-3 mt-3">
+    <h4 class="text-success"><i class="bi bi-film"></i> Chi Tiết Vé Xem Phim</h4>
+    <table class="table table-bordered">
+        <thead class="table-success">
+            <tr>
+                <th>Phim</th>
+                <th>Thời gian</th>
+                <th>Phòng chiếu</th>
+                <th>Ghế</th>
+                <th>Giá vé</th>
+                <th>Bắp nước</th>
+                <th>Số lượng</th>
+                <th>Giá bắp nước</th>
+                <th>Tổng tiền mục</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@item.Showtime?.Movie?.Title</td>
+                    <td>@item.Showtime?.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.Showtime?.Room?.Name</td>
+                    <td>@item.Seat?.SeatNumber</td>
+                    <td>@item.Price?.ToString("C")</td>
+                    <td>@item.PopcornDrinkItem?.Name</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.PopcornDrinkItem?.Price.ToString("C"))</td>
+                    <td>@(((item.Price ?? 0) + (item.PopcornDrinkItem?.Price ?? 0) * item.Quantity).ToString("C"))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<h3 class="text-danger text-end">
+    <i class="bi bi-coin"></i> Tổng tiền: @Model.TotalPrice.ToString("C")
+</h3>
+
+<a asp-action="Index" class="btn btn-primary mt-3"><i class="bi bi-arrow-left"></i> Quay lại danh sách</a>

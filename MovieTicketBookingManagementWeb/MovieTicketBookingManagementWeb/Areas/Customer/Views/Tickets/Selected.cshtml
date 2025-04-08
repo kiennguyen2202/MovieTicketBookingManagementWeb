@@ -109,7 +109,7 @@
 	</style>
 </head>
 <div class="container">
-    <h2 class="page-title">Chọn Bắp & Nước</h2>
+	<h2 class="page-title">Chọn Bắp & Nước</h2>
 
 	<form asp-action="AddToCart" asp-controller="ShoppingCart" method="post" class="item-form">
 		<input type="hidden" name="showtimeId" value="@showtimeId" />
@@ -130,11 +130,11 @@
 				{
 					<tr>
 						<td>
-							<input type="checkbox" class="item-checkbox" data-id="@item.ID" />
+							<input type="checkbox" class="item-checkbox" name="selectedPopcornDrinkItemIds" value="@item.ID" data-id="@item.ID" />
 						</td>
 						<td><img src="@item.PictureUrl" alt="@item.Name" class="item-image" /></td>
 						<td>@item.Name</td>
-						<td>@item.Price.ToString("N0") VND</td>
+						<td>@item.Price.ToString("N0") $</td>
 						<td>
 							<button type="button" class="quantity-btn minus" data-id="@item.ID">-</button>
 							<span class="quantity-display" data-id="@item.ID">0</span>
@@ -157,7 +157,7 @@
 </div>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function () {
+		document.addEventListener('DOMContentLoaded', function () {
 		const checkboxes = document.querySelectorAll('.item-checkbox');
 		const minusButtons = document.querySelectorAll('.minus');
 		const plusButtons = document.querySelectorAll('.plus');
@@ -211,5 +211,29 @@
 				cb.checked = true;
 			});
 		});
+
+		// Khi form submit, chỉ gửi các item được chọn
+		const form = document.querySelector('form');
+		form.addEventListener('submit', function (e) {
+			// Lọc các món đã chọn và set lại danh sách ID và số lượng
+			const selectedIds = [];
+			const selectedQuantities = [];
+
+			checkboxes.forEach(cb => {
+				if (cb.checked) {
+					const id = cb.dataset.id;
+					const quantity = document.getElementById(`qty-${id}`).value;
+					selectedIds.push(id);
+					selectedQuantities.push(quantity);
+				}
+			});
+
+			// Cập nhật giá trị trong các hidden input
+			const idsInput = document.querySelector('input[name="popcornDrinkItemIds"]');
+			const quantitiesInput = document.querySelector('input[name="popcornDrinkItemQuantitiess"]');
+			idsInput.value = selectedIds.join(',');
+			quantitiesInput.value = selectedQuantities.join(',');
+		});
 	});
+
 </script>

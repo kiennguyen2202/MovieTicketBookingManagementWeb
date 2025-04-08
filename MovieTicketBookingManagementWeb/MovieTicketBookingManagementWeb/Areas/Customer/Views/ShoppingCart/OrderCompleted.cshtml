@@ -1,50 +1,144 @@
 ﻿@model MovieTicketBookingManagementWeb.Models.Order
 
-<h2><i class="bi bi-check-circle"></i> Đơn Hàng Đã Được Xác Nhận</h2>
+@{
+    Layout = "_Layout";
+}
 
-<div class="card p-3">
-    <h4 class="text-primary"><i class="bi bi-person"></i> Thông Tin Khách Hàng</h4>
-    <ul>
-       
-    </ul>
-</div>
+<h2 class="text-center text-success my-4 animate__animated animate__fadeInDown">
+    <i class="bi bi-check-circle-fill"></i> Đơn Hàng Đã Được Xác Nhận
+</h2>
 
-<div class="card p-3 mt-3">
-    <h4 class="text-primary"><i class="bi bi-box"></i> Thông Tin Đặt Hàng</h4>
-    <ul>
-       
-       
-       
-    </ul>
-</div>
+<div class="container">
 
-<div class="card p-3 mt-3">
-    <h4 class="text-success"><i class="bi bi-basket"></i> Sản Phẩm Trong Đơn Hàng</h4>
-    <table class="table table-bordered">
-        <thead class="table-success">
-            <tr>
-                <th>Mã sản phẩm</th>
-                <th>Tên sản phẩm</th>
-                <th>Số lượng</th>
-                <th>Giá</th>
-                <th>Thành tiền</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.OrderDetails)
-            {
+    <!-- Vé xem phim -->
+    <div class="card p-4 shadow-lg mb-4 border-start border-4 border-success">
+        <h4 class="text-primary">
+            <i class="bi bi-film"></i> Vé Xem Phim
+        </h4>
+        <table class="table table-hover mt-3 text-center">
+            <thead class="table-info">
                 <tr>
-                    <td>@item.Movie.ID</td>
-                    <td>@item.Movie.Title</td>
-                    <td>@item.Quantity</td>
-                    <td>@item.Ticket.Showtime.Price.ToString("#,##0") $</td>
-                    
+                    <th>🎬 Tên phim</th>
+                    <th>🕒 Suất chiếu</th>
+                    <th>💺 Ghế</th>
+                    <th>💵 Giá vé</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.OrderDetails.Where(od => od.PopcornDrinkItem == null))
+                {
+                    <tr>
+                        <td>@item.Movie?.Title</td>
+                        <td>@item.Showtime?.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.Seat?.SeatNumber</td>
+                        <td>@item.Price?.ToString("#,##0") $</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-<h3 class="text-danger text-end">
-    <i class="bi bi-coin"></i> 
-</h3>
+    <!-- Bắp - Nước -->
+    @if (Model.OrderDetails.Any(od => od.PopcornDrinkItem != null))
+    {
+        <div class="card p-4 shadow-lg mb-4 border-start border-4 border-warning">
+            <h4 class="text-warning">
+                <i class="bi bi-cup-straw"></i> Bắp - Nước
+            </h4>
+            <table class="table table-hover mt-3 text-center">
+                <thead class="table-warning">
+                    <tr>
+                        <th>🥤 Tên sản phẩm</th>
+                        <th>🔢 Số lượng</th>
+                        <th>💵 Đơn giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderDetails.Where(od => od.PopcornDrinkItem != null))
+                    {
+                        <tr>
+                            <td>@item.PopcornDrinkItem?.Name</td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price?.ToString("#,##0") $</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <!-- Thông tin khách hàng -->
+    <div class="card p-4 shadow-lg mb-4 border-start border-4 border-primary">
+        <h4 class="text-primary"><i class="bi bi-person-fill"></i> Thông Tin Khách Hàng</h4>
+        @if (Model.User != null)
+        {
+            <ul class="list-group list-group-flush mt-2">
+                <li class="list-group-item"><strong>👤 Họ tên:</strong> @Model.User.FullName</li>
+                <li class="list-group-item"><strong>📧 Email:</strong> @Model.User.Email</li>
+                <li class="list-group-item"><strong>📞 SĐT:</strong> @Model.User.PhoneNumber</li>
+                <li class="list-group-item"><strong>🗓 Ngày đặt:</strong> @Model.OrderDate?.ToString("dd/MM/yyyy HH:mm")</li>
+            </ul>
+        }
+        else
+        {
+            <p class="text-muted">Không có thông tin khách hàng.</p>
+        }
+    </div>
+
+    <!-- Tổng cộng -->
+    @{
+        var total = Model.OrderDetails.Sum(od => od.Price * od.Quantity);
+    }
+    <div class="text-end mb-4">
+        <h4 class="fw-bold">
+            <span class="text-dark">Tổng cộng:</span>
+            <span class="text-danger">@total?.ToString("#,##0") $</span>
+        </h4>
+    </div>
+
+    <!-- Lời chúc đẹp mắt -->
+    <div class="text-center my-5">
+        <h2 style="
+            font-weight: bold;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            animation: fadeIn 1.5s ease-in-out;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        ">
+            🎉 Chúc bạn xem phim vui vẻ! 🍿🎬
+        </h2>
+    </div>
+
+    <!-- Nút về trang chủ -->
+    <div class="text-center mb-5">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-success btn-lg px-4 py-2 shadow-lg">
+            <i class="bi bi-house-door-fill"></i> Về Trang Chủ
+        </a>
+    </div>
+</div>
+    <!-- Hiệu ứng mượt -->
+<style>
+    keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .fade-in {
+        animation: fadeIn 1.5s ease-in-out;
+    }
+</style>
+
+

@@ -47,7 +47,7 @@
                 <p><strong>Thời lượng:</strong> @Model.Duration phút</p>
                 <p><strong>Ngày phát hành:</strong> @(Model.ReleaseDate?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")</p>
                 <p class="text-justify"><strong>Mô tả:</strong> @Model.Description</p>
-                <p><strong>Gia ve:</strong> @ViewBag.Price</p>
+                <p><strong>Gia ve:</strong>@ViewBag.Price</p>
                 <div class="mt-3">
                     <a href="@Url.Action("Trailer", "Movies", new { id = Model.ID })" class="btn btn-outline-primary me-2">
                         <i class="fas fa-play-circle"></i> Xem Trailer

@@ -42,7 +42,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
             if (string.IsNullOrEmpty(userId)) return Unauthorized(); // Nếu chưa đăng nhập, trả về lỗi 401
 
             var hasWatchedMovie = await _context.Tickets
-                .AnyAsync(t => t.UserID.ToString() == userId && t.MovieID == movieId && t.Status == "Completed");
+                .AnyAsync(t => t.ToString() == userId && t.MovieID == movieId && t.Status == "Completed");
 
             if (!hasWatchedMovie)
             {

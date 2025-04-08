@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Danh sách đơn hàng";
-    
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container mt-4">
@@ -25,8 +25,9 @@
                 {
                     <tr>
                         <td class="text-center">@order.ID</td>
-                        
-                        <td class="text-center">@order.OrderDate?.ToString("dd/MM/yyyy")?? "N/A"</td>
+                        <td class="text-center">@order.User.FullName</td>
+                        <td class="text-center">@order.User.Email</td>
+                        <td class="text-center">@order.OrderDate?.ToString("dd/MM/yyyy")</td>
                         <td class="text-end fw-bold">@order.TotalPrice</td>
                         <td class="text-center">
                             <a asp-area="Admin" asp-controller="Order" asp-action="Detail"

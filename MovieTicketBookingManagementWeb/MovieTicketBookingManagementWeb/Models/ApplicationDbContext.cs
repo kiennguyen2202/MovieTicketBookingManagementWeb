@@ -41,7 +41,10 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public virtual DbSet<PopcornDrinkItem> PopcornDrinkItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+
     {
+       
         modelBuilder.Entity<Cinema>(entity =>
         {
             entity.HasKey(e => e.ID).HasName("PK__Cinemas__59C926260B1BBE46");
@@ -80,7 +83,9 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.HasOne(o => o.User)
                 .WithMany()
                 .HasForeignKey(o => o.UserID)
-                .IsRequired(true);
+                .IsRequired(true)
+                .OnDelete(DeleteBehavior.Restrict);
+
         });
 
 
@@ -96,12 +101,13 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.OrderID)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrderDeta__Order__1AD3FDA4");
+                .IsRequired(true)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             entity.HasOne(d => d.Ticket).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.TicketID)
                 .OnDelete(DeleteBehavior.ClientSetNull)
+                .IsRequired(true)
                 .HasConstraintName("FK__OrderDeta__Ticke__1BC821DD");
         });
 
@@ -117,11 +123,11 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
 
-            entity.HasOne(o => o.User)
+            /*entity.HasOne(o => o.User)
                 .WithMany()
                 .HasForeignKey(o => o.UserID)
                 .IsRequired(true);
-
+            */
         });
 
         modelBuilder.Entity<Room>(entity =>
@@ -215,7 +221,9 @@ public partial class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             entity.HasOne(o => o.User)
                 .WithMany()
                 .HasForeignKey(o => o.UserID)
-                .IsRequired(true);
+                .IsRequired(true)
+                .OnDelete(DeleteBehavior.Restrict);
+
         });
 
         OnModelCreatingPartial(modelBuilder);

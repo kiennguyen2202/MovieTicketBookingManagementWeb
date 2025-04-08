@@ -3,13 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MovieTicketBookingManagementWeb.Extensions;
 using MovieTicketBookingManagementWeb.Models;
-using MovieTicketBookingManagementWeb.Extensions;
-using MovieTicketBookingManagementWeb.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace MovieTicketBookingManagementWeb.Controllers
 {
-    [Authorize]
+
     public class ShoppingCartController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,8 +19,7 @@ namespace MovieTicketBookingManagementWeb.Controllers
             _userManager = userManager;
         }
 
-        // Trong controller của bạn
-        public async Task<IActionResult> AddToCart(int showtimeId, int seatId, List<int> popcornDrinkItemIds , List<int> popcornDrinkItemQuantitiess)
+        public async Task<IActionResult> AddToCart(int showtimeId, int seatId, List<int> selectedPopcornDrinkItemIds, List<int> popcornDrinkItemIds, List<int> popcornDrinkItemQuantitiess)
         {
             var showtime = await _context.Showtimes
                 .Include(s => s.Movie)
@@ -35,28 +32,30 @@ namespace MovieTicketBookingManagementWeb.Controllers
                 .Where(p => popcornDrinkItemIds.Contains(p.ID))
                 .ToListAsync();
 
-            if (showtime == null || seat == null || !popcornDrinkItems.Any())
-            {
-                return NotFound("Showtime, Seat, or PopcornDrinkItem not found.");
-            }
+            if (showtime == null || seat == null)
+                return NotFound("Showtime or Seat not found.");
 
             var popcornDrinkCardItems = new List<PopcornDrinkCardItem>();
             for (int i = 0; i < popcornDrinkItemIds.Count && i < popcornDrinkItemQuantitiess.Count; i++)
             {
-                var popcornDrinkItem = popcornDrinkItems.Find(p => p.ID == popcornDrinkItemIds[i]);
-                if (popcornDrinkItem == null) 
-                {
+                if (!selectedPopcornDrinkItemIds.Contains(popcornDrinkItemIds[i]))
                     continue;
-                }
-                var popcornDrinkCardItem = new PopcornDrinkCardItem()
+
+                var item = popcornDrinkItems.FirstOrDefault(p => p.ID == popcornDrinkItemIds[i]);
+                if (item == null) continue;
+
+                popcornDrinkCardItems.Add(new PopcornDrinkCardItem
                 {
-                    ID = popcornDrinkItem.ID,
-                    Name = popcornDrinkItem.Name,
-                    Price = popcornDrinkItem.Price,
+                    ID = item.ID,
+                    Name = item.Name,
+                    Price = item.Price,
                     Quantity = popcornDrinkItemQuantitiess[i]
-                };
-                popcornDrinkCardItems.Add(popcornDrinkCardItem);
+                });
             }
+
+            var user = await _userManager.GetUserAsync(User);
+            var sessionKey = $"TicketCart_{user.Id}";
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>(sessionKey) ?? new ShoppingCart();
 
             var cartItem = new CartItem
             {
@@ -71,40 +70,53 @@ namespace MovieTicketBookingManagementWeb.Controllers
                 SeatID = seatId,
                 SeatNumber = seat.SeatNumber,
                 PopcornDrinkCardItems = popcornDrinkCardItems,
-                Quantity = 1 // Hoặc số lượng vé bạn muốn
+                Quantity = 1
             };
-            return RedirectToAction("Index", "ShoppingCart");
-            // ... thêm cartItem vào giỏ hàng
+
+            var existingItem = cart.Items.FirstOrDefault(i => i.ShowtimeID == showtimeId && i.SeatID == seatId);
+            if (existingItem != null)
+                existingItem.Quantity += 1;
+            else
+                cart.AddItem(cartItem);
+
+            HttpContext.Session.SetObjectAsJson(sessionKey, cart);
+            HttpContext.Session.SetInt32("TicketCartCount", cart.Items.Sum(i => i.Quantity));
+
+            return RedirectToAction("Index");
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("TicketCart") ?? new ShoppingCart();
-            ViewBag.TotalPrice = cart.Items?.Sum(item => item.TotalPrice) ?? 0;
+            var user = await _userManager.GetUserAsync(User);
+            var sessionKey = $"TicketCart_{user.Id}";
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>(sessionKey) ?? new ShoppingCart();
+
+            ViewBag.TicketCartCount = cart.Items.Sum(i => i.Quantity);
             return View(cart);
         }
 
-        public IActionResult RemoveFromCart(int showtimeId, int seatId, int popcornDrinkItemId)
+        public async Task<IActionResult> RemoveFromCart(int showtimeId, int seatId)
         {
-            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("TicketCart");
+            var user = await _userManager.GetUserAsync(User);
+            var sessionKey = $"TicketCart_{user.Id}";
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>(sessionKey);
 
             if (cart != null)
             {
-                cart.RemoveItem(showtimeId, seatId,popcornDrinkItemId);
-                HttpContext.Session.SetObjectAsJson("TicketCart", cart);
-                HttpContext.Session.SetInt32("TicketCartCount", cart.Items.Sum(item => item.Quantity));
+                cart.RemoveItem(showtimeId, seatId);
+                HttpContext.Session.SetObjectAsJson(sessionKey, cart);
+                HttpContext.Session.SetInt32("TicketCartCount", cart.Items.Sum(i => i.Quantity));
             }
-
-            ViewBag.TicketCartCount = cart?.Items?.Sum(item => item.Quantity) ?? 0;
-            ViewBag.TicketCartTotal = cart?.Items?.Sum(item => item.TotalPrice * item.Quantity) ?? 0;
 
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult Checkout()
+        public async Task<IActionResult> Checkout()
         {
-            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("TicketCart");
+            var user = await _userManager.GetUserAsync(User);
+            var sessionKey = $"TicketCart_{user.Id}";
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>(sessionKey);
 
             if (cart == null || !cart.Items.Any())
             {
@@ -112,44 +124,135 @@ namespace MovieTicketBookingManagementWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(cart);
+            var orderDetails = cart.Items.Select(item =>
+            {
+                var movieId = _context.Showtimes.FirstOrDefault(s => s.ID == item.ShowtimeID)?.MovieID ?? 0;
+
+                return new OrderDetail
+                {
+                    ShowtimeID = item.ShowtimeID,
+                    SeatID = item.SeatID,
+                    RoomID = item.RoomID,
+                    MovieID = movieId,
+                    Quantity = item.Quantity,
+                    Price = item.ShowtimePrice,
+                    PopcornDrinkItemID = item.PopcornDrinkCardItems.FirstOrDefault()?.ID ?? 0
+                };
+            }).ToList();
+
+            var order = new Order
+            {
+                OrderDetails = orderDetails,
+                CartItems = cart.Items
+            };
+
+            return View("Checkout", order);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Checkout(ShoppingCart cart)
+        public async Task<IActionResult> Checkout(Order order)
         {
-            var sessionCart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("TicketCart");
+            var user = await _userManager.GetUserAsync(User);
+            var sessionKey = $"TicketCart_{user.Id}";
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>(sessionKey);
 
-            if (sessionCart == null || !sessionCart.Items.Any())
+            if (cart == null || !cart.Items.Any())
             {
                 TempData["Error"] = "Your cart is empty.";
                 return RedirectToAction("Index");
             }
 
-            var user = await _userManager.GetUserAsync(User);
-
-            foreach (var item in sessionCart.Items)
+            var finalOrder = new Order
             {
+                User = user,
+                OrderDate = DateTime.UtcNow,
+                TotalPrice = 0,
+                OrderDetails = new List<OrderDetail>()
+            };
+
+            decimal totalPrice = 0;
+
+            foreach (var item in cart.Items)
+            {
+                var movieId = _context.Showtimes.FirstOrDefault(s => s.ID == item.ShowtimeID)?.MovieID ?? 0;
+
                 var ticket = new Ticket
                 {
                     ShowtimeID = item.ShowtimeID,
                     SeatID = item.SeatID,
+                    MovieID = movieId,
                     TicketType = "Standard",
                     UserID = user.Id,
-                    FinalPrice = item.TotalPrice,
-                    Status = "Booked",
                     BookingTime = DateTime.UtcNow,
-                    MovieID = _context.Showtimes.Find(item.ShowtimeID).MovieID
+                    Status = "Booked",
+                    FinalPrice = item.TotalPrice,
+                    PopcornDrinkItemID = item.PopcornDrinkCardItems.FirstOrDefault()?.ID ?? 0,
                 };
+
                 _context.Tickets.Add(ticket);
+
+                finalOrder.OrderDetails.Add(new OrderDetail
+                {
+                    ShowtimeID = item.ShowtimeID,
+                    SeatID = item.SeatID,
+                    RoomID = item.RoomID,
+                    MovieID = movieId,
+                    Ticket = ticket,
+                    Quantity = 1,
+                    Price = item.ShowtimePrice,
+                    PopcornDrinkItemID = null,
+                    Order = finalOrder
+                });
+
+                foreach (var popcorn in item.PopcornDrinkCardItems)
+                {
+                    finalOrder.OrderDetails.Add(new OrderDetail
+                    {
+                        ShowtimeID = item.ShowtimeID,
+                        SeatID = item.SeatID,
+                        RoomID = item.RoomID,
+                        MovieID = movieId,
+                        Ticket = ticket,
+                        Quantity = popcorn.Quantity,
+                        Price = popcorn.Price,
+                        PopcornDrinkItemID = popcorn.ID,
+                        Order = finalOrder
+                    });
+
+                    totalPrice += popcorn.Quantity * popcorn.Price;
+                }
+
+                totalPrice += item.TotalPrice;
             }
 
+            finalOrder.TotalPrice = totalPrice;
+
+            _context.Orders.Add(finalOrder);
             await _context.SaveChangesAsync();
 
-            HttpContext.Session.Remove("TicketCart");
+            HttpContext.Session.Remove(sessionKey);
             HttpContext.Session.SetInt32("TicketCartCount", 0);
 
-            return View("OrderCompleted", sessionCart);
+            return RedirectToAction("OrderCompleted", new { orderId = finalOrder.ID });
+        }
+
+        public async Task<IActionResult> OrderCompleted(int orderId)
+        {
+            var order = await _context.Orders
+                .Include(o => o.OrderDetails).ThenInclude(od => od.Movie)
+                .Include(o => o.OrderDetails).ThenInclude(od => od.Seat)
+                .Include(o => o.OrderDetails).ThenInclude(od => od.Showtime)
+                .Include(o => o.OrderDetails).ThenInclude(od => od.PopcornDrinkItem)
+                .Include(o => o.User)
+                .FirstOrDefaultAsync(o => o.ID == orderId);
+
+            if (order == null)
+            {
+                TempData["Error"] = "Order not found.";
+                return RedirectToAction("Index");
+            }
+
+            return View(order);
         }
     }
 }

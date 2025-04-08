@@ -13,6 +13,8 @@ namespace MovieTicketBookingManagementWeb.Models
     }
     public class CartItem
     {
+        public string Type { get; set; }// "MovieTicket" hoặc "PopcornDrink"
+        [Key]
         public int ShowtimeID { get; set; }
         public int RoomID { get; set; }
         public int CinemaID { get; set; }
@@ -27,5 +29,6 @@ namespace MovieTicketBookingManagementWeb.Models
         public decimal TotalPrice => (ShowtimePrice + PopcornDrinkCardItems.Sum(p => p.Quantity * p.Price));
 
         public int Quantity { get; set; }
+        
     }
 }

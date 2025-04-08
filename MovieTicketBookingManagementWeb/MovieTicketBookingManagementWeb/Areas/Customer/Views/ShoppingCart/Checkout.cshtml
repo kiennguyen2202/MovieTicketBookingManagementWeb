@@ -1,71 +1,102 @@
 ﻿@model MovieTicketBookingManagementWeb.Models.Order
-
 @{
     ViewData["Title"] = "Thanh Toán";
+    Layout = "_Layout";
 }
 
-<h2 class="text-center my-4"><i class="bi bi-credit-card"></i> Thanh Toán</h2>
-<form asp-action="Checkout" method="post">
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <!-- Card for Checkout Form -->
-            <div class="card p-4 shadow-sm rounded">
-                <div class="card-header bg-primary text-white text-center">
-                    <h3><i class="bi bi-cart-check"></i> Đặt Hàng</h3>
-                </div>
-                <div class="card-body">
-                    <form asp-action="Checkout" method="post">
-                       
-                    </form>
-                </div>
-            </div>
+<div class="container my-5 animate__animated animate__fadeIn">
+    <h2 class="text-center mb-4 text-primary fw-bold">
+        <i class="bi bi-credit-card-fill"></i> Xác Nhận Thanh Toán
+    </h2>
 
-            <!-- Card danh sách sản phẩm -->
-            <div class="card p-4 shadow-sm rounded mt-4">
-                <h4 class="text-success"><i class="bi bi-basket"></i> Sản Phẩm Trong Đơn Hàng</h4>
-                <table class="table table-bordered mt-3">
-                    <thead class="table-success text-center">
+    <form asp-action="Checkout" method="post">
+        <div class="card shadow p-4 border-start border-4 border-success">
+            <h4 class="text-success mb-3"><i class="bi bi-receipt-cutoff"></i> Chi Tiết Đơn Hàng</h4>
+
+            <div class="table-responsive">
+                <table class="table table-bordered text-center align-middle">
+                    <thead class="table-success">
                         <tr>
-                            <th>Mã sản phẩm</th>
-                            <th>Tên sản phẩm</th>
-                            <th class="text-center">Số lượng</th>
-                            <th class="text-end">Giá</th>
-                            <th class="text-end">Thành tiền</th>
+                            <th>🎬 Phim</th>
+                            <th>🕒 Thời Gian</th>
+                            <th>💺 Ghế</th>
+                            <th>🥤 Bắp Nước</th>
+                            <th class="text-end">🎟 Giá Vé</th>
+                            <th class="text-end">🍿 Giá Bắp</th>
+                            <th>🔢 SL</th>
+                            <th class="text-end">💵 Tổng</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.OrderDetails)
-                        {
-                            <tr>
-                                <td>@item.MovieID</td>
-                                <td>@item.Movie.Title</td>
-                                <td class="text-center">@item.Quantity</td>
-                                <td class="text-end">@item.Showtime.Price.ToString("#,##0") $</td>
-                                  
-                            </tr>
+                        @{
+                            var groupedOrderDetails = Model.OrderDetails
+                            .GroupBy(od => new { od.ShowtimeID, od.SeatID });
+
+                            decimal finalTotalPrice = 0; // Khởi tạo biến tổng tiền
+
+                            @foreach (var group in groupedOrderDetails)
+                            {
+                                var movieTicket = group.FirstOrDefault(od => od.PopcornDrinkItemID == null);
+                                var popcornItems = group.Where(od => od.PopcornDrinkItemID != null).ToList();
+                                decimal currentTotalPrice = 0; // Tổng tiền cho dòng hiện tại
+
+                                @if (movieTicket != null)
+                                {
+                                    currentTotalPrice += movieTicket.Price ?? 0;
+
+                                    <tr>
+                                        <td>@movieTicket.Movie?.Title</td>
+                                        <td>@movieTicket.Showtime?.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>@movieTicket.Seat?.SeatNumber</td>
+                                        <td>
+                                            @if (popcornItems.Any())
+                                            {
+                                                @foreach (var popcorn in popcornItems)
+                                                {
+                                                    <span>@popcorn.PopcornDrinkItem?.Name (@popcorn.Quantity)</span>
+                                                    <br />
+                                                    currentTotalPrice += (popcorn.Price ?? 0) * popcorn.Quantity;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>Không</span>
+                                            }
+                                        </td>
+                                        <td class="text-end">@movieTicket.Price?.ToString("C")</td>
+                                        <td class="text-end">
+                                            @if (popcornItems.Any())
+                                            {
+                                                @popcornItems.Sum(p => p.Price * p.Quantity)?.ToString("C")
+                                            }
+                                            else
+                                            {
+                                                <span>$0.00</span>
+                                            }
+                                        </td>
+                                        <td class="text-center">@group.Sum(od => od.Quantity)</td>
+                                        <td class="text-end">@currentTotalPrice.ToString("C")</td>
+                                    </tr>
+                                    finalTotalPrice += currentTotalPrice; // Cộng tổng tiền của dòng vào tổng cuối cùng
+                                }
+                            }
                         }
                     </tbody>
                 </table>
             </div>
 
-            <!-- Tổng tiền -->
-            <h3 class="text-danger text-end mt-3 fw-bold">
-                <i class="bi bi-coin"></i> 
-            </h3>
+            <h4 class="text-danger text-end mt-4 fw-bold">
+                <i class="bi bi-wallet2"></i> Tổng tiền: @finalTotalPrice.ToString("C")
+            </h4>
 
-            <!-- Nút đặt hàng và quay lại -->
             <div class="text-end mt-4">
-                <button type="submit" class="btn btn-success w-100"><i class="bi bi-check-circle"></i> Xác Nhận Đặt Hàng</button>
-                <a asp-action="Index" asp-controller="ShoppingCart" class="btn btn-outline-primary mt-2 w-100">
+                <button type="submit" class="btn btn-success btn-lg w-100 shadow">
+                    <i class="bi bi-check2-circle"></i> Xác Nhận Đặt Hàng
+                </button>
+                <a asp-action="Index" asp-controller="ShoppingCart" class="btn btn-outline-secondary mt-2 w-100">
                     <i class="bi bi-arrow-left"></i> Quay lại giỏ hàng
                 </a>
             </div>
         </div>
-    </div>
+    </form>
 </div>
-</form>
-<!-- Footer -->
-<footer class="py-4 mt-5 bg-dark text-white text-center">
-    <p>&copy; 2025 NguyenTrungKien Company. All Rights Reserved.</p>
-</footer>

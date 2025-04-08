@@ -25,10 +25,13 @@ namespace MovieTicketBookingManagementWeb.Models
 
         public void RemoveItem(int showtimeId, int seatId)
         {
-            Items.RemoveAll(i =>
+            // Xóa toàn bộ item trong giỏ hàng dựa trên showtimeId và seatId
+            Items?.RemoveAll(i =>
                 i.ShowtimeID == showtimeId &&
                 i.SeatID == seatId);
         }
+
+
 
 
         public void UpdateQuantity(int showtimeId, int seatId, int popcornDrinkItemId, int quantity)

@@ -16,19 +16,19 @@ public partial class OrderDetail
 
     public int TicketID { get; set; }
 
-    public int? Quantity { get; set; }
+    public int Quantity { get; set; }
 
-    public decimal Price { get; set; }
-    public int PopcornDrinkItemID { get; set; }
-    public PopcornDrinkItem PopcornDrinkItem { get; set; }
+    public decimal? Price { get; set; }
+    public int? PopcornDrinkItemID { get; set; }
+    public PopcornDrinkItem? PopcornDrinkItem { get; set; }
 
     public virtual Order Order { get; set; } = null!;
 
     public virtual Ticket Ticket { get; set; } = null!;
 
-    public virtual Showtime Showtime { get; set; } = null!;
-    public virtual Seat Seat { get; set; } = null!;
+    public virtual Showtime? Showtime { get; set; } = null!;
+    public virtual Seat? Seat { get; set; } = null!;
     public virtual Room Room { get; set; } = null!;
-    public virtual Movie Movie { get; set; } = null!;
+    public virtual Movie? Movie { get; set; } = null!;
 
 }
