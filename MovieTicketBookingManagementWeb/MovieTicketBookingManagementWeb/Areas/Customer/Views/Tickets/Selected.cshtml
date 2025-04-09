@@ -1,239 +1,51 @@
 ﻿@model List<MovieTicketBookingManagementWeb.Models.PopcornDrinkItem>
 
 @{
-	ViewData["Title"] = "Chọn Bắp & Nước";
-	int showtimeId = (int)ViewData["ShowtimeId"];
-	int selectedSeatId = (int)ViewData["SelectedSeatId"];
+    ViewData["Title"] = "Chọn Bắp & Nước";
+    int showtimeId = (int)ViewData["ShowtimeId"];
+    int selectedSeatId = (int)ViewData["SelectedSeatId"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<head>
-	<style>
-		.container {
-			width: 90%;
-			max-width: 1200px;
-			margin: 20px auto;
-			font-family: sans-serif;
-		}
+@section Styles {
+    <link rel="stylesheet" href="~/css/selected.css" asp-append-version="true" />
+}
 
-		.page-title {
-			text-align: center;
-			margin-bottom: 30px;
-			color: #333;
-		}
+<div class="combo-container">
+    <h2 class="page-title">Chọn Bắp & Nước</h2>
 
-		.item-form {
-			border: 1px solid #ddd;
-			border-radius: 8px;
-			padding: 20px;
-		}
+    <form id="combo-form" asp-action="AddToCart" asp-controller="ShoppingCart" method="post" onsubmit="return prepareComboForm()">
+        <input type="hidden" name="showtimeId" value="@showtimeId" />
+        <input type="hidden" name="seatId" value="@selectedSeatId" />
 
-		.item-table {
-			width: 100%;
-			border-collapse: collapse;
-		}
+        <div class="combo-grid">
+            @foreach (var item in Model)
+            {
+                <div class="combo-card">
+                    <img src="@item.PictureUrl" alt="@item.Name" class="combo-image" />
+                    <div class="combo-content">
+                        <div class="combo-title">@item.Name</div>
+                        <div class="combo-price">@item.Price.ToString("N0") $</div>
 
-			.item-table th, .item-table td {
-				border: 1px solid #eee;
-				padding: 12px 15px;
-				text-align: left;
-			}
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus" data-id="@item.ID">-</button>
+                            <span class="quantity-display" data-id="@item.ID">0</span>
+                            <button type="button" class="quantity-btn plus" data-id="@item.ID">+</button>
+                        </div>
 
-			.item-table th {
-				background-color: #f8f8f8;
-				font-weight: bold;
-			}
+                        <!-- Không dùng [] trong name nữa để đúng với controller -->
+                        <input type="hidden" class="id-input" name="popcornDrinkItemIds" value="@item.ID" data-id="@item.ID" disabled />
+                        <input type="hidden" class="qty-input" name="popcornDrinkItemQuantitiess" value="0" id="qty-@item.ID" data-id="@item.ID" disabled />
+                    </div>
+                </div>
+            }
+        </div>
 
-		.item-image {
-			max-width: 80px;
-			height: auto;
-			border-radius: 4px;
-			border: 1px solid #ddd;
-		}
+        <div class="confirm-button-container">
+            <button type="submit" class="confirm-button" id="submitBtn">Xác nhận</button>
 
-		.item-price {
-			font-weight: 500;
-			color: #007bff;
-		}
-
-		.quantity-control {
-			display: flex;
-			align-items: center;
-		}
-
-		.quantity-btn {
-			background-color: #f0f0f0;
-			border: 1px solid #ccc;
-			padding: 8px 12px;
-			cursor: pointer;
-			font-size: 16px;
-		}
-
-		.quantity-input {
-			width: 50px;
-			text-align: center;
-			margin: 0 5px;
-			padding: 8px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-		}
-
-		.confirm-button-container {
-			text-align: center;
-			margin-top: 20px;
-		}
-
-		.confirm-button {
-			background-color: #007bff;
-			color: white;
-			padding: 12px 25px;
-			border: none;
-			border-radius: 5px;
-			font-size: 18px;
-			cursor: pointer;
-		}
-
-			.confirm-button:hover {
-				background-color: #0056b3;
-			}
-
-		.item-checkbox-label {
-			display: inline-block;
-			width: 20px;
-			height: 20px;
-		}
-
-		.item-checkbox {
-			width: 20px;
-			height: 20px;
-			margin: 0;
-		}
-	</style>
-</head>
-<div class="container">
-	<h2 class="page-title">Chọn Bắp & Nước</h2>
-
-	<form asp-action="AddToCart" asp-controller="ShoppingCart" method="post" class="item-form">
-		<input type="hidden" name="showtimeId" value="@showtimeId" />
-		<input type="hidden" name="seatId" value="@selectedSeatId" />
-
-		<table class="item-table">
-			<thead>
-				<tr>
-					<th>Chọn</th>
-					<th>Hình ảnh</th>
-					<th>Tên</th>
-					<th>Giá</th>
-					<th>Số lượng</th>
-				</tr>
-			</thead>
-			<tbody>
-				@foreach (var item in Model)
-				{
-					<tr>
-						<td>
-							<input type="checkbox" class="item-checkbox" name="selectedPopcornDrinkItemIds" value="@item.ID" data-id="@item.ID" />
-						</td>
-						<td><img src="@item.PictureUrl" alt="@item.Name" class="item-image" /></td>
-						<td>@item.Name</td>
-						<td>@item.Price.ToString("N0") $</td>
-						<td>
-							<button type="button" class="quantity-btn minus" data-id="@item.ID">-</button>
-							<span class="quantity-display" data-id="@item.ID">0</span>
-							<button type="button" class="quantity-btn plus" data-id="@item.ID">+</button>
-						</td>
-
-						<!-- Các hidden input để submit về controller -->
-						<input type="hidden" name="popcornDrinkItemIds" value="@item.ID" />
-						<input type="hidden" name="popcornDrinkItemQuantitiess" value="0" id="qty-@item.ID" />
-					</tr>
-				}
-			</tbody>
-		</table>
-
-		<div class="confirm-button-container">
-			<button type="submit" class="confirm-button">Xác nhận</button>
-		</div>
-	</form>
-
+        </div>
+    </form>
 </div>
-
-<script>
-		document.addEventListener('DOMContentLoaded', function () {
-		const checkboxes = document.querySelectorAll('.item-checkbox');
-		const minusButtons = document.querySelectorAll('.minus');
-		const plusButtons = document.querySelectorAll('.plus');
-
-		checkboxes.forEach(cb => {
-			cb.addEventListener('change', () => {
-				const id = cb.dataset.id;
-				const display = document.querySelector(`.quantity-display[data-id="${id}"]`);
-				const input = document.getElementById(`qty-${id}`);
-
-				if (cb.checked) {
-					if (display.textContent === "0") {
-						display.textContent = "1";
-						input.value = 1;
-					}
-				} else {
-					display.textContent = "0";
-					input.value = 0;
-				}
-			});
-		});
-
-		minusButtons.forEach(btn => {
-			btn.addEventListener('click', () => {
-				const id = btn.dataset.id;
-				const display = document.querySelector(`.quantity-display[data-id="${id}"]`);
-				const input = document.getElementById(`qty-${id}`);
-				const cb = document.querySelector(`.item-checkbox[data-id="${id}"]`);
-
-				let quantity = parseInt(display.textContent);
-				if (quantity > 0) {
-					quantity--;
-					display.textContent = quantity;
-					input.value = quantity;
-					if (quantity === 0) cb.checked = false;
-				}
-			});
-		});
-
-		plusButtons.forEach(btn => {
-			btn.addEventListener('click', () => {
-				const id = btn.dataset.id;
-				const display = document.querySelector(`.quantity-display[data-id="${id}"]`);
-				const input = document.getElementById(`qty-${id}`);
-				const cb = document.querySelector(`.item-checkbox[data-id="${id}"]`);
-
-				let quantity = parseInt(display.textContent);
-				quantity++;
-				display.textContent = quantity;
-				input.value = quantity;
-				cb.checked = true;
-			});
-		});
-
-		// Khi form submit, chỉ gửi các item được chọn
-		const form = document.querySelector('form');
-		form.addEventListener('submit', function (e) {
-			// Lọc các món đã chọn và set lại danh sách ID và số lượng
-			const selectedIds = [];
-			const selectedQuantities = [];
-
-			checkboxes.forEach(cb => {
-				if (cb.checked) {
-					const id = cb.dataset.id;
-					const quantity = document.getElementById(`qty-${id}`).value;
-					selectedIds.push(id);
-					selectedQuantities.push(quantity);
-				}
-			});
-
-			// Cập nhật giá trị trong các hidden input
-			const idsInput = document.querySelector('input[name="popcornDrinkItemIds"]');
-			const quantitiesInput = document.querySelector('input[name="popcornDrinkItemQuantitiess"]');
-			idsInput.value = selectedIds.join(',');
-			quantitiesInput.value = selectedQuantities.join(',');
-		});
-	});
-
-</script>
+@section Scripts {
+    <script src="~/js/select.js"></script>
+}

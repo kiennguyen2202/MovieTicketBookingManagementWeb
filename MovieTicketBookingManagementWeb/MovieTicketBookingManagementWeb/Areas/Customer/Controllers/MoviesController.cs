@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
 {
@@ -13,10 +14,12 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
     {
         
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public MoviesController(ApplicationDbContext context)
+        public MoviesController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // Hiển thị danh sách phim
@@ -35,6 +38,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
         [HttpGet]
 
         // Xem chi tiết phim
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,29 +47,83 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             }
 
             var movie = await _context.Movies
-                    .Include(m => m.Genre)
-                 .Include(m => m.Showtimes)
-                 .ThenInclude(s => s.Room)
-                 .ThenInclude(r => r.Cinema)
-                 
+                .Include(m => m.Genre)
+                .Include(m => m.Showtimes)
+                    .ThenInclude(s => s.Room)
+                        .ThenInclude(r => r.Cinema)
+                .Include(m => m.Reviews)
                 .FirstOrDefaultAsync(m => m.ID == id);
-
+             // Lấy danh sách đánh giá và thông tin người dùng
+                        var reviews = await _context.Reviews
+                            .Where(r => r.MovieID == id)
+                            .Include(r => r.User)
+                            .OrderByDescending(r => r.ReviewTime)
+                            .ToListAsync();
             if (movie == null)
             {
                 return NotFound();
             }
+
+            // Lấy giá vé từ Showtime đầu tiên (nếu có)
             if (movie.Showtimes.Any())
             {
-                ViewBag.Price = movie.Showtimes.First().Price; // Lấy giá từ Showtime đầu tiên
+                ViewBag.Price = movie.Showtimes.First().Price;
             }
             else
             {
-                ViewBag.Price = "Chưa có giá"; // Hoặc giá mặc định nếu không có Showtime
+                ViewBag.Price = "Chưa có giá";
             }
 
+
+
+           
+
+            ViewData["Reviews"] = reviews;
+
+
             return View(movie);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddReview([FromBody] Review input)
+        {
+            var userId = _userManager.GetUserId(User);
+            if (userId == null) return Unauthorized();
+
+            var review = new Review
+            {
+                MovieID = input.MovieID,
+                UserID = userId,
+                Rating = input.Rating,
+                Comment = input.Comment,
+                ReviewTime = DateTime.Now
+            };
+
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            var reviews = await _context.Reviews
+                .Where(r => r.MovieID == input.MovieID)
+                .Include(r => r.User)
+                .OrderByDescending(r => r.ReviewTime)
+                .ToListAsync();
+
+            return Json(new
+            {
+                success = true,
+                reviews = reviews.Select(r => new {
+                    userName = r.User.FullName,
+                    rating = r.Rating,
+                    comment = r.Comment,
+                    reviewTime = r.ReviewTime?.ToString("HH:mm dd/MM/yyyy")
+                })
+            });
 
         }
+
+
+
         public IActionResult Trailer(int id)
         {
             var movie = _context.Movies.FirstOrDefault(m => m.ID == id);
@@ -75,6 +133,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             }
             return View(movie);
         }
+        [AllowAnonymous]
         public async Task<IActionResult> ByGenre(int genreId)
         {
             if (genreId <= 0)
@@ -96,6 +155,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
 
             return View(movies); // Trả về danh sách phim đã lọc theo genre
         }
+        [AllowAnonymous]
         public IActionResult GetShowtimesByDate(int movieId, DateTime date)
         {
             var showtimes = _context.Showtimes
@@ -106,6 +166,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
                     StartTime = s.StartTime.ToString("HH:mm"), // Lấy giờ theo định dạng HH:mm
                     RoomName = s.Room.Name,
                     CinemaName = s.Room.Cinema.Name,
+                    cinemaAddress = s.Room.Cinema.Location,
                     s.Price
                 })
                 .ToList()

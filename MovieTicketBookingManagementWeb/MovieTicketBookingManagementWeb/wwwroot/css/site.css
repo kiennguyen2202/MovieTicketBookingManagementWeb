@@ -1,168 +1,23 @@
-﻿html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
-
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
-}
-
-.seat-map {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.seat {
-    width: 50px;
-    height: 50px;
-    background-color: #4CAF50;
-    text-align: center;
-    line-height: 50px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-    .seat.selected {
-        background-color: #FFD700;
-    }
-
-    .seat.unavailable {
-        background-color: #D3D3D3;
-        cursor: not-allowed;
-    }
-
-    .seat.available:hover {
-        background-color: #45a049;
-    }
-
-/*Xuat chieu */
-.date-selector {
+﻿/* ==== RESET & CƠ BẢN ==== */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    scroll-behavior: smooth;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* Căn chỉnh các ô vuông từ trái sang phải */
+    flex-direction: column;
 }
 
-.date-item {
-    width: 50px;
-    height: 50px;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px;
-    cursor: pointer;
-    background-color: yellow; /* Màu nền xám nhạt */
-    color: #333; /* Màu chữ xám đậm */
-    font-weight: bold; /* Chữ đậm */
-}
-.date-item.active {
- background-color: red; /* Màu nền vàng khi được chọn */
-color: black; /* Màu chữ đen khi được chọn */
+main {
+    flex-grow: 1;
 }
 
-/*footer*/
-.footer {
-    background-color: #f8f9fa;
-    color: #6c757d;
-    padding: 40px 0;
-    border-top: 1px solid #dee2e6;
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
-    .footer h3 {
-        color: #343a40;
-        font-weight: bold;
-        margin-bottom: 15px;
-    }
-
-    .footer .nav-link {
-        color: #6c757d;
-        padding: 0;
-        transition: color 0.3s;
-    }
-
-        .footer .nav-link:hover {
-            color: #007bff;
-        }
-
-    .footer .text-body-secondary {
-        color: #6c757d;
-    }
-
-    .footer .bi {
-        fill: #007bff;
-    }
-
-    .footer a.d-flex {
-        align-items: center;
-    }
-
-.footer-logo {
-    width: 150px;
-    margin-bottom: 10px;
+.carousel {
+    z-index: 5;
 }
-
-.footer-slogan {
-    font-style: italic;
-    margin-bottom: 15px;
-}
-
-.footer-social {
-    display: flex;
-}
-
-    .footer-social a {
-        color: #6c757d;
-        font-size: 20px;
-        margin-right: 10px;
-        transition: color 0.3s;
-    }
-
-        .footer-social a:hover {
-            color: #007bff;
-        }
-
-.footer-language {
-    display: flex;
-    align-items: center;
-}
-
-    .footer-language p {
-        margin-right: 10px;
-    }
-
-    .footer-language select {
-        background-color: transparent;
-        color: #6c757d;
-        border: 1px solid #ced4da;
-        padding: 5px;
-        transition: border-color 0.3s;
-    }
-
-        .footer-language select:hover {
-            border-color: #007bff;
-        }

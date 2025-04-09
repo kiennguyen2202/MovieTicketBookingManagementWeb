@@ -1,0 +1,37 @@
+﻿/* ==== NAVBAR ==== */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+    .navbar .nav-link {
+        position: relative;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+        .navbar .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 2px;
+            width: 0;
+            background-color: #007bff;
+            transition: width 0.3s;
+        }
+
+        .navbar .nav-link:hover::after {
+            width: 100%;
+        }
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+    cursor: pointer;
+    margin-left: 1rem;
+    color: #555;
+}
+
+    #darkModeToggle:hover {
+        color: #007bff;
+    }

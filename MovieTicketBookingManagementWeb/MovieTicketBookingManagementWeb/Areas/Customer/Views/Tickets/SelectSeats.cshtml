@@ -1,138 +1,53 @@
 ﻿@model MovieTicketBookingManagementWeb.Models.SelectSeats
-<head>
-    <style>
-        .seat-map {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); /* Bố cục lưới đáp ứng */
-            gap: 10px;
-            justify-content: center;
-            align-items: center; /* Căn chỉnh các phần tử theo chiều dọc */
-            margin: 20px auto;
-            max-width: 600px; /* Điều chỉnh khi cần */
-            padding: 20px;
-            background-color: #f9f9f9; /* Nền sáng */
-            border-radius: 8px; /* Góc bo tròn */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Bóng mờ nhẹ */
-        }
 
-        .seat {
-            width: 50px;
-            height: 50px;
-            border: 1px solid #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            background-color: #fff; /* Nền ghế màu trắng */
-            color: #555; /* Chữ tối màu */
-            font-weight: 500; /* Độ đậm chữ trung bình */
-            border-radius: 4px; /* Góc ghế bo tròn nhẹ */
-            transition: background-color 0.2s, color 0.2s; /* Hiệu ứng chuyển tiếp mượt mà */
-        }
+@{
+    ViewData["Title"] = "Chọn ghế";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-            .seat:hover {
-                background-color: #f0f0f0; /* Nền sáng hơn khi di chuột qua */
+@section Styles {
+    <link rel="stylesheet" href="~/css/selectSeats.css" asp-append-version="true" />
+}
+
+<div class="container my-5 animate__animated animate__fadeIn">
+    <h2 class="text-center mb-4">🎟 Chọn Ghế - <span class="text-primary">@Model.Showtime.Movie.Title</span></h2>
+
+    <form asp-action="Selected" method="post">
+        <input type="hidden" name="showtimeId" value="@Model.Showtime.ID" />
+        <input type="hidden" name="selectedSeatId" value="" />
+
+        <div class="screen">Màn Hình</div>
+
+        <div class="seat-map" style="--seat-columns:@Model.SeatColumns">
+            @foreach (var seat in Model.AvailableSeats)
+            {
+                var seatClass = seat.IsBooked ? "seat unavailable" : "seat";
+                <div class="@seatClass" data-seat-id="@seat.ID">
+                    <span>@seat.SeatNumber</span>
+                </div>
             }
+        </div>
 
-            .seat.selected {
-                background-color: #ffc107; /* Màu vàng khi được chọn */
-                color: #000;
-                font-weight: bold;
-            }
-
-            .seat.unavailable {
-                background-color: #dc3545; /* Màu đỏ cho ghế không khả dụng */
-                color: #fff;
-                cursor: not-allowed;
-                border-color: #dc3545;
-            }
-
-            .seat span {
-                font-size: 0.9em; /* Chữ số ghế nhỏ hơn một chút */
-            }
-        .legend {
-            display: flex;
-            flex-direction: row; /* Thay đổi thành row */
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            margin: 0 15px;
-        }
-
-        .legend-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            margin-right: 5px;
-        }
-
-            .legend-color.normal {
-                background-color: #fff;
-                border: 1px solid #ddd;
-            }
-
-            .legend-color.selected {
-                background-color: #ffc107;
-            }
-
-            .legend-color.unavailable {
-                background-color: #dc3545;
-            }
-    
-    </style>
-</head>
-<h2>Chọn Ghế Cho Suất Chiếu: @Model.Showtime.Movie.Title</h2>
-
-<form asp-action="Selected" method="post">
-    <input type="hidden" name="showtimeId" value="@Model.Showtime.ID" />
-    <input type="hidden" name="selectedSeatId" value="" />
-
-    <div class="seat-map">
-        @foreach (var seat in Model.AvailableSeats)
-        {
-            <div class="seat @(seat.IsBooked ? "unavailable" : "")" data-seat-id="@seat.ID">
-                <span>@seat.SeatNumber</span>
+        <div class="legend mt-4">
+            <div class="legend-item">
+                <div class="legend-box legend-available"></div>
+                <span>Còn trống</span>
             </div>
-        }
-    </div>
-    <div class="legend">
-        
-        <div class="legend-item">
-            <div class="legend-color selected"></div>
-            <span class="legend-text">Ghế chọn</span>
+            <div class="legend-item">
+                <div class="legend-box legend-selected"></div>
+                <span>Đang chọn</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box legend-unavailable"></div>
+                <span>Đã đặt</span>
+            </div>
         </div>
-        <div class="legend-item">
-            <div class="legend-color unavailable"></div>
-            <span class="legend-text">Ghế đã đặt</span>
+
+        <div class="confirm-button-container">
+            <button type="submit" class="confirm-button" id="submitSeatBtn">Xác nhận ghế</button>
         </div>
-    </div>
-
-    <button type="submit" class="btn btn-primary"> Xac nhan</button>
-</form>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const seats = document.querySelectorAll('.seat:not(.unavailable)');
-        let selectedSeat = null;
-
-        seats.forEach(seat => {
-            seat.addEventListener('click', function() {
-                if (selectedSeat) {
-                    selectedSeat.classList.remove('selected');
-                }
-                this.classList.add('selected');
-                selectedSeat = this;
-                updateSelectedSeatId();
-            });
-        });
-
-        function updateSelectedSeatId() {
-            const selectedSeatId = selectedSeat ? selectedSeat.dataset.seatId : '';
-            document.querySelector('input[name="selectedSeatId"]').value = selectedSeatId;
-        }
-    });
-</script>
+    </form>
+</div>
+@section Scripts {
+    <script src="~/js/selectSeats.js"></script>
+}

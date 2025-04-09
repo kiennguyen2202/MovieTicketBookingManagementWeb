@@ -356,9 +356,7 @@ C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\M
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\nezrqnk58p-muycvpuwrr.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\v0zgfp0y55-87fc7y1x7t.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\yfc7ypekbg-mlv21k5csn.gz
-C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\36tnbugcva-kordshw6rt.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\18i72sq966-61n19gt1b8.gz
-C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\la9509nygi-3r8b2a0bt1.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\0k2nens97a-t1cqhe9u97.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\5fa9rbg3q7-c2jlpeoesf.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\6k34e5qskp-sejl45xvog.gz
@@ -418,8 +416,6 @@ C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\M
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\dqd83xzylt-9vr69e8ynj.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\0n4d3artk3-87fc7y1x7t.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\jhk2m26l1n-mlv21k5csn.gz
-C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\l1yveptw4l-c1mb3jzokq.gz
-C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\shgyzkr7v5-c1mb3jzokq.gz
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\staticwebassets.build.endpoints.json
@@ -436,3 +432,18 @@ C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\M
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\MovieTicketBookingManagementWeb.pdb
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\MovieTicketBookingManagementWeb.genruntimeconfig.cache
 C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\ref\MovieTicketBookingManagementWeb.dll
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\l1yveptw4l-v8hyr8bbtd.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\shgyzkr7v5-v8hyr8bbtd.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\seszndy7w6-vswxxx6obf.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\jksuxpdy2g-s0eqnib49r.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\4d4hfq1mqt-jrk3j2x1gt.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\vpidt3xget-8uv5gwxjxd.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\36tnbugcva-6z8cikqtbd.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\v96qm3vqpc-44dnvmwog6.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\c3i4k7l5wk-gsslevydg8.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\la9509nygi-zi72o7fpln.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\roi34gsnl4-qhvatxoc04.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\m0s80l34vg-woumaqyuny.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\b69byls0q1-h4cvg02dsl.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\nrejei2sqw-0e1tnj2abr.gz
+C:\Users\ADMIN\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\MovieTicketBookingManagementWeb\obj\Debug\net9.0\compressed\o41ay6zcbv-h5qpqjb7z6.gz

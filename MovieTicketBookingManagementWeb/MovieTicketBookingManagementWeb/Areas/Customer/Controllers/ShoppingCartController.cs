@@ -37,27 +37,29 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
                 .FirstOrDefaultAsync(s => s.ID == showtimeId);
 
             var seat = await _context.Seats.FindAsync(seatId);
-            var popcornDrinkItems = await _context.PopcornDrinkItems
-                .Where(p => popcornDrinkItemIds.Contains(p.ID))
-                .ToListAsync();
-
-            if (showtime == null || seat == null || !popcornDrinkItems.Any())
+            var popcornDrinkItems = new List<PopcornDrinkItem>();
+            if (popcornDrinkItemIds != null && popcornDrinkItemIds.Any())
             {
-                return NotFound("Showtime, Seat, or PopcornDrinkItem not found.");
+                popcornDrinkItems = await _context.PopcornDrinkItems
+                    .Where(p => popcornDrinkItemIds.Contains(p.ID))
+                    .ToListAsync();
+            }
+
+            if (showtime == null || seat == null )
+            {
+                return NotFound("Showtime, Seat not found.");
             }
 
             var popcornDrinkCardItems = new List<PopcornDrinkCardItem>();
             for (int i = 0; i < popcornDrinkItemIds.Count && i < popcornDrinkItemQuantitiess.Count; i++)
             {
-                var popcornDrinkItem = popcornDrinkItems.Find(p => p.ID == popcornDrinkItemIds[i]);
+
+                var popcornDrinkItem = await _context.PopcornDrinkItems.FirstOrDefaultAsync(p => p.ID == popcornDrinkItemIds[i]);
                 if (popcornDrinkItem == null)
                 {
                     continue;
                 }
-                if (!selectedPopcornDrinkItemIds.Contains(popcornDrinkItemIds[i]))
-                {
-                    continue;
-                }
+                
                 var popcornDrinkCardItem = new PopcornDrinkCardItem()
                 {
                     ID = popcornDrinkItem.ID,
@@ -291,6 +293,10 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
                 .Include(o => o.OrderDetails).ThenInclude(od => od.Seat)
                 .Include(o => o.OrderDetails).ThenInclude(od => od.Showtime)
                 .Include(o => o.OrderDetails).ThenInclude(od => od.PopcornDrinkItem)
+                .Include(o => o.OrderDetails)
+        .ThenInclude(od => od.Showtime)
+            .ThenInclude(st => st.Room)
+                .ThenInclude(r => r.Cinema)
                 .Include(o => o.User)
                 .FirstOrDefaultAsync(o => o.ID == orderId);
 

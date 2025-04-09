@@ -34,9 +34,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        // Hiển thị form tạo mới Review
-
-        /*public async Task<IActionResult> Add(int movieId)
+        public async Task<IActionResult> Add(int movieId)
         {
             var movie = await _context.Movies.FindAsync(movieId);
             if (movie == null) return NotFound();
@@ -44,10 +42,8 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             var userId = _userManager.GetUserId(User);
 
             // Kiểm tra nếu người dùng đã xem phim
-           
-            var userIdInt = int.Parse(userId);
-            var hasWatchedMovie = _context.Tickets
-                .Any(t => t.UserID == userIdInt && t.MovieID == movieId && t.Status == "Completed");
+            var hasWatchedMovie = await _context.Tickets
+                .AnyAsync(t => t.UserID == userId && t.MovieID == movieId && t.Status == "Completed");
 
             if (!hasWatchedMovie)
             {
@@ -58,27 +54,42 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             ViewBag.MovieID = movieId; // Thêm ID phim vào ViewBag để biết đang tạo review cho phim nào.
             return View();
         }
-        */
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add([Bind("ID,UserID,MovieID,Rating,Comment,ReviewTime")] Review review)
         {
+            var movie = await _context.Movies.FindAsync(review.MovieID);
+            if (movie == null) return NotFound();
+
+            var userId = _userManager.GetUserId(User);
+
+            // Kiểm tra nếu người dùng đã xem phim
+            var hasWatchedMovie = await _context.Tickets
+                .AnyAsync(t => t.UserID == userId && t.MovieID == review.MovieID && t.Status == "Completed");
+
+            if (!hasWatchedMovie)
+            {
+                TempData["ErrorMessage"] = "Bạn cần xem phim này trước khi đánh giá.";
+                return RedirectToAction("Details", "Movies", new { id = review.MovieID });
+            }
+
             if (ModelState.IsValid)
             {
+                review.UserID = userId; // Gán ID người dùng vào review
+                review.ReviewTime = DateTime.Now; // Thêm thời gian review
                 _context.Add(review);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
 
-            // Nếu có lỗi, giữ lại dữ liệu dropdown
             ViewBag.MovieID = new SelectList(_context.Movies, "ID", "Title", review.MovieID);
-
             return View(review);
         }
 
+
         [HttpGet]
-        // Hiển thị form chỉnh sửa Review
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null) return NotFound();
@@ -109,14 +120,12 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             return View(review);
         }
 
-        // Hiển thị chi tiết Review
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
 
             var review = await _context.Reviews
                 .Include(r => r.Movie)
-
                 .FirstOrDefaultAsync(m => m.ID == id);
 
             if (review == null) return NotFound();
@@ -124,14 +133,12 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             return View(review);
         }
 
-        // Hiển thị trang xác nhận xóa Review
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
 
             var review = await _context.Reviews
                 .Include(r => r.Movie)
-
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (review == null) return NotFound();
 
@@ -146,10 +153,10 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             if (review != null)
             {
                 _context.Reviews.Remove(review);
-
             }
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
     }
 }

@@ -2,7 +2,31 @@
   "Files": [
     {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\MovieTicketBookingManagementWeb.bundle.scp.css",
-      "PackagePath": "staticwebassets\\MovieTicketBookingManagementWeb.c1mb3jzokq.bundle.scp.css"
+      "PackagePath": "staticwebassets\\MovieTicketBookingManagementWeb.v8hyr8bbtd.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\css\\components.css",
+      "PackagePath": "staticwebassets\\css\\components.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\css\\footer.css",
+      "PackagePath": "staticwebassets\\css\\footer.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\css\\home.css",
+      "PackagePath": "staticwebassets\\css\\home.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\css\\narbar.css",
+      "PackagePath": "staticwebassets\\css\\narbar.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\css\\selectSeats.css",
+      "PackagePath": "staticwebassets\\css\\selectSeats.css"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\css\\selected.css",
+      "PackagePath": "staticwebassets\\css\\selected.css"
     },
     {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\css\\site.css",
@@ -45,6 +69,14 @@
       "PackagePath": "staticwebassets\\images\\Oxidized.jpg"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\am-duong-lo.webp",
+      "PackagePath": "staticwebassets\\images\\am-duong-lo.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\coca.png",
+      "PackagePath": "staticwebassets\\images\\coca.png"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\combo-co-gau.png.png",
       "PackagePath": "staticwebassets\\images\\combo-co-gau.png.png"
     },
@@ -57,6 +89,10 @@
       "PackagePath": "staticwebassets\\images\\combo-nha-gau.png"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\cuoc-xe-kinh-hoang.webp",
+      "PackagePath": "staticwebassets\\images\\cuoc-xe-kinh-hoang.webp"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\dh3227_105_b026cc45a2eb4bf48d7f567579485b62.png",
       "PackagePath": "staticwebassets\\images\\dh3227_105_b026cc45a2eb4bf48d7f567579485b62.png"
     },
@@ -65,12 +101,36 @@
       "PackagePath": "staticwebassets\\images\\dia-dao-cu-chi_1.webp"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\fanta.jpg",
+      "PackagePath": "staticwebassets\\images\\fanta.jpg"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\gau-yeu-cua-anh-banner.jpg",
       "PackagePath": "staticwebassets\\images\\gau-yeu-cua-anh-banner.jpg"
     },
     {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\lays-khoai-tay.png",
+      "PackagePath": "staticwebassets\\images\\lays-khoai-tay.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\lays-vi-bo_1_.png",
+      "PackagePath": "staticwebassets\\images\\lays-vi-bo_1_.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\logo1.png",
+      "PackagePath": "staticwebassets\\images\\logo1.png"
+    },
+    {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\love-lies.jpg",
       "PackagePath": "staticwebassets\\images\\love-lies.jpg"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\mat-vu-phu-ho.webp",
+      "PackagePath": "staticwebassets\\images\\mat-vu-phu-ho.webp"
     },
     {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\nghe-sieu-kho-noi-poster.webp",
@@ -83,6 +143,26 @@
     {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\images\\thieu-nu-anh-trang.webp",
       "PackagePath": "staticwebassets\\images\\thieu-nu-anh-trang.webp"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\js\\detail.js",
+      "PackagePath": "staticwebassets\\js\\detail.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\js\\home.js",
+      "PackagePath": "staticwebassets\\js\\home.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\js\\layout.js",
+      "PackagePath": "staticwebassets\\js\\layout.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\js\\selectSeats.js",
+      "PackagePath": "staticwebassets\\js\\selectSeats.js"
+    },
+    {
+      "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\js\\selected.js",
+      "PackagePath": "staticwebassets\\js\\selected.js"
     },
     {
       "Id": "C:\\Users\\ADMIN\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\MovieTicketBookingManagementWeb\\wwwroot\\js\\site.js",

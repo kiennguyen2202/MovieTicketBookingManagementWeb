@@ -1,7 +1,7 @@
 ﻿@model MovieTicketBookingManagementWeb.Models.Order
 
 @{
-    Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="text-center text-success my-4 animate__animated animate__fadeInDown">
@@ -19,6 +19,8 @@
             <thead class="table-info">
                 <tr>
                     <th>🎬 Tên phim</th>
+                    <th>🏢 Cụm rạp</th>
+                    <th>🏟 Phòng</th>
                     <th>🕒 Suất chiếu</th>
                     <th>💺 Ghế</th>
                     <th>💵 Giá vé</th>
@@ -29,6 +31,8 @@
                 {
                     <tr>
                         <td>@item.Movie?.Title</td>
+                        <td>@item.Showtime?.Room?.Cinema?.Name</td>
+                        <td>@item.Showtime?.Room?.Name</td>
                         <td>@item.Showtime?.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
                         <td>@item.Seat?.SeatNumber</td>
                         <td>@item.Price?.ToString("#,##0") $</td>
@@ -76,7 +80,7 @@
                 <li class="list-group-item"><strong>👤 Họ tên:</strong> @Model.User.FullName</li>
                 <li class="list-group-item"><strong>📧 Email:</strong> @Model.User.Email</li>
                 <li class="list-group-item"><strong>📞 SĐT:</strong> @Model.User.PhoneNumber</li>
-                <li class="list-group-item"><strong>🗓 Ngày đặt:</strong> @Model.OrderDate?.ToString("dd/MM/yyyy HH:mm")</li>
+                <li class="list-group-item"><strong>🗓 Ngày đặt:</strong> @Model.OrderDate?.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</li>
             </ul>
         }
         else

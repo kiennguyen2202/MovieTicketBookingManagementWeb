@@ -1,0 +1,57 @@
+﻿@model List<MovieTicketBookingManagementWeb.Models.Order>
+
+@{
+    ViewData["Title"] = "Vé của tôi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center my-4 text-primary">🎟 Vé của tôi</h2>
+
+@foreach (var order in Model)
+{
+    <div class="card shadow-lg mb-4 p-4 border-start border-4 border-success">
+        <h5 class="mb-3 text-success">🗓 Đặt lúc: @order.OrderDate?.ToLocalTime().ToString("dd/MM/yyyy HH:mm")</h5>
+
+
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-info">
+                <tr>
+                    <th>🎬 Phim</th>
+                    <th>🏢 Cụm rạp</th>
+                    <th>🏟 Phòng</th>
+                    <th>🕒 Giờ chiếu</th>
+                    <th>💺 Ghế</th>
+                    <th>💵 Giá</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in order.OrderDetails.Where(od => od.PopcornDrinkItem == null))
+                {
+                    <tr>
+                        <td>@item.Movie?.Title</td>
+                        <td>@item.Showtime?.Room?.Cinema?.Name</td>
+                        <td>@item.Showtime?.Room?.Name</td>
+                        <td>@item.Showtime?.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.Seat?.SeatNumber</td>
+                        <td>@item.Price?.ToString("#,##0") $</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (order.OrderDetails.Any(od => od.PopcornDrinkItem != null))
+        {
+            <h6 class="mt-4 text-warning">🥤 Bắp - Nước:</h6>
+            <ul class="list-group">
+                @foreach (var item in order.OrderDetails.Where(od => od.PopcornDrinkItem != null))
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>@($"{item.PopcornDrinkItem?.Name} (x{item.Quantity})")</span>
+                        <span>@(item.Price?.ToString("#,##0")) $</span>
+                    </li>
+
+                }
+            </ul>
+        }
+    </div>
+}

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Cinema>
+
+@{
+    ViewData["Title"] = "Rạp chiếu phim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center text-primary mb-4">Chọn Chi Nhánh</h2>
+
+<div class="row">
+    @foreach (var cinema in Model)
+    {
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm rounded-3">
+                @if (!string.IsNullOrEmpty(cinema.GoogleMapEmbedUrl))
+                {
+                    <div class="ratio ratio-16x9">
+                        <iframe src="@cinema.GoogleMapEmbedUrl"
+                                width="100%" height="100%"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                }
+                else
+                {
+                    <div class="bg-light text-muted text-center p-5">Chưa có bản đồ</div>
+                }
+
+                <div class="card-body">
+                    <h5 class="card-title">@cinema.Name</h5>
+                    <p class="card-text"><strong>Địa chỉ:</strong> @cinema.Location</p>
+                    <p class="card-text"><strong>SĐT:</strong> @cinema.Phone</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

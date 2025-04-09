@@ -1,0 +1,111 @@
+﻿.combo-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #222;
+}
+
+.combo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.combo-card {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+}
+
+    .combo-card:hover {
+        transform: scale(1.02);
+    }
+
+.combo-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.combo-content {
+    padding: 15px;
+}
+
+.combo-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.combo-price {
+    color: #e91e63;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.quantity-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.quantity-btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.quantity-display {
+    margin: 0 10px;
+    font-size: 16px;
+    width: 40px;
+    text-align: center;
+}
+
+.combo-checkbox {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.confirm-button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.confirm-button {
+    background-color: #ff5722;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+    .confirm-button:hover {
+        background-color: #e64a19;
+    }
+
+.combo-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; /* Cực quan trọng */
+    border-bottom: 1px solid #eee;
+}

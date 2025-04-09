@@ -2,10 +2,9 @@
 
 @{
     ViewData["Title"] = "Add";
-
 }
 
-<h2>Thêm Rap chieu phim moi</h2>
+<h2>Thêm Rạp chiếu phim mới</h2>
 
 <div class="row">
     <div class="col-md-4">
@@ -20,7 +19,17 @@
                 <label asp-for="Location" class="control-label"></label>
                 <input asp-for="Location" class="form-control" />
                 <span asp-validation-for="Location" class="text-danger"></span>
-            
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoogleMapEmbedUrl" class="control-label">Google Maps (iframe src)</label>
+                <input asp-for="GoogleMapEmbedUrl" class="form-control" />
+                <small class="text-muted fst-italic">Ví dụ: https://www.google.com/maps/embed?pb=...</small>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-primary" />
             </div>

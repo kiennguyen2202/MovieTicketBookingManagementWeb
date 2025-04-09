@@ -109,7 +109,8 @@ namespace MovieTicketBookingManagementWeb.Areas.Customer.Controllers
             var viewModel = new SelectSeats
             {
                 Showtime = showtime,
-                AvailableSeats = allSeatsInRoom // Sử dụng tất cả ghế trong phòng
+                AvailableSeats = allSeatsInRoom, // Sử dụng tất cả ghế trong phòng
+                SeatColumns = 8 //So lượng cột ghế
             };
 
             return View(viewModel);

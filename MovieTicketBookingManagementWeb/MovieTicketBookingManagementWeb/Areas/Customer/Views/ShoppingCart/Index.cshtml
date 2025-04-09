@@ -1,7 +1,7 @@
 ﻿@model MovieTicketBookingManagementWeb.Models.ShoppingCart
 @{
     ViewData["Title"] = "Giỏ Hàng";
-    Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container my-5 animate__animated animate__fadeIn">
@@ -36,7 +36,7 @@
                     {
                         <tr>
                             <td>@item.MovieTitle</td>
-                            <td>@item.StartTime</td>
+                            <td>@item.StartTime.ToString("dd/MM/yyyy HH:mm")</td>
                             <td>@item.SeatNumber</td>
                             <td>
                                 @if (item.PopcornDrinkCardItems != null && item.PopcornDrinkCardItems.Any())

@@ -116,7 +116,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
 
 
         // Xem chi tiết phim
-        /*
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -139,7 +139,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
             var averageRating = movie.Reviews.Any() ? movie.Reviews.Average(r => r.Rating) : 0;
             var reviews = await _context.Reviews
         .Where(r => r.MovieID == id)
-        .Include(r => r.ApplicationUser) // Lấy thông tin người dùng
+        .Include(r => r.User) // Lấy thông tin người dùng
         .OrderByDescending(r => r.ReviewTime)
         .ToListAsync();
             // Gửi thông tin về điểm trung bình và reviews đến view
@@ -148,7 +148,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
             return View(movie);
 
         }
-        */
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -183,14 +183,14 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
         }
         [HttpPost]
         [Authorize]
-        /*
+        
         public async Task<IActionResult> AddReview(Review review)
         {
             review.UserID = _userManager.GetUserId(User);
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
             return RedirectToAction("Details", new { id = review.MovieID });
-        }*/
+        }
 
         public async Task<IActionResult> ByGenre(int genreId)
         {

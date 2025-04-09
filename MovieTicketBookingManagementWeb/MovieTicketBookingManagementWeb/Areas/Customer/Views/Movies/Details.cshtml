@@ -1,149 +1,165 @@
 ﻿@model MovieTicketBookingManagementWeb.Models.Movie
-<head>
-    <style>
-        .date-selector {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-start; /* Căn chỉnh các ô vuông từ trái sang phải */
-        }
 
+@{
+    ViewData["Title"] = "Chi tiết phim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var reviews = ViewData["Reviews"] as List<Review>;
+    var currentUserId = User.Identity.IsAuthenticated ? User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value : null;
+    var isAdmin = User.IsInRole("Admin");
+}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <style>
         .date-item {
-            width: 50px;
-            height: 50px;
-            border: 1px solid #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 5px;
             cursor: pointer;
-            background-color: white; /* Màu nền xám nhạt */
-            color: #333; /* Màu chữ xám đậm */
-            font-weight: bold; /* Chữ đậm */
         }
 
             .date-item.active {
-                background-color: red; /* Màu nền vàng khi được chọn */
-                color: black; /* Màu chữ đen khi được chọn */
+                background-color: #007bff;
+                color: white;
             }
     </style>
 </head>
-<div class="container mt-4">
-    <div class="card shadow-lg p-4">
-        <div class="row">
-            <div class="col-md-4 text-center">
+<div class="container my-5 animate__animated animate__fadeIn">
+    <div class="row g-4">
+        <!-- Poster -->
+        <div class="col-md-4 text-center">
+            <div class="card shadow rounded-4">
                 @if (!string.IsNullOrEmpty(Model.PosterUrl))
                 {
-                    <img src="@Model.PosterUrl" alt="@Model.Title" class="img-fluid rounded" style="max-width: 100%; height: auto;">
+                    <img src="@Model.PosterUrl" class="card-img-top rounded-top-4" alt="@Model.Title" style="object-fit: cover; height: 500px;" />
                 }
                 else
                 {
-                    <p class="text-muted">Không có ảnh</p>
+                    <div class="p-5 text-muted">Không có ảnh</div>
                 }
             </div>
-            <div class="col-md-8">
-                <h2 class="text-primary">@Model.Title</h2>
-                <p><strong>Thể loại :</strong> @Model.Genre.Name</p>
-                <p><strong>Ngôn ngữ:</strong> @Model.Language</p>
-                <p><strong>Thời lượng:</strong> @Model.Duration phút</p>
-                <p><strong>Ngày phát hành:</strong> @(Model.ReleaseDate?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")</p>
-                <p class="text-justify"><strong>Mô tả:</strong> @Model.Description</p>
-                <p><strong>Gia ve:</strong>@ViewBag.Price</p>
-                <div class="mt-3">
-                    <a href="@Url.Action("Trailer", "Movies", new { id = Model.ID })" class="btn btn-outline-primary me-2">
-                        <i class="fas fa-play-circle"></i> Xem Trailer
-                    </a>
-                </div>
+        </div>
+
+        <!-- Thông tin phim -->
+        <div class="col-md-8">
+            <div class="card shadow rounded-4 p-4">
+                <h2 class="text-primary fw-bold mb-3">@Model.Title</h2>
+                @if (reviews != null && reviews.Any())
+                {
+                    var avgRating = reviews.Average(r => r.Rating);
+                    <div id="avgRatingDisplay" class="text-warning mb-3">
+                        ⭐ @avgRating.ToString("0.0") / 5.0 (@reviews.Count lượt đánh giá)
+                    </div>
+                }
+                else
+                {
+                    <div id="avgRatingDisplay" class="text-muted mb-3">Chưa có đánh giá</div>
+                }
+                <p><strong>🎭 Thể loại:</strong> @Model.Genre.Name</p>
+                <p><strong>🗣 Ngôn ngữ:</strong> @Model.Language</p>
+                <p><strong>⏱ Thời lượng:</strong> @Model.Duration phút</p>
+                <p><strong>📅 Ngày phát hành:</strong> @(Model.ReleaseDate?.ToString("dd/MM/yyyy") ?? "Chưa cập nhật")</p>
+                <p><strong>🎟 Giá vé:</strong> @ViewBag.Price</p>
+                <p class="mt-3"><strong>📝 Mô tả:</strong><br />@Model.Description</p>
 
                 <div class="mt-4">
-                    <h3>Ngày Chiếu</h3>
-                    <div id="dateSelector" class="date-selector">
-                        @{
-                            var showDates = Model.Showtimes.Select(s => s.StartTime.Date).Distinct().ToList();
-                            foreach (var date in showDates)
-                            {
-                                <div class="date-item" data-date="@date.ToString("yyyy-MM-dd")">
-                                    @date.ToString("dd/MM")
-                                </div>
-                            }
-                        }
-                    </div>
+                    <a href="@Url.Action("Trailer", "Movies", new { id = Model.ID })" class="btn btn-outline-primary me-2 shadow">
+                        <i class="bi bi-play-circle"></i> Xem Trailer
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Chọn ngày chiếu -->
     <div class="mt-5">
-        <h3 class="text-center text-success">Suất Chiếu</h3>
-        <div id="showtimeSlots">
-            @* Suất chiếu theo ngày sẽ được hiển thị ở đây *@
+        <h4 class="text-success fw-bold"><i class="bi bi-calendar-event"></i> Chọn Ngày Chiếu</h4>
+        <div id="dateSelector" class="d-flex flex-wrap gap-2 mt-3">
+            @{
+                var showDates = Model.Showtimes.Select(s => s.StartTime.Date).Distinct().OrderBy(d => d).ToList();
+                foreach (var date in showDates)
+                {
+                    <div class="btn btn-outline-secondary date-item" data-date="@date.ToString("yyyy-MM-dd")">
+                        @date.ToString("dd/MM")
+                    </div>
+                }
+            }
         </div>
     </div>
 
-    <div class="text-center mt-4">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
-            <i class="fas fa-arrow-left"></i> Quay lại trang chủ
+    <!-- Hiển thị suất chiếu -->
+    <div class="mt-4">
+        <h4 class="text-info fw-bold"><i class="bi bi-clock-history"></i> Suất Chiếu</h4>
+        <div id="showtimeSlots" class="mt-3">
+            <!-- Dữ liệu suất chiếu sẽ được load bằng JavaScript -->
+        </div>
+    </div>
+
+    <!-- Quay lại -->
+    <div class="text-center mt-5">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-secondary shadow">
+            <i class="bi bi-arrow-left-circle"></i> Quay lại trang chủ
         </a>
     </div>
 </div>
+<div>
+    <!-- Form đánh giá -->
+    <section class="mt-5">
+        <h4 class="fw-bold">Đánh giá phim</h4>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const dateItems = document.querySelectorAll('.date-item');
-        const showtimeSlots = document.getElementById('showtimeSlots');
-
-        function loadShowtimesByDate(selectedDate) {
-            fetch(`/Customer/Movies/GetShowtimesByDate?movieId=@Model.ID&date=${selectedDate}`)
-                .then(response => response.json())
-                .then(data => {
-                    showtimeSlots.innerHTML = '';
-
-                    if (data.length > 0) {
-                        const table = document.createElement('table');
-                        table.className = 'table table-hover table-striped text-center';
-                        table.innerHTML = `
-                            <thead class="bg-dark text-white">
-                                <tr>
-                                    <th>Giờ</th>
-                                    <th>Phòng Chiếu</th>
-                                    <th>Rạp Chiếu</th>
-                                    <th>Đặt Vé</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${data.map(showtime => `
-                                    <tr>
-                                        <td>${showtime.startTime}</td>
-                                        <td>${showtime.roomName}</td>
-                                        <td>${showtime.cinemaName}</td>
-                                        <td>
-                                                    <a href="/Customer/Tickets/SelectSeats?showtimeId=${showtime.id}" class="btn btn-success">
-                                                        <i class="fas fa-ticket-alt"></i> Đặt Vé
-                                                                </a>
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        `;
-                        showtimeSlots.appendChild(table);
-                    } else {
-                        showtimeSlots.innerHTML = '<p class="text-center text-muted">Không có suất chiếu nào cho ngày này.</p>';
-                    }
-                })
-                .catch(error => console.error('Lỗi:', error));
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form id="reviewForm">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="movieId" value="@Model.ID" />
+                <div class="mb-3">
+                    <label for="Rating" class="form-label">⭐ Đánh giá:</label>
+                    <select id="Rating" name="rating" class="form-select" required>
+                        <option value="">Chọn điểm</option>
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="Comment" class="form-label">📝 Bình luận:</label>
+                    <textarea id="Comment" name="comment" class="form-control" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Gửi Đánh Giá</button>
+            </form>
+        }
+        else
+        {
+            <p>Vui lòng <a href="/Account/Login">đăng nhập</a> để thêm đánh giá.</p>
         }
 
-        // Load initial showtimes
-        if (dateItems.length > 0) {
-            loadShowtimesByDate(dateItems[0].dataset.date);
-            dateItems[0].classList.add('active'); // Đánh dấu ngày đầu tiên là active
-        }
+        <!-- Danh sách đánh giá -->
+        <div id="reviewList" class="mt-4">
+            @if (reviews != null && reviews.Any())
+            {
+                @foreach (var review in reviews)
+                {
+                    <div class="review-item border-bottom py-2" data-review-id="@review.ID">
+                        <p class="mb-1">
+                            <strong>@review.User.FullName</strong> ⭐@review.Rating
+                            <span class="text-muted small">• @review.ReviewTime?.ToString("HH:mm dd/MM/yyyy")</span>
 
-        dateItems.forEach(item => {
-            item.addEventListener('click', function () {
-                dateItems.forEach(i => i.classList.remove('active')); // Xóa active từ tất cả các item
-                this.classList.add('active'); // Thêm active cho item được click
-                loadShowtimesByDate(this.dataset.date);
-            });
-        });
-    });
-</script>
+                        </p>
+                        <p class="mb-0">@review.Comment</p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p class="text-muted">Chưa có đánh giá nào.</p>
+            }
+        </div>
+    </section>
+</div>
+
+@section Scripts {
+    <script src="~/js/detail.js"></script>
+}

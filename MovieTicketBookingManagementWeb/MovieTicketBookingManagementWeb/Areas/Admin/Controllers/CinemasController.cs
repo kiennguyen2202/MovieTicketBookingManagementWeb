@@ -13,6 +13,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
     {
         
         private readonly ApplicationDbContext _context;
+
         public CinemasController(ApplicationDbContext context)
         {
             _context = context;
@@ -30,7 +31,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("ID,Name,Location")] Cinema cinema)
+        public async Task<IActionResult> Add([Bind("Name,Location,Phone,GoogleMapEmbedUrl")] Cinema cinema)
         {
             if (ModelState.IsValid)
             {
@@ -51,7 +52,7 @@ namespace MovieTicketBookingManagementWeb.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, [Bind("ID,Name,Location")] Cinema cinema)
+        public async Task<IActionResult> Update(int id, [Bind("ID,Name,Location,Phone,GoogleMapEmbedUrl")] Cinema cinema)
         {
             if (id != cinema.ID) return NotFound();
 

@@ -1,35 +1,23 @@
 ﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Cinema>
 
-<h2 class="my-4 text-center">Cinemas List</h2>
-<table id="cinameTable" class="table table-bordered table-striped text-center">
+@{
+    ViewData["Title"] = "Rạp chiếu phim";
+}
 
+<h2 class="text-center text-primary mb-4">Chọn Chi Nhánh</h2>
 
-    <thead class="table-dark">
-        <tr>
-            <th>Name</th>
-            <th>Location</th>
-            
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var cinema in Model)
-        {
-            <tr>
-
-                <td>@cinema.Name</td>
-                <td>@cinema.Location</td>
-                
-
-                <td>
-                    <a asp-action="Update" asp-route-id="@cinema.ID" class="btn btn-warning">Sửa</a>
-                    <a asp-action="Details" asp-route-id="@cinema.ID" class="btn btn-danger">Chi tiet</a>
-                    <a asp-action="Delete" asp-route-id="@cinema.ID" class="btn btn-danger">Xóa</a>
-                </td>
-
-
-            </tr>
-        }
-    </tbody>
-</table>
-<a asp-action="Add" class="btn btn-primary">Thêm rap chieu phim</a>
+<div class="row">
+    @foreach (var cinema in Model)
+    {
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm rounded-3">
+                <img src="@cinema.GoogleMapEmbedUrl" class="card-img-top" alt="Map of @cinema.Name" />
+                <div class="card-body">
+                    <h5 class="card-title">@cinema.Name</h5>
+                    <p class="card-text"><strong>Địa chỉ:</strong> @cinema.Location</p>
+                    <p class="card-text"><strong>SĐT:</strong> @cinema.Phone</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

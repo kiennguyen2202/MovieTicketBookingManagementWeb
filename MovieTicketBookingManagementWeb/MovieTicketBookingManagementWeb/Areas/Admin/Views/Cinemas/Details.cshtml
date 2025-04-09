@@ -1,27 +1,46 @@
 ﻿@model MovieTicketBookingManagementWeb.Models.Cinema
 
 @{
-    ViewData["Title"] = "Room Details";
+    ViewData["Title"] = "Chi tiết rạp chiếu phim";
 }
 
-<h2>Cinema Details</h2>
+<h2 class="text-center text-primary mb-4">Chi tiết rạp chiếu phim</h2>
 
-<div>
-    <h4>Cinema Information</h4>
-    <hr />
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Tên rạp:</dt>
+            <dd class="col-sm-8">@Model.Name</dd>
 
-    <dl class="row">
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Name)</dt>
-        <dd class="col-sm-9">@Model.Name</dd>
+            <dt class="col-sm-4">Địa chỉ:</dt>
+            <dd class="col-sm-8">@Model.Location</dd>
 
-        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Location)</dt>
-        <dd class="col-sm-9">@Model.Location</dd>
+            <dt class="col-sm-4">Số điện thoại:</dt>
+            <dd class="col-sm-8">@Model.Phone</dd>
+        </dl>
+    </div>
 
-       
-    </dl>
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.GoogleMapEmbedUrl))
+        {
+            <h5 class="mb-2">Vị trí bản đồ Google Maps:</h5>
+            <div class="ratio ratio-16x9 rounded-4 shadow">
+                <iframe src="@Model.GoogleMapEmbedUrl"
+                        width="100%" height="100%"
+                        style="border:0;" allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+        }
+        else
+        {
+            <p class="text-muted fst-italic">Chưa có bản đồ Google Maps.</p>
+        }
+    </div>
 </div>
 
-<div>
-    <a asp-action="Update" asp-route-id="@Model.ID" class="btn btn-warning">Edit</a>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+<hr />
+
+<div class="text-center mt-4">
+    <a asp-action="Update" asp-route-id="@Model.ID" class="btn btn-warning me-2">Chỉnh sửa</a>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
 </div>

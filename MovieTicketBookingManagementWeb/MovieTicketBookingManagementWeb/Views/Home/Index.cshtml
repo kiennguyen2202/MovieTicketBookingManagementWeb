@@ -1,182 +1,71 @@
 ﻿@model IEnumerable<MovieTicketBookingManagementWeb.Models.Movie>
 @{
-    ViewData["Title"] = "Trang Mua Vé";
-    int numOfQuantity = 1;  
+    ViewData["Title"] = "Trang Chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <meta charset="utf-8" />
-    <title>@ViewData["Title"]</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .movie-card {
-            transition: transform 0.3s ease-in-out;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-        }
 
-            .movie-card:hover {
-                transform: scale(1.05);
-            }
+@section Styles {
+    <link rel="stylesheet" href="~/css/home.css" />
+}
+@section Scripts {
+    <script src="~/js/home.js"></script>
+}
 
-        .card {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
+<!-- Hero Section -->
+<section class="hero-banner-custom text-white text-center d-flex align-items-center justify-content-center fade-in">
+    <div class="hero-content">
+        <h1 class="fw-bold mb-4">Trải nghiệm điện ảnh đỉnh cao tại <span class="text-warning">Cinestar</span></h1>
+        <h2 class="fw-semibold mb-3">🎬 Chào mừng đến với <span class="text-primary">MovieTicket</span></h2>
+        <p class="lead mb-4">Đặt vé xem phim nhanh chóng – tiện lợi – hiện đại</p>
+        <a href="@Url.Action("Index", "Movies")" class="btn btn-lg btn-warning px-4 py-2 fw-bold shadow-sm">🎟 Mua Vé Ngay</a>
+    </div>
+</section>
 
-        .card-body {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card-title {
-            min-height: 50px;
-        }
-
-        .card-text {
-            flex-grow: 1;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- Slider -->
-        <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="~/images/love-lies.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="~/images/MAIN_2_ADL_1215x365.png" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="~/images/gau-yeu-cua-anh-banner.jpg" class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
+<!-- Carousel -->
+<div id="carouselExample" class="carousel slide my-4 fade-in" data-bs-ride="carousel" data-bs-interval="4000">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/images/love-lies.jpg" class="d-block w-100 rounded" alt="Love Lies">
         </div>
-
-        <!-- Danh sách Phim -->
-        <section class="py-4">
-            <div class="container">
-                <h2 class="text-center">Danh Sách Phim</h2>
-
-                <!-- Thanh tìm kiếm -->
-                <form class="d-flex mb-4" method="get" action="@Url.Action("Index", "Movies")">
-                    <input class="form-control me-2" type="search" name="searchQuery" placeholder="Tìm kiếm phim..."
-                           value="@ViewData["SearchQuery"]" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Tìm</button>
-                </form>
-
-                <!-- Danh sách phim -->
-                <div class="row">
-                    @if (Model != null && Model.Any())
-                    {
-                        @foreach (var movie in Model)
-                        {
-                            <div class="col-md-4 mb-4">
-                                <div class="card movie-card">
-                                    <img src="@movie.PosterUrl" class="card-img-top" style="height: 300px">
-                                    <div class="card-body">
-                                        <h5 class="card-title">@movie.Title</h5>
-                                        
-
-                                        <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.ID"
-                                           class="btn btn-info btn-sm">Xem</a>
-
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <div class="col-12 text-center">
-                            <p class="text-muted">Không tìm thấy phim nào!</p>
-                        </div>
-                    }
-                </div>
-            </div>
-        </section>
-
-        <div class="container">
-            <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
-                <div class="col mb-3">
-                    <img src="path/to/cinestar-logo.png" alt="Cinestar Logo" class="footer-logo">
-                    <p class="footer-slogan">BE HAPPY BE A STAR</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                    <div class="footer-language">
-                        <p>Ngôn ngữ</p>
-                        <select>
-                            <option value="vn">VN</option>
-                            <option value="en">EN</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col mb-3">
-                    <h3>TÀI KHOẢN</h3>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Đăng nhập</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Đăng ký</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Membership</a></li>
-                    </ul>
-                </div>
-
-                <div class="col mb-3">
-                    <h3>XEM PHIM</h3>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Phim đang chiếu</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Phim sắp chiếu</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Suất chiếu đặc biệt</a></li>
-                    </ul>
-                </div>
-
-                <div class="col mb-3">
-                    <h3>CINESTAR</h3>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Giới thiệu</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Liên hệ</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Tuyển dụng</a></li>
-                    </ul>
-                </div>
-
-                <div class="col mb-3">
-                    <h3>HỆ THỐNG RẠP</h3>
-                    <ul class="nav flex-column">
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Tất cả hệ thống rạp</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cinestar Quốc Thanh (TPHCM)</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cinestar Hai Bà Trưng (TPHCM)</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cinestar Sinh Viên (Bình Dương)</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cinestar Mỹ Tho (Tiền Giang)</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cinestar Kiên Giang (Rạch Sỏi)</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cinestar Lâm Đồng (Đức Trọng)</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cinestar Da Lat (TP. Đà Lạt)</a></li>
-                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Cinestar Huế (TP. Huế)</a></li>
-                    </ul>
-                </div>
-            </footer>
+        <div class="carousel-item">
+            <img src="~/images/MAIN_2_ADL_1215x365.png" class="d-block w-100 rounded" alt="Adl">
+        </div>
+        <div class="carousel-item">
+            <img src="~/images/gau-yeu-cua-anh-banner.jpg" class="d-block w-100 rounded" alt="Gấu yêu của anh">
         </div>
     </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<!-- Phim Đang Chiếu -->
+<div class="container my-5 fade-in">
+    <h2 class="text-center section-title">Phim Đang Chiếu</h2>
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var movie in Model)
+            {
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card movie-card h-100">
+                        <img src="@movie.PosterUrl" class="card-img-top" alt="@movie.Title" />
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@movie.Title</h5>
+                            <a asp-controller="Movies" asp-action="Details" asp-route-id="@movie.ID" class="btn btn-outline-success mt-auto">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center">
+                <p class="text-muted">Không có phim nào!</p>
+            </div>
+        }
+    </div>
+</div>

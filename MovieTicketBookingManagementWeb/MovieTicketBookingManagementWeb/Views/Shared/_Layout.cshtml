@@ -1,105 +1,111 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Trang Đặt Vé</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css/>
+    <title>@ViewData["Title"] - MovieTicket</title>
+    <link rel="icon" href="~/images/logo1.png" type="image/png" />
+
+    <!-- Bootstrap + Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- 🌐 CSS tách -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navbar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/components.css" asp-append-version="true" />
+
+    <!-- Build style -->
     <link rel="stylesheet" href="~/MovieTicketBookingManagementWeb.styles.css" asp-append-version="true" />
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-          rel="stylesheet" />
-
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Styles", required: false)
 </head>
-<body>
+<body class="bg-light">
+    <!-- Header -->
     <header>
-
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                
-
-                <!-- Nút mở menu trên mobile -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="@Url.Action("Index", "Home")">
+                    <img src="~/images/logo.png" alt="Logo" style="height: 36px;" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <!-- Menu chính -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/Home/Index">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/PopcornDrinkItems/Selected">Combo giảm giá</a>
-                        </li>
-
-                        <!-- Dropdown Thể loại -->
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <button id="darkModeToggle" class="btn btn-outline-light ms-2"><i class="bi bi-moon-fill"></i></button>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/PopcornDrinkItems/Selected">Combo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Customer/Cinemas">Rạp</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Orders/MyTickets">Vé của tôi</a></li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Thể loại
-                            </a>
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Thể loại</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 1 })">Hành động</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 2 })">Hài</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 3 })">Phiêu lưu</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 4 })">Khoa học viễn tưởng</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 5 })">Kinh dị</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 6 })">Tâm lý - Chính kịch</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 7 })">Tình cảm</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 8 })">Tội phạm - Hình sự</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 9 })">Hoạt hình</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 10 })">Âm nhạc</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 11 })">Chiến tranh</a></li>
-                                <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = 12 })">Giả tưởng</a></li>
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <li><a class="dropdown-item" href="@Url.Action("ByGenre", "Movies", new { area = "Customer", genreId = i })">Thể loại @i</a></li>
+                                }
                             </ul>
                         </li>
-
                     </ul>
 
-                    <!-- Ô tìm kiếm -->
-                    <!-- Thanh tìm kiếm trong Navigation -->
-                    <form class="d-flex" method="get" action="@Url.Action("Index", "Movies")">
-                        <input class="form-control me-2" type="search" name="searchQuery" placeholder="Tìm kiếm phim..." aria-label="Search" value="@ViewData["SearchQuery"]">
-                        <button class="btn btn-outline-success" type="submit">Tìm</button>
+                    <form class="d-flex me-3" method="get" action="/Movies">
+                        <input class="form-control me-2" type="search" name="searchQuery" placeholder="Tìm phim..." />
+                        <button class="btn btn-light" type="submit">Tìm</button>
                     </form>
 
-
-
-
                     <partial name="_LoginPartial" />
-                    <!-- Giỏ hàng -->
-                    <a href="/ShoppingCart" class="btn btn-outline-dark ms-3 position-relative">
-                        <i class="bi bi-cart-fill"></i> Giỏ hàng
+
+                    <a href="/ShoppingCart" class="btn btn-outline-light ms-3 position-relative">
+                        <i class="bi bi-cart-fill"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             @(Context.Session.GetInt32("CartCount") ?? 0)
                         </span>
                     </a>
-
-
                 </div>
             </div>
         </nav>
-
-
-
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    
+    <!-- Main -->
+    <main class="container my-4">
+        @RenderBody()
+    </main>
 
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">© 2025 Cinestar. Tất cả quyền lợi được bảo lưu.</p>
+            <div class="chatbox">
+                <button class="btn btn-outline-light" onclick="openChat()">Chat với chúng tôi</button>
+            </div>
+
+            <div>
+                <a href="mailto:support@example.com" class="text-white mx-2">Email hỗ trợ</a>
+                <a href="tel:+0123456789" class="text-white mx-2">SĐT hỗ trợ</a>
+            </div>
+            <div>
+                <a href="#" class="text-white mx-2">Giới thiệu</a>
+                <a href="#" class="text-white mx-2">Chính sách bảo mật</a>
+                <a href="#" class="text-white mx-2">Điều khoản sử dụng</a>
+            </div>
+            <div class="social-icons mt-3">
+                <a href="https://www.facebook.com/cinestarcinemasvietnam" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- JS tách riêng -->
     <script src="~/js/site.js"></script>
+    <script src="~/js/layout.js"></script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

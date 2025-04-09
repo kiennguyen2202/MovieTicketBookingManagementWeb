@@ -240,6 +240,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Areas/Customer/Views/Cinemas/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ2luZW1hc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Areas/Customer/Views/Cinemas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ2luZW1hc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Areas/Customer/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -262,6 +270,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Areas/Customer/Views/Movies/Trailer.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcTW92aWVzXFRyYWlsZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Areas/Customer/Views/Orders/MyTickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcT3JkZXJzXE15VGlja2V0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Areas/Customer/Views/PopcornDrinkItems/Details.cshtml]
@@ -446,6 +458,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Views/Orders/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Views/Orders/MyTickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT3JkZXJzXE15VGlja2V0cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/MovieTicketBookingManagementWeb/Views/Orders/Update.cshtml]
